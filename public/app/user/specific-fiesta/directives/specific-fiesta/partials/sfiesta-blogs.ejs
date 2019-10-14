@@ -1,0 +1,130 @@
+<div ng-controller="SFiestaBlogsCtrl" >
+  <div class="container">
+    <!-- Header -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span class="bold lead"><i class="fa fa-newspaper-o" aria-hidden="true"></i> {{blogActive}} </span>
+        <span class="blog-count pull-right small text-muted" ng-cloak  ng-if="blogActive !== 'Message'"
+              ng-if="::blogs.length || undefined" ng-show="blogs.length">{{blogs.length}} {{blogActive}} </span>
+      </div>
+      <div class="panel-body no-blogs" ng-cloak ng-if="::blogs.length == 0 || undefined" ng-show="blogs.length == 0">
+        <div class="text-center lead text-muted"> No {{blogActive}} to show.</div>
+      </div>
+    </div>
+
+    <div class="row"  ng-if="blogActive !== 'Message'">
+      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 post-grid"
+           ng-cloak ng-repeat="blog in blogs.slice(((blogsPage-1)*pageSize), ((blogsPage)*pageSize)) track by $index">
+        <div class="post-single">
+          <div class="featured-image overlay">
+            <div class="img-responsive center-block" ng-cloak ng-style="{'background-image':'url(' + blog.image.path + ')'}">
+              <span class="small blog-img-header-credits pull-right white small" ng-cloak
+                    ng-if="(blog.image && blog.image.credits && blog.image.credits.trim() != '')">&copy; {{blog.image.credits}}</span>
+            </div>
+            <div class="date" ng-cloak>
+              <strong> {{blog.timestamp | date: 'dd'}} </strong>
+              <p>{{blog.timestamp | date: 'MMM'}}<br>{{blog.timestamp | date: 'yyyy'}}</p>
+            </div>
+          </div>
+          <div class="information">
+            <div class="title" ng-cloak uib-tooltip="{{blog.title}}" tooltip-placement="bottom-left" tooltip-append-to-body="true">
+              <p>{{blog.title}}</p>
+            </div>
+            <ul class="post-info list-inline italic" ng-cloak>
+              <li ng-if="blog.author"><i class="fa fa-user"></i> {{blog.author}}</li>
+              <li ng-if="blog.authors">
+                <i class="fa fa-user"></i>
+                <span ng-repeat="author in blog.authors">
+                  {{author.name}}<span ng-if="author.position"> ({{author.position}})</span>
+                  <span ng-hide="$last">, </span>
+                </span>
+              </li>
+            </ul>
+            <ul class="post-info list-inline" ng-cloak>
+              <li ng-if="blog.category"><i class="fa fa-folder"></i> {{blog.category}}</li>
+            </ul>
+            <ul class="post-info list-inline tags-limit" ng-cloak>
+              <li>
+                <span ng-show="blog.tags.length > 0"><i class="fa fa-tags" aria-hidden="true"></i></span>
+                <span ng-repeat="tag in blog.tags">
+                  <span class="text-muted"><a class="tags">{{tag}}</a><span ng-hide="$last">, </span> </span>
+                </span>
+              </li>
+            </ul>
+            <div class="btn btn-theme" data-ng-click="SetBlogFocus($index)" data-toggle="modal" data-target="#blog-modal">Read</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" ng-if="blogActive === 'Message' && blogs[0].title">
+    <h1 class="text-center bold">{{blogs[0].title}} </h1>
+    <p class="text-center text-muted"> By:
+      <span ng-repeat="auth in blogs[0].authors"> {{auth.name}} ({{auth.position}})<span ng-hide="$last">, <span></span>
+    </p>
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <img class="img-responsive" ng-if="blogs[0].image.path" ng-src="{{blogs[0].image.path}}">
+        <img class="img-responsive" ng-if="!blogs[0].image.path" ng-src="{{sfiesta_cms.fiesta.execdir.default}}" style="width: 100%; height: 100%; margin: auto;">
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+        <br>
+        <p ng-bind-html="blogs[0].body"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOGS Pagination -->
+  <div class="paginations pagination-sm text-center" ng-show="blogs.length"
+        ng-if="blogActive !== 'Message' && blogActive !== 'Contents'">
+    <ul uib-pagination total-items="blogs.length" ng-model="blogsPage"
+        items-per-page="pageSize" boundary-link-numbers="true"
+        rotate="false" previous-text="&laquo;" next-text="&raquo;">
+    </ul>
+  </div>
+  <br> <br>
+
+  <div id="blog-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-header tech-image" ng-style="{'background-image':'url(' + blogFocus.image.path + ')'}">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <p class="small">
+              &copy; {{blogFocus.image.credits}}
+            </p>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="title-modal">
+            <h2>{{blogFocus.title}}</h2>
+          </div>
+          <ul class="list-inline">
+            <li ng-if="blogFocus.author" class="text-muted small">By: <span class="post-info-modal">{{blogFocus.author}}</span> </li>
+            <li ng-if="blogFocus.authors" class="text-muted small">By:
+              <span class="post-info-modal" ng-repeat="author in blogFocus.authors">{{author.name}}
+                <span ng-if="author.position"> ({{author.position}})</span>
+              <span ng-hide="$last">, </span>
+              </span>
+            </li>
+            <li class="text-muted small timestamp">{{blogFocus.timestamp | date: 'medium'}}</li>
+          </ul>
+          <hr>
+          <div ng-bind-html="blogFocus.body"></div>
+          <h6>
+            <br>
+            <span ng-show="blogFocus.tags.length > 0"><i class="fa fa-tags" aria-hidden="true"></i></span>
+            <span ng-repeat="tag in blogFocus.tags | orderBy: ''">
+              <span class="text-muted"><a class="tags">{{tag}}</a><span ng-hide="$last">, </span> </span>
+            </span>
+          </h6>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="/assets/user/css/specific-fiesta/sfiesta-blogs.css">

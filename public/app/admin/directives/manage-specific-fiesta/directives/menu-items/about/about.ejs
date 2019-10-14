@@ -1,0 +1,389 @@
+<div class="panel panel-default">
+  <!-- Panel Title -->
+  <div class="panel-heading">
+    <h3 class="panel-title">About</h3>
+  </div>
+
+  <!-- Panel Body -->
+  <div class="panel-body">
+    <!-- General -->
+    <h5 class="dim-text"> General</h5>
+    <ul class="list-group">
+
+      <!-- Title -->
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-1">
+            <span class="dim-text"> Title:</span>
+          </div>
+          <div class="col-md-10 fiesta-about-item">
+            <a class="no-data-small" data-toggle="modal" data-target="#editTitle" ng-click="EditItem('title', '')" ng-if="!fiesta.title" href>
+              + Edit title for the fiesta
+            </a>
+            <span class="emphasize-text" ng-if="fiesta.title" >
+              {{fiesta.title}}
+            </span>
+          </div>
+          <div class="col-md-1">
+            <small class="pull-right edit-button">
+              <a data-toggle="modal" data-target="#editTitle" ng-click="EditItem('title', fiesta.title)" href>
+                Edit
+              </a>
+            </small>
+          </div>
+        </div>
+        <!-- Modal -->
+        <edit-title></edit-title>
+      </li>
+
+
+      <!-- Description -->
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-2">
+            <span class="dim-text"> Description:</span>
+          </div>
+          <div class="col-md-9 fiesta-about-item">
+            <a class="no-data-small" data-toggle="modal" data-target="#editDescription" ng-click="EditItem('description', '')" ng-if="!fiesta.description" href>
+              + Add a description about the fiesta
+            </a>
+            <span class="emphasize-text" ng-if="fiesta.description">
+              {{fiesta.description}}
+            </span>
+          </div>
+          <div class="col-md-1">
+            <small class="pull-right edit-button">
+              <a href data-toggle="modal" data-target="#editDescription" ng-click="EditItem('description', fiesta.description)">
+                Edit
+              </a>
+            </small>
+          </div>
+        </div>
+        <!-- Modal -->
+        <edit-description></edit-description>
+      </li>
+
+      <!-- Modal -->
+      <edit-date></edit-date>
+      <!-- Start date and Venue -->
+      <li class="list-group-item">
+        <div class="row">
+
+          <!-- Start date -->
+          <div class="col-md-5">
+            <div class="row">
+              <div class="col-md-4">
+                <span class="glyphicon glyphicon-calendar text-muted small"></span>
+                <span class="dim-text"> Start date:</span>
+              </div>
+              <div class="col-md-7 fiesta-about-item">
+                <a  class="no-data-small" ng-if="!fiesta.startDate" href data-toggle="modal" data-target="#editDate" ng-click="EditItem('date', null, null)">
+                  + Enter start date
+                </a>
+                <span class="emphasize-text" ng-if="fiesta.startDate">
+                  {{fiesta.startDate | date:'MMMM dd, yyyy'}}
+                </span>
+              </div>
+              <div class="col-md-1">
+                <small class="pull-right edit-button">
+                  <a href data-toggle="modal" data-target="#editDate" ng-click="EditItem('date', fiesta.startDate, fiesta.endDate)">
+                    Edit
+                  </a>
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Venue -->
+          <div class="col-md-7">
+            <div class="row">
+              <div class="col-md-3">
+                <span class="glyphicon glyphicon-flag text-muted small"></span>
+                <span class="dim-text"> Venue:</span>
+              </div>
+              <div class="col-md-8 fiesta-about-item">
+                <a class="no-data-small" data-toggle="modal" data-target="#editVenue" ng-click="EditItem('venue', '')" ng-if="!fiesta.venue" href>
+                  + Edit venue
+                </a>
+                <span class="emphasize-text" ng-if="fiesta.venue" >
+                  {{fiesta.venue}}
+                </span>
+              </div>
+              <div class="col-md-1">
+                <small class="pull-right edit-button">
+                  <a href data-toggle="modal" data-target="#editVenue" ng-click="EditItem('venue', fiesta.venue)">
+                    Edit
+                  </a>
+                </small>
+              </div>
+            </div>
+          </div>
+          <!-- Modal -->
+          <edit-venue></edit-venue>
+
+        </div>
+      </li>
+
+      <!-- End date and Region -->
+      <li class="list-group-item">
+
+        <!-- End date -->
+        <div class="row">
+          <div class="col-md-5">
+            <div class="row">
+              <div class="col-md-4">
+                <span class="glyphicon glyphicon-calendar text-muted small"></span>
+                <span class="dim-text"> End date:</span>
+              </div>
+              <div class="col-md-7 fiesta-about-item">
+                <a class="no-data-small" ng-if="!fiesta.endDate" href data-toggle="modal" data-target="#editDate" ng-click="EditItem('date', null, null)">
+                  + Enter end date
+                </a>
+                <span class="emphasize-text" ng-if="fiesta.endDate">
+                  {{fiesta.endDate | date:'MMMM dd, yyyy'}}
+                </span>
+              </div>
+              <div class="col-md-1">
+                <small class="pull-right edit-button">
+                  <a href data-toggle="modal" data-target="#editDate" ng-click="EditItem('date', fiesta.startDate, fiesta.endDate)">Edit</a>
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Region -->
+          <div class="col-md-7">
+            <div class="row">
+              <div class="col-md-3">
+                <span class="glyphicon glyphicon-globe text-muted small"></span>
+                <span class="dim-text"> Region:</span>
+              </div>
+              <div class="col-md-8 fiesta-about-item">
+                <a class="no-data-small" data-toggle="modal" data-target="#editRegion" ng-click="EditItem('region', '')" ng-if="!fiesta.region" href>
+                  + Edit region
+                </a>
+                <span class="emphasize-text" ng-if="fiesta.region">
+                  {{fiesta.region}}
+                </span>
+              </div>
+              <div class="col-md-1">
+                <small class="pull-right edit-button">
+                  <a href data-toggle="modal" data-target="#editRegion" ng-click="EditItem('region', fiesta.region)">Edit</a>
+                </small>
+              </div>
+            </div>
+          </div>
+          <!-- Modal -->
+          <edit-region></edit-region>
+        </div>
+      </li>
+
+      <!-- Consortium -->
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-2">
+            <span class="glyphicon glyphicon-bookmark text-muted small"></span>
+            <span class="dim-text"> Consortium:</span>
+          </div>
+          <div class="col-md-9 fiesta-about-item">
+            <a class="no-data-small" data-toggle="modal" data-target="#editConsortium" ng-click="EditItem('consortium', '')" ng-if="!fiesta.consortiumFull" href>
+              + Edit consortium
+            </a>
+            <span class="emphasize-text" ng-if="fiesta.consortiumFull">
+              {{fiesta.consortiumFull + ( (!fiesta.consortium)? '' : ' ('+fiesta.consortium+')' ) }}
+            </span>
+          </div>
+          <div class="col-md-1">
+            <small class="pull-right edit-button">
+              <a href data-toggle="modal" data-target="#editConsortium" ng-click="EditItem('consortium', fiesta.consortium, fiesta.consortiumFull)">
+                Edit
+              </a>
+            </small>
+          </div>
+        </div>
+        <!-- Modal -->
+        <edit-consortium></edit-consortium>
+      </li>
+
+      <!-- Commodities -->
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-2">
+            <span class="glyphicon glyphicon-grain text-muted small"></span>
+            <span class="dim-text"> Commodity:</span>
+          </div>
+          <div class="col-md-9 fiesta-about-item">
+            <a class="no-data-small" ng-if="!fiesta.commodity || fiesta.commodity.length == 0" href data-toggle="modal" data-target="#editCommodity" ng-click="EditItem('commodity', [])">
+              + Edit commodity
+            </a>
+            <span ng-if="fiesta.commodity" class="emphasize-text">
+              <span ng-repeat="comm in fiesta.commodity track by $index">
+                {{comm}}
+                <span ng-hide="$last"> &middot; </span>
+              </span>
+            </span>
+          </div>
+          <div class="col-md-1">
+            <small class="pull-right edit-button">
+              <a href data-toggle="modal" data-target="#editCommodity" ng-click="EditItem('commodity', fiesta.commodity)">Edit</a>
+            </small>
+          </div>
+        </div>
+        <!-- Modal -->
+        <edit-commodity></edit-commodity>
+      </li>
+    </ul>
+
+    <h5 class="dim-text"> Location</h5>
+    <ul class="list-group">
+
+      <!-- Vicinity Map -->
+      <li class="list-group-item">
+        <div class="no-data-large" ng-if="!fiesta.vicinityMap || !fiesta.vicinityMap.path || fiesta.vicinityMap.path.trim() == ''">
+          <span class="glyphicon glyphicon-road"></span> <br/><br/>
+          <span class="lead">Add Vicinity Map to the Fiesta</span>
+          <span class="text-muted">
+            <p>
+              You don't have any vicinity map for the fiesta.
+              Add one to give people an overview of the fiesta.
+            </p>
+          </span><br/>
+          <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editVicinityMap">
+            Add Vicinity Map
+          </button>
+          <br/>
+        </div>
+        <div class="" ng-if="fiesta.vicinityMap.path.trim() != ''">
+          <div class="row">
+            <div class="col-md-6 text-left">
+              <span class="dim-text"> Vicinity Map:</span>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href class="small" data-toggle="modal" data-target="#editVicinityMap">Change Image</a>
+            </div>
+          </div>
+          <div class="row">
+            <br />
+            <div class="col-md-10 col-md-offset-1">
+              <img class="vicinity-map img-responsive img-rounded" ng-src="{{fiesta.vicinityMap.path}}" alt="" />
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+        <edit-vicinity-map></edit-vicinity-map>
+      </li>
+
+      <li class="list-group-item">
+
+        <!-- Google map -->
+        <div class="no-data-large" ng-if="!(fiesta.coordinates.lat && fiesta.coordinates.lng)" >
+          <span class="glyphicon glyphicon-map-marker"></span> <br/><br/>
+          <span class="lead">Add a Google Map Marker to the Fiesta</span>
+          <span class="text-muted">
+            <p>
+              Your fiesta doesn't have a Google Map mark. Add one to make it easy for people to find the fiesta.
+            </p>
+          </span><br/>
+          <add-google-map></add-google-map>
+        </div>
+
+        <div class="row"  ng-if="(fiesta.coordinates.lat && fiesta.coordinates.lng)" id="googleMap">
+            <div class="col-md-6 text-left">
+              <span class="dim-text"> Google Map:</span>
+            </div>
+            <div class="col-md-6 text-right">
+                <a  id="editGoogle" href class="small" ng-click="editCoordinates=true; EditItem('coordinates', fiesta.coordinates)"> Change location</a>
+            </div>
+          <div class="col-md-10 col-md-offset-1">
+            <br/>
+            <div class="row" ng-show="editCoordinates" id="editGoogleMap">
+              <div class="col-md-12">
+                <div map-lazy-load="https://maps.google.com/maps/api/js?libraries=places" map-lazy-load-params="https://maps.googleapis.com/maps/api/js?key={{googleMapApi}}&libraries=places">
+                    <input id="pac-input" class="form-control" places-auto-complete size=80 ng-model="address" on-place-changed="changeLocation()" component-restrictions="{country:'ph'}"/>
+                    <p class="help-block small text-muted">
+                      To change location, you can either (1) enter the address above, (2) enter coordinates below, or (3) drag the map marker.
+                    </p>
+                </div>
+              </div>
+              <div class="col-md-12 text-center">
+                <form class="form-inline">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon">Latitude</div>
+                      <input ng-model="coordinates.lat" type="text" class="form-control" id="latInput" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon">Longitude</div>
+                      <input ng-model="coordinates.lng" type="text" class="form-control" id="lngInput" />
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary btn-sm" ng-click="EditCoordinates('editCoordinates')" ladda="coordinatesLoading" data-style="expand-right" data-spinner-size="10">
+                    Save coordinates
+                  </button>
+                  <button type="button" class="btn btn-default btn-xs" ng-click="editCoordinates=false; resetMap();" ng-show="!coordinatesLoading">
+                    Cancel
+                  </button>
+                </form>
+                <br>
+              </div>
+              <br/>
+            </div>
+            <div class="row">
+              <div class="google-map" map-lazy-load="https://maps.google.com/maps/api/js?libraries=places" map-lazy-load-params="https://maps.googleapis.com/maps/api/js?key={{googleMapApi}}&libraries=places" ng-if="(fiesta.coordinates.lat && fiesta.coordinates.lng)">
+                <ng-map id="editCoordinates" zoom="15" ng-init="coordinates = fiesta.coordinates" center="{{coordinates.lat}}, {{coordinates.lng}}">
+                  <marker  position="{{fiesta.coordinates.lat}}, {{fiesta.coordinates.lng}}" title="{{fiesta.venue}}" animation="{{(editCoordinates)?'BOUNCE':'DROP'}}" draggable="{{editCoordinates}}" on-dragend="getDrag()" centered="true"></marker>
+                </ng-map>
+              </div>
+              <p class="small text-muted help-block">Something wrong with the map? Try <a href ng-click="refresh()">refreshing</a> the page.</p>
+            </div>
+          </div>
+        </div>
+        <br>
+      </li>
+    </ul>
+
+    <h5 class="dim-text"> Magazine</h5>
+    <ul class="list-group">
+
+      <!-- Magazine -->
+      <li class="list-group-item">
+        <div class="no-data-large" ng-if="!fiesta.magazine || undefined">
+          <span class="glyphicon glyphicon-book"></span> <br/><br/>
+          <span class="lead">Add FIESTA Magazine </span>
+          <span class="text-muted">
+            <p>
+              You don't have any magazine for the fiesta.
+              Add one to give people an overview of the fiesta.
+            </p>
+          </span><br/>
+          <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editMagazine">
+            Add Magazine
+          </button>
+          <br/>
+        </div>
+        <div class="" ng-if="fiesta.magazine">
+          <div class="row">
+            <div class="col-md-6 text-left">
+              <span class="dim-text"> Magazine: </span>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href class="small" data-toggle="modal" data-target="#editMagazine">Change Magazine</a>
+            </div>
+          </div>
+          <div class="row">
+            <br>
+            <div class="col-md-11 col-md-offset-1">
+              <a target="_blank" ng-href="{{fiesta.magazine}}">
+                <img class="thumbnail" title="{{fiesta.title}}" ng-src="{{fiesta.mag_thumb}}" style="height: 300px;"/>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+        <edit-magazine></edit-magazine>
+      </li>
+    </ul>
+  </div>
+</div>

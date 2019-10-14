@@ -1,0 +1,103 @@
+.well {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  /*background-color: rgba(255,255,255,.8);*/
+}
+
+.pcaarrd-logo {
+  max-width: 25%;
+  max-height: 25%;
+  margin: auto;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.fiesta-logo {
+  height: 20px;
+  padding-bottom: 4px;
+}
+
+/* DOWNLOAD BTN */
+.download-pdf {
+	display: inline-block;
+	position: relative;
+	padding: 10px 25px 10px 35px;
+  margin: 15px;
+	/*background-color: #000000;*/
+	color: #000000;
+  border: solid 3px #000000;
+  border-radius: 30px;
+}
+
+.download-pdf:hover {
+  background-color: #000000;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.download-pdf:before, .download-pdf:after {
+	content: ' ';
+	display: block;
+	position: absolute;
+	left: 15px;
+	top: 52%;
+}
+
+/* Download box shape  */
+.download-pdf:before {
+	width: 10px;
+	height: 2px;
+	border-style: solid;
+	border-width: 0 2px 2px;
+}
+
+/* Download arrow shape */
+.download-pdf:after {
+	width: 0;
+	height: 0;
+	margin-left: 1px;
+	margin-top: -7px;
+	border-style: solid;
+	border-width: 4px 4px 0 4px;
+	border-color: transparent;
+	border-top-color: inherit;
+	animation: downloadArrow 2s linear infinite;
+	animation-play-state: paused;
+}
+
+.download-pdf:hover:before {
+	border-color: #4CC713;
+}
+
+.download-pdf:hover:after {
+	border-top-color: #4CC713;
+	animation-play-state: running;
+}
+
+@keyframes downloadArrow {
+	0% {
+		margin-top: -7px;
+		opacity: 1;
+	}
+
+	0.001% {
+		margin-top: -15px;
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		margin-top: 0;
+		opacity: 0;
+	}
+}

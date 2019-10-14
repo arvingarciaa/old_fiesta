@@ -1,0 +1,85 @@
+<div class="panel panel-default">
+  <!-- Panel Title -->
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-1">
+        <h3 class="panel-title">Schedule</h3>
+      </div>
+      <div class="col-md-2 col-md-offset-9">
+        <button class="btn btn-xs btn-primary pull-right" type="button" name="button" ng-click="AddActivity(activity)" data-toggle="modal" data-target="#activityModal">
+          Add Activity
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel Body -->
+  <div class="panel-body">
+    <v-accordion class="vAccordion--default" ng-if="activities.length != 0">
+      <v-pane ng-repeat="date in dates | orderBy: 'name'">
+        <v-pane-header class="lead">
+          &nbsp; {{ date.name | date: 'medium' }}
+        </v-pane-header>
+        <v-pane-content>
+          <div class="col-md-12">
+            <ul class="list-group" >
+                <li class="list-group-item list-margin-top small" ng-repeat="activity in date.activities">
+                  <table style="width:100%; height:100%">
+                    <tr>
+                      <td class="col-md-5 text-right">
+                        <h4>
+                          {{activity.title}}
+                        </h4>
+                        <p class="lead date-margin-setting">
+                          {{activity.timestamp | date:"h:mm a"}}
+                        </p>
+                        <em class="text-muted small">{{activity.location}}</em>
+                        <span ng-if="activity.location.trim()!=''" class="glyphicon glyphicon-map-marker text-muted small"></span> <br/>
+                        <span class="lead small"><strong>{{activity.sector}}</strong></span>
+                      </td>
+                      <td class="col-md-6 text-left">
+                        <h5 class="small text-muted"><span class="glyphicon glyphicon-user"></span><em> Guests</em></h5>
+                          <span ng-repeat="people in activity.people track by $index">
+                            {{people}}<span ng-hide="$last">, </span>
+                          </span>
+                        <h5 class="small text-muted"><span class="glyphicon glyphicon-asterisk"></span><em> Subtitles</em></h5>
+                          <span ng-repeat="subtitle in activity.subtitle track by $index">
+                            {{subtitle}}<span ng-hide="$last">, </span>
+                          </span>
+                      </td>
+                      <td class="col-md-1">
+                        <table style="height:100%">
+                          <tr>
+                            <td><a href ng-click="EditActivity(activity)" data-toggle="modal" data-target="#activityModal">Edit</a></td>
+                          </tr>
+                          <tr>
+                            <td><a href ng-click="DeleteActivity(activity._id)" >Delete</a></td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </li>
+            </ul>
+          </div>
+        </v-pane-content>
+      </v-pane>
+    </v-accordion>
+
+    <div class="" ng-if="activities.length == 0">
+      <li class="list-group-item">
+        <div class="no-data-large">
+          <span class="glyphicon glyphicon-list"></span> <br/><br/>
+          <span class="lead">Add Activities in the Fiesta</span>
+          <span class="text-muted">
+            <p>No activities added in the fiesta. <a href ng-click="AddActivity(activity)" data-toggle="modal" data-target="#activityModal">Add one</a>?</p>
+          </span><br/>
+          <br/>
+        </div>
+      </li>
+    </div>
+  </div>
+</div>
+
+<activity-modal></activity-modal>

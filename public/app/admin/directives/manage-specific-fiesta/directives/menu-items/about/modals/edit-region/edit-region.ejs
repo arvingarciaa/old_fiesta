@@ -1,0 +1,58 @@
+
+<div class="modal centered-modal" id="editRegion" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!regionLoading">&times;</button>
+          <h4 class="modal-title" id="">Edit region</h4>
+        </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- Region -->
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-globe"></span></span>
+                <select class="form-control" name="" aria-describedby="sizing-addon3" ng-model="region">
+                  <option value="" disabled="">Choose a region</option>
+                  <optgroup label="Luzon">
+                    <option value="Region I">Region I (Ilocos Region)</option>
+                    <option value="Region II">Region II (Cagayan Valley)</option>
+                    <option value="CAR">Cordillera Administrative Region (CAR)</option>
+                    <option value="Region III">Region III (Central Luzon)</option>
+                    <option value="NCR">National Capital Region (NCR)</option>
+                    <option value="Region IV-A">Region IV-A (Calabarzon)</option>
+                    <option value="Region IV-B">Region IV-B (Mimaropa)</option>
+                    <option value="Region V">Region V (Bicol)</option>
+                  </optgroup>
+
+                  <optgroup label="Visayas">
+                    <option value="Region VI">Region VI (Western Visayas)</option>
+                    <option value="Region VII">Region VII (Central Visayas)</option>
+                    <option value="Region VIII">Region VIII (Eastern Visayas)</option>
+                    <option value="Region XVIII">Region XVIII (Negros Island Region)</option>
+                  </optgroup>
+
+                  <optgroup label="Mindanao">
+                    <option value="Region IX">Region IX (Zamboanga Peninsula)</option>
+                    <option value="Region X">Region X (Northern Mindanao)</option>
+                    <option value="Region XI">Region XI (Davao Region)</option>
+                    <option value="Region XII">Region XII (Soccsksargen)</option>
+                    <option value="Region XIII">Region XIII (Caraga)</option>
+                    <option value="ARMM">Autonomous Region in Muslim Mindanao (ARMM)</option>
+                  </optgroup>
+
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!regionLoading">Close</button>
+        <button type="button" class="btn btn-primary" ladda="regionLoading" data-style="expand-right" data-spinner-size="10" ng-click="EditRegion(region)">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

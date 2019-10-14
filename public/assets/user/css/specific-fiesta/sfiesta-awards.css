@@ -1,0 +1,172 @@
+/* HEADER */
+.panel {
+  margin: 10px 0;
+}
+
+.award-count {
+  padding-top: 0.8%;
+}
+
+.no-awards {
+  padding-top: 20px;
+}
+
+.awards-container {
+  margin-top: -10px;
+  margin-left: 10px;
+}
+
+/* AWARDS CAROUSEL */
+#carousel {
+  height: 66vh;
+}
+
+.carousel-container {
+  border: 5px solid #eeeeee;
+  padding: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.carousel-indicators {
+  visibility: hidden;
+}
+
+/* AWARD CAPTION */
+.carousel-caption {
+  display: none;
+  left: 0;
+  bottom: 0;
+  padding: 0 5px;
+  margin-bottom: 0 !important;
+  width: 100%;
+  text-align: left;
+  background-color: #000000;
+  opacity: 0.8;
+}
+
+.carousel:hover > .carousel-inner > .carousel-caption {
+  display: block;
+}
+
+a {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+a:hover {
+  color: #ffffff;
+}
+
+.award-photo {
+  max-width: 100%;
+  height: 66vh;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* AWARD THUMBNAILS */
+.thumbnail-container {
+  padding: 0;
+  padding-left: 2px;
+}
+
+.carousel-thumbnail {
+  background-color: #ffffff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 14vw;
+  height: 67vh;
+}
+
+.carousel-thumbnail > .window {
+  overflow-y: auto;
+  position: relative;
+  height: 100%;
+}
+
+.carousel-thumbnail > .window::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.carousel-thumbnail > .window::-webkit-scrollbar {
+  width: 7px;
+	background-color: #F5F5F5;
+}
+
+.carousel-thumbnail > .window::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+
+.carousel-thumbnail ul {
+  position: absolute;
+  list-style: none;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 0px;
+}
+
+.thumbnail {
+  display: inline-block;
+  margin: 0;
+  margin-bottom: -5px;
+  padding: 0;
+  width: 100%;
+  height: 22.35vh;
+  cursor: pointer;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media only screen and (min-width : 0px){
+  .thumbnail {
+    height: 10vh;
+  }
+}
+
+@media only screen and (min-width : 768px){
+  .thumbnail {
+    height: 22.35vh;
+  }
+}
+
+.prev,
+.next {
+  color: #000000;
+  font-size: 30px;
+  width: 100%;
+  left: 50%;
+  margin-left: -15px;
+  position: absolute;
+  z-index: 1;
+}
+
+.prev:hover,
+.next:hover {
+  color: #000000;
+}
+
+.prev {
+  top: 0;
+}
+
+.next {
+  bottom: 0
+}
+
+/* AWARD MODAL */
+.modal-tags a{
+  color: #000000;
+}
+
+.modal-picture img {
+  max-width: 100%;
+  max-height: 100%;
+}

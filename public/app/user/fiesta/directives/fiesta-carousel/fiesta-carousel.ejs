@@ -1,0 +1,37 @@
+<div class="container-fluid" id="fiesta-carousel-container">
+  <div uib-carousel class="fiesta-carousel" active="active" interval="5000" no-wrap="false">
+    <div uib-slide index="0">
+    <div class="fiesta-img" ng-cloak ng-if="::fiesta_cms.carousel.default || undefined" ng-show="fiesta_cms.carousel.default"
+         ng-style="{'background-image':'url('+fiesta_cms.carousel.default+')'}"></div>
+     <div class="fiesta-img" ng-cloak ng-if="::!fiesta_cms.carousel.default || undefined" ng-show="!fiesta_cms.carousel.default"
+         ng-style="{'background-image':'url(/assets/user/images/fiesta/fiesta-slider.png)'}"></div>
+    </div>
+
+    <div uib-slide ng-repeat="fiesta in selectedFiestas track by $index" index="$index+1">
+     <div class="fiesta-img" ng-cloak ng-style="{'background-image':'url(' + fiesta.picture.path + ')'}"></div>
+     <div class="carousel-caption">
+       <div class="ftitle-container overflow">
+         <span class="lead bold" ng-cloak ng-if="::fiesta.title || undefined" ng-show="fiesta.title"
+               uib-tooltip="{{fiesta.title}}" tooltip-placement="bottom-center" tooltip-append-to-body="true">
+           <a ng-href="/fiesta/{{fiesta._id}}/">{{fiesta.title | uppercase}}</a>
+         </span>
+       </div>
+       <span class="bold" ng-cloak ng-if="::(fiesta.startDate && fiesta.endDate) || undefined"
+             ng-show="(fiesta.startDate && fiesta.endDate)">
+             {{fiesta.startDate | date: "MMMM d, y"}} - {{fiesta.endDate | date: "MMMM d, y"}}
+       </span>
+       <span ng-cloak ng-if="::fiesta.venue || undefined" ng-show="fiesta.venue">
+         <br>{{fiesta.venue}}
+       </span>
+       <span ng-cloak ng-if="::fiesta.consortium || undefined" ng-show="fiesta.consortium">
+          <br>{{fiesta.consortiumFull}} ({{fiesta.consortium}})
+       </span>
+       <span ng-cloak ng-if="::fiesta.commodity || undefined" ng-show="fiesta.commodity">
+         <br><span class="italic" ng-cloak ng-repeat="commodity in fiesta.commodity | orderBy: ''">
+             {{commodity}}{{$last ? '' : '  &middot;  '}}</span>
+       </span>
+     </div>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="assets/user/css/fiesta/fiesta-carousel.css">

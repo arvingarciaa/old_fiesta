@@ -1,0 +1,34 @@
+<div class="navbar navbar-default navbar-fixed-top">
+  <div>
+    <div class="navbar-header">
+      <a ng-href="/"><img class="navbar-brand" src="assets/common/images/dost-pcaarrd-logo.png"></a>
+      <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right" id="navbar-links">
+        <li><a ng-href="https://dpitc.ph">Home</a></li>
+        <li id="fiesta"class="active"><a ng-href="http://fiesta.dpitc.ph/fiesta">FIESTA</a></li>
+        <li id="technology"><a ng-href="http://fiesta.dpitc.ph/technology">Technology</a></li>
+        <li><a ng-href="http://community.dpitc.ph">Community</a></li>
+        <li><a ng-href="https://dpitc.ph/eresources">eResources</a></li>
+        <li><a ng-href></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="assets/common/css/navbar/navbar.css">
+<script type="text/javascript">
+$(document).ready(function () {
+  $("li").removeClass('active');
+  if(window.location.pathname !== '/technology/admin')
+    $("#"+window.location.pathname.replace('/','')).addClass('active');
+  $("li").click(function(e) {
+      $("li").removeClass('active');
+      $(this).addClass('active');
+  });
+});
+</script>

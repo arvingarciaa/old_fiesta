@@ -1,0 +1,95 @@
+<!-- Profile Picture -->
+<div class="row">
+  <div class="profile-pic-container">
+
+  <!-- Image -->
+    <div class="text-center">
+      <div class="row">
+        <div class="col-md-12 profile-picture-holder">
+          <div class="">
+            <img class="img-thumbnail" ng-src="{{ fiesta.picture.path }}" fallback-src="/assets/fiesta-logo.jpg" alt=""/>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <button type="button" class="btn btn-default btn-xs btn-link btn-block" data-toggle="modal" data-target="#editPicture">
+            Change Image
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <edit-picture></edit-picture>
+
+</div>
+
+<!-- Fiesta Title -->
+<div class="row">
+  <div class="fiesta-title-holder">
+    <h4>{{fiesta.title}}</h4>
+  </div>
+</div>
+
+<!-- Fiesta Menu -->
+<div class="row">
+  <ul class="nav flex-column">
+    <!-- About -->
+    <li class="nav-item fiesta-nav-item">
+      <a class="fix-top" ng-class="{'disabled-menu':show['about']}"  href ng-click="showPanel('about')" id="about">About</a>
+    </li>
+    <!-- Executive Director's Corner -->
+    <li class="nav-item fiesta-nav-item">
+      <a ng-class="{'disabled-menu':show['executive']}" class="nav-link" href ng-click="showPanel('executive')" id="executive">Message</a>
+    </li>
+    <!-- Content -->
+    <li class="nav-item fiesta-nav-item">
+      <a ng-class="{'disabled-menu':show['content']}" class="nav-link" href ng-click="showPanel('content')" id="content">Content</a>
+    </li>
+    <!-- Technologies -->
+    <li class="nav-item fiesta-nav-item">
+      <a ng-class="{'disabled-menu':show['feat-tech']}" class="nav-link" href ng-click="showPanel('feat-tech')" id="feat-tech">Featured Technologies</a>
+    </li>
+    <!-- Profile -->
+    <li class="nav-item fiesta-nav-item">
+      <a ng-class="{'disabled-menu':show['profile']}" class="nav-link" href ng-click="showPanel('profile')" id="profile">Profiles</a>
+    </li>
+    <!-- Activities -->
+    <li class="nav-item fiesta-nav-item">
+      <a ng-class="{'disabled-menu':show['activities']}" class="nav-link" href ng-click="showPanel('activities')" id="activities">Schedule</a>
+    </li>
+    <!-- Events -->
+    <li class="nav-item fiesta-nav-item">
+      <a ng-class="{'disabled-menu':show['events']}" class="nav-link" href ng-click="showPanel('events')" id="events">Events</a>
+    </li>
+    <!-- Posters -->
+    <li class="nav-item fiesta-nav-item">
+      <a ng-class="{'disabled-menu':show['posters']}" class="nav-link" href ng-click="showPanel('posters')" id="posters">Posters</a>
+    </li>
+    <!-- Awards -->
+    <li class="nav-item fiesta-nav-item">
+      <a ng-class="{'disabled-menu':show['awards']}" class="nav-link" href ng-click="showPanel('awards')" id="awards">Awards</a>
+    </li>
+    <!-- Photos -->
+    <li class="nav-item fiesta-nav-item">
+      <a ng-class="{'disabled-menu':show['photos']}" class="nav-link" href ng-click="showPanel('photos')" id="photos">Photos</a>
+    </li>
+    <!-- Videos -->
+    <li class="nav-item fiesta-nav-item">
+      <a ng-class="{'disabled-menu':show['videos']}" class="nav-link" href ng-click="showPanel('videos')" id="videos">Videos</a>
+    </li>
+    <!-- Blogs -->
+    <li class="nav-item fiesta-nav-item">
+      <a ng-class="{'disabled-menu':show['blogs']}" class="nav-link" href ng-click="showPanel('blogs')" id="blogs">Blogs</a>
+    </li>
+    <!-- More -->
+    <li class="nav-item fiesta-nav-item">
+      <a ng-class="{'disabled-menu':show['more']}" class="nav-link" href ng-click="showPanel('more')" id="more">More</a>
+    </li>
+  </ul>
+
+  <button class="btn btn-success" style="width: 100%;" ng-if="!fiesta.published" ng-click="publishfiesta(true)">
+    Publish FIESTA
+  </button>
+  <button class="btn btn-success" style="width: 100%;" ng-if="fiesta.published" ng-click="publishfiesta(false)">
+    Unpublish FIESTA
+  </button>
+</div>

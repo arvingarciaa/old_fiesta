@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/assets/admin/css/manage-specific-fiesta/manage-specific-fiesta.css">
+<link rel="stylesheet" href="/assets/admin/css/manage-specific-fiesta/fiesta-menu-panel.css">
+<link rel="stylesheet" href="/assets/admin/css/manage-specific-fiesta/about.css">
+<link rel="stylesheet" href="/assets/admin/css/manage-specific-fiesta/activities.css">
+<link rel="stylesheet" href="/assets/admin/css/manage-specific-fiesta/photo-upload.css">
+<link rel="stylesheet" href="/assets/admin/css/manage-specific-fiesta/video.css">
+<link rel="stylesheet" href="/assets/admin/css/manage-specific-fiesta/blog.css">
+<link rel="stylesheet" href="/assets/admin/css/manage-specific-fiesta/featured-technology.css">
+<link rel="stylesheet" href="/assets/admin/css/common/centered-modal.css"/>
+
+
+<div ng-controller="ManageSpecificFiestaCtrl">
+  <ol class="breadcrumb back-to-fiestas">
+    <li>
+      <a href="/admin">
+        <span class="glyphicon glyphicon-chevron-left small left"></span>&nbsp;Back to FIESTA's
+      </a>
+    </li>
+    <li class="pull-right">
+      <a ng-href="/fiesta/{{fiesta._id}}" target="_blank">
+        View as Public
+      </a>
+    </li>
+  </ol>
+  <div class="row" id="manageSpecificFiestaHolder">
+    <div ng-show="loggedIn">
+      <div class="col-md-2 menu-panel">
+        <fiesta-menu-panel></fiesta-menu-panel>
+      </div>
+      <div class="col-md-10 view-panel">
+        <multi-view-panel></multi-view-panel>
+      </div>
+    </div>
+  </div>
+
+</div>

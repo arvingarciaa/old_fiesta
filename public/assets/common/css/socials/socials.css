@@ -1,0 +1,55 @@
+.fixed {
+  position: fixed;
+  top: 30.5%;
+  z-index: 100;
+}
+
+.social-sharing {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.social-sharing #logo {
+  width: 40px;
+  height: 40px;
+}
+
+.socials a {
+  padding-top: 7px;
+  margin-bottom: 1px;
+  display: block;
+  width: 52px;
+  height: 52px;
+  font-size: 25px;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+}
+
+.socials a:hover {
+  cursor: pointer;
+  width: 70px;
+  -webkit-transition: width 1s ease-out;
+     -moz-transition: width 1s ease-out;
+       -o-transition: width 1s ease-out;
+          transition: width 1s ease-out;
+}
+
+.community>a{
+  background-color: #eeeeee;
+}
+.facebook>a{
+  background-color: #3a55a0;
+}
+.twitter>a{
+  background-color: #51abf1;
+}
+.youtube>a{
+  background-color: #e52d27;
+}
+.google-plus>a{
+  background-color: #d34836;
+}
+.newsletter>a{
+  background-color: #ff9302;
+}

@@ -1,0 +1,134 @@
+
+
+<!-- ********************************
+ Modal for Adding and Editing Photo
+***********************************-->
+<div class="modal centered-modal" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+  <div class="modal-dialog centered-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!photo.loading && !photoLoading">&times;</button>
+        <h4 class="modal-title"> {{(fromAdd)?'Add':'Edit'}} a Photo</h4>
+      </div>
+      <div class="modal-body">
+
+        <!-- Image input -->
+        <div class="photo-uploader" ng-show="fromAdd" type="file" ngf-select="" ng-model="photo.inputImage" name="file" ngf-accept="'image/jpeg'">
+          <div class="photo-preview" ng-hide="(!photo.inputImage || photo.loading) || !photo.okay">
+            <img ngf-src="photo.inputImage" alt="">
+          </div>
+          <div class="photo-select" ng-hide="(photo.inputImage || photo.loading) || !photo.okay">
+            <div>
+              <span class="glyphicon glyphicon-picture"></span>
+              <p>Upload a photo</p>
+            </div>
+          </div>
+          <div class="photo-loading" ng-show="photo.loading">
+            <uib-progressbar class="progress-striped active" value="100"></uib-progressbar>
+          </div>
+        </div>
+
+        <!-- Credits and Tags -->
+        <div class="row" ng-hide="photo.loading">
+          <br>
+          <div class="col-md-10 col-md-offset-1">
+            <div class="form-group photo-caption">
+              <label for="captionInput">Caption</label>
+              <input ng-model="photo.caption" type="text" class="form-control" id="captionInput" />
+            </div>
+            <div class="form-group photo-credits">
+              <label for="creditsInput">Credits</label>
+              <input ng-model="photo.credits" type="text" class="form-control" id="creditsInput" />
+            </div>
+            <div class="form-group photo-timestamp">
+              <label for="timestampInput">Date Stamp</label>
+              <input class="form-control" type="date" ng-model="photo.timestamp" name="" value="">
+            </div>
+            <h5 ng-init="toggletags=false" ng-hide="toggletags || photo.tags.length > 0">
+              <a href ng-click="toggletags=true">
+                + Add tags for this photo
+              </a>
+            </h5>
+            <div class="form-group" ng-if="toggletags || photo.tags.length > 0">
+              <label for="tagsInput">Tags</label>
+              <tags-input replace-spaces-with-dashes="false" id="tagsInput" class="tags-input" placeholder="Add tag" ng-model="photo.tags"></tags-input>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!photo.loading && !photoLoading">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="SubmitPhoto()" ladda="photoLoading || photo.loading" data-style="expand-right" data-spinner-size="10">{{(fromAdd)?'Add':'Update'}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ******************************
+ Modal for Focusing Photo
+*********************************-->
+<div class="modal centered-modal" id="focusPhotoModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+  <div class="modal-dialog  centered-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!focusedPhoto.loading">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Image input -->
+            <div class="photo-uploader focused" type="file" ngf-select="" ng-model="focusedPhoto.inputImage" name="file" ngf-accept="'image/jpeg'">
+              <div class="photo-preview"  ng-show="focusedPhoto.inputImage && !focusedPhoto.loading">
+                <img ngf-src="focusedPhoto.inputImage" alt=""/>
+              </div>
+              <div class="photo-preview" ng-show="!focusedPhoto.inputImage && !focusedPhoto.loading">
+                  <img ng-src="{{ focusedPhoto.image.path }}" alt="" />
+              </div>
+              <div class="photo-loading" ng-show="focusedPhoto.loading">
+                <uib-progressbar class="progress-striped active" value="100"></uib-progressbar>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- Credits and Tags -->
+        <div class="row">
+          <br>
+          <div class="col-md-12">
+            <blockquote>
+              <div class="caption">
+                <h4>{{ focusedPhoto.caption }}</h4>
+                <p class="lead small">
+                  &copy; {{focusedPhoto.image.credits}} <br/>
+                  {{ focusedPhoto.timestamp | date: 'MMMM, dd yyyy' }}
+                </p>
+                <p class="tags text-muted">
+                  <span class="glyphicon glyphicon-tags"></span> &nbsp;&nbsp;
+                  <span ng-repeat="tag in focusedPhoto.tags track by $index">
+                    {{ tag }}
+                    <span ng-hide="$last"> &middot; </span>
+                  </span>
+                </p>
+              </div>
+            </blockquote>
+          </div>
+        </div>
+        <!-- Help -->
+        <div class="row">
+          <div class="col-md-12">
+            <p class="small text-muted">
+              <span class="glyphicon glyphicon-info-sign small"></span>
+              For <strong>updating</strong> the image for this photo, click the image above and select a new one from your
+               <br/> &nbsp;&nbsp;&nbsp; computer. To apply changes, click on the update button below.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!focusedPhoto.loading">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="EditImagePhoto()" ng-class="{'disabled': focusedPhoto.loading}">Apply Changes</button>
+      </div>
+    </div>
+  </div>
+</div>

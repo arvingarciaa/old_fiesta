@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="assets/lost/css/lost.css">
+
+<div ng-controller="LostCtrl" class="lost-body">
+  <div class="jumbotron text-center">
+    <h1>
+      <img src="assets/logo-fiesta.jpg" alt="" class="lost-logo">
+    </h1>
+    <br>
+    <p ng-cloak class="page-not-found">{{type}} not found!</p>
+    <p ng-cloak class="lead lost-info">We're sorry, but {{message}} <br> You can explore other FIESTA instead.</p>
+    <p ng-cloak><a class="btn btn-primary btn-lg" ng-href="{{href}}" role="button">{{button}}</a></p>
+  </div>
+</div>

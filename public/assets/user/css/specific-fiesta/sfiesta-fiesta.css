@@ -1,0 +1,377 @@
+img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+.img-responsive {
+  height: 200px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.well {
+  margin-top: 0px;
+  text-align: center;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/* Executive Director */
+.exec-main-cont {
+  height: 450px;
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
+}
+
+/* Executive Director Header */
+.exec-header-cont {
+  width: 100%;
+  height: 45px;
+  margin: 10px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: #3062B7;
+}
+
+.exec-header {
+  height: 45px;
+  float: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  font-weight: bold;
+  background-color: #252525;
+  color: #ffffff;
+}
+
+@media only screen and (min-width : 0px){
+  .exec-header { font-size: 1em;}
+  .exec-header-cont,
+  .exec-header {
+    height: 40px;
+  }
+}
+
+@media only screen and (min-width : 375px){
+  .exec-header { font-size: 1.5em;}
+  .exec-header-cont,
+  .exec-header {
+    height: 45px;
+  }
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 45px solid #252525;
+  border-right: 45px solid transparent;
+  float: left;
+}
+
+/* Executive: Photo */
+.exec-photo {
+  width: auto;
+  margin: auto;
+}
+
+/* Quote container */
+.quote-card {
+  position: relative;
+  height: 450px;
+  padding: 20px;
+  padding-left: 70px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 0 2px 4px rgba(34, 34, 34, 0.12);
+          box-shadow: 0 2px 4px rgba(34, 34, 34, 0.12);
+  background-color: rgb(0, 204, 68);
+  color: #000000;
+  overflow: hidden;
+}
+
+.quote-card-sm {
+  position: relative;
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 0 2px 4px rgba(34, 34, 34, 0.12);
+          box-shadow: 0 2px 4px rgba(34, 34, 34, 0.12);
+  background-color: rgb(0, 204, 68);
+  color: #000000;
+  overflow: hidden;
+}
+
+.quote-card p {
+  max-width: 75%;
+  margin-top: 40px;
+  /* Addition of clamping a long paragraph */
+  line-height: 1.4em;
+  position: relative;
+  height: 7em;
+  overflow: hidden;
+}
+
+.quote-card p:after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 1.4em;
+  background: linear-gradient(to right, rgba(0, 204, 68, 0), rgba(0, 204, 68, 1) 80%);
+}
+
+.quote-card-sm p {
+  max-width: 75%;
+  /* Addition of clamping a long paragraph */
+  line-height: 1.4em;
+  position: relative;
+  height: 7em;
+  overflow: hidden;
+}
+
+.quote-card-sm p:after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 1.4em;
+  background: linear-gradient(to right, rgba(0, 204, 68, 0), rgba(0, 204, 68, 1) 80%);
+}
+
+/* Now add in code for the browsers that support -webkit-line-clamp and overwrite the non-supportive stuff */
+@supports (-webkit-line-clamp: 5) {
+  .quote-card p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+
+  .quote-card p:after {
+    display: none;
+  }
+}
+
+.quote-card cite.see-more {
+    margin-top: 0px;
+    max-width: 75%;
+    cursor: pointer;
+}
+
+@media only screen and (min-width : 0px){
+  .quote-card-sm {
+    padding-left: 50px;
+    margin-top: 10px;
+  }
+  .quote-card-sm p {
+    font-size: .8em;
+    margin-top: 0px;
+  }
+}
+
+@media only screen and (min-width : 768px){
+  .quote-card-sm {
+    padding-left: 70px;
+    margin-top: 0;
+  }
+  .quote-card-sm p {
+    font-size: .58em;
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (min-width : 992px){
+  .quote-card p {
+    font-size: 1em;
+  }
+}
+
+@media only screen and (min-width : 1200px){
+  .quote-card p {
+    font-size: 1.2em;
+  }
+}
+
+.quote-card cite {
+  font-size: 18px;
+  margin-top: 10px;
+  display: block;
+  font-weight: 200;
+  opacity: 0.8;
+}
+
+@media only screen and (min-width : 0px){
+  .quote-card-sm cite {
+    font-size: 10px;
+  }
+}
+
+.quote-card:before,
+.quote-card-sm:before {
+  font-family: Georgia, serif;
+  content: "“";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 5em;
+  font-weight: bold;
+  color: #ffffff;
+  font-weight: normal;
+}
+
+.quote-card:after {
+  font-family: Georgia, serif;
+  content: "”";
+  position: absolute;
+  bottom: -100px;
+  line-height: 100px;
+  right: -32px;
+  font-size: 25em;
+  font-weight: bold;
+  color: #ffffff;
+  font-weight: normal;
+}
+
+.quote-card-sm:after {
+  font-family: Georgia, serif;
+  content: "”";
+  position: absolute;
+  bottom: -80px;
+  line-height: 100px;
+  right: -32px;
+  font-size: 15em;
+  font-weight: bold;
+  color: #ffffff;
+  font-weight: normal;
+}
+/* PDF */
+.no-mag {
+  width: 80%;
+  margin: 0px 10%,
+}
+
+.pdf-cont {
+  height: 450px;
+  width: auto;
+  position: relative;
+}
+
+.pdf-cont > a > img {
+  height: 409px;
+}
+
+.pdf-download {
+  display: inherit;
+}
+
+.pdf-pic-mag {
+  height: 205px;
+}
+
+@media only screen and (min-width : 0px){
+  .pdf-pic-mag {
+    padding-left: 0;
+  }
+
+  .pdf-download {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (min-width : 768px){
+  .pdf-pic-mag {
+    padding-left: 15px;
+    margin-top: 0;
+  }
+
+  .pdf-download {
+    margin-top: 7px;
+    font-size: 12px;
+  }
+}
+
+@media only screen and (min-width : 992px) {
+  .pdf-download {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+}
+
+/* About */
+@media only screen and (min-width : 0px){
+  .about-header-cont {
+    margin-top: 50px;
+  }
+}
+
+
+@media only screen and (min-width : 768px){
+  .about-header-cont {
+    margin-top: 0;
+  }
+}
+
+.about-logo,
+.about-logo-sm {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+}
+
+@media only screen and (min-width : 0px){
+  .about-logo-sm {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+  }
+
+  .about-fiesta-desc {
+    font-size: 12px;
+  }
+
+}
+
+@media only screen and (min-width : 768px){
+  .about-corner {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .about-desc {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+
+  .about-fiesta-desc {
+    font-size: 17px;
+  }
+}
+
+.about-desc > .well {
+  background-color: #fafafa;
+  margin-bottom: 0;
+}
+
+.about-title {
+  margin-bottom: 0;
+}

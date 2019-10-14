@@ -1,0 +1,41 @@
+
+
+@media screen and (max-width: 767px){
+  #manage-fiesta-container {
+    padding: 10px;
+  }
+  .tooltip {
+    max-width: 90%;
+  }
+}
+
+
+
+@media screen and (min-width: 768px){
+  #manage-fiesta-container {
+    padding-top: 30px;
+    padding-bottom: 20px;
+  }
+}
+
+a {
+  cursor: pointer;
+}
+
+#manage-fiesta-container {
+  max-width: 1500px;
+  min-width: 640px;
+  margin: auto;
+  margin-bottom: 8%;
+}
+
+.tooltip-inner {
+  max-width: 100%;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.row {
+  width: 100%;
+}

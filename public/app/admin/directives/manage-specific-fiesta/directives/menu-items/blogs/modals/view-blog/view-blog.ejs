@@ -1,0 +1,45 @@
+<div class="modal centered-modal" id="viewBlog" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+  <div class="modal-dialog centered-modal modal-xl">
+    <div class="modal-content">
+      <div class="modal-header tech-image" ng-style="{'background-image':'url(' + focused.image.path + ')'}">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <p class="small">
+          &copy; {{focused.image.credits}}
+        </p>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+              <h2>{{focused.title}}</h2>
+              <span class="small text-muted">
+                <span ng-if="focused.authors.trim() != ''">
+                  By: {{focused.author}}
+                </span>
+                <br>
+                <strong>
+                  {{focused.timestamp | date:'MMMM dd, yyyy'}}
+                </strong>
+                <br>
+                <span ng-if="focused.tags.length > 0" class="small">
+                  <span class="glyphicon glyphicon-tags"></span> &nbsp;&nbsp;
+                  <span ng-repeat="tag in focused.tags">
+                    {{tag}}
+                    <span ng-hide="$last"> &middot; </span>
+                  </span>
+                </span>
+              </span>
+              <br/>
+              <br>
+              <div ng-bind-html="focused.body">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

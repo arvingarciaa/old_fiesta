@@ -1,0 +1,51 @@
+<div class="panel panel-default">
+  <!-- Panel Title -->
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-1">
+
+        <h3 class="panel-title"></span> Awards</h3>
+      </div>
+      <div class="col-md-2 col-md-offset-9">
+        <button class="btn btn-xs btn-primary pull-right" type="button" name="button" ng-click="AddAward(award)" data-toggle="modal" data-target="#awardModal">
+          Add Award
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel Body -->
+  <div class="panel-body">
+    <!-- List of Awards -->
+    <div class="list-display text-center">
+      <div class="list-holder row">
+        <!-- NG-REPEAT for awards -->
+        <div class="col-md-3 photo-holder" ng-repeat ="award in awards track by $index" >
+          <div class="photo-thumbnail text-right" ng-cloak ng-style="{'background-image':'url(' + award.image.path + ')'}" ng-click="FocusAward(award)" data-toggle="modal" data-target="#focusAwardModal">
+          </div>
+          <span class="photo-info">
+            <a href ng-click="EditAward(award)" data-toggle="modal" data-target="#awardModal">
+              Edit Details
+            </a>
+            <span ng-click="DeleteAward(award._id)" class="glyphicon glyphicon-trash"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="" ng-if="awards.length == 0">
+      <li class="list-group-item">
+        <div class="no-data-large">
+          <span class="glyphicon glyphicon-star"></span> <br/><br/>
+          <span class="lead">Add Awards in the Fiesta</span>
+          <span class="text-muted">
+            <p>No awards presented in the fiesta. <a href ng-click="AddAward(award)" data-toggle="modal" data-target="#awardModal">Add one</a>?</p>
+          </span><br/>
+          <br/>
+        </div>
+      </li>
+    </div>
+  </div>
+</div>
+<award-modal></award-modal>

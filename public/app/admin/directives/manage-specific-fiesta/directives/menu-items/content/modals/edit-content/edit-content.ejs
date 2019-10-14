@@ -1,0 +1,128 @@
+<div class="modal" id="editContent" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!contentLoading">&times;</button>
+        <div class="row">
+          <div class="col-md-6 text-left">
+            <h4 class="modal-title" id="">
+               {{' ' + selected}}
+            </h4>
+          </div>
+          <div class="col-md-6 text-right">
+            <span ng-if="selected == 'Editorial'" class="glyphicon glyphicon-font text-muted"></span>
+            <span ng-if="selected == 'In-Focus'" class="glyphicon glyphicon-eye-open text-muted"></span>
+            <span ng-if="selected == 'Fiestaval'" class="glyphicon glyphicon-list-alt text-muted"></span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="title" class="col-sm-2 control-label">Title</label>
+                <div class="col-sm-10">
+                  <input ng-model="writeup.title" type="text" class="form-control" placeholder="Add a title for {{selected.toLowerCase()}}"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="date" class="col-sm-2 control-label">Date Published</label>
+                <div class="col-sm-10">
+                  <input ng-model="writeup.timestamp" type="date" class="form-control" id="date">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title" class="col-sm-2 control-label">Image Credits</label>
+                <div class="col-sm-10">
+                  <input ng-model="writeup.credits" type="text" class="form-control" placeholder="Add a credits for the thumbnail"/>
+                  <p class="help-block small">Thumbnail can be configured in the content section. Check for this button <span class="glyphicon glyphicon-camera"></span>.</p>
+                </div>
+              </div>
+              <div class="form-group" ng-init="author = {name: '', position: ''}">
+                <label for="title" class="col-sm-2 control-label">Author</label>
+                <div class="col-sm-5">
+                  <input ng-model="author.name" type="text" class="form-control" id="authorname" placeholder="Author name">
+                </div>
+                <div class="col-sm-4">
+                  <input ng-model="author.position" type="text" class="form-control" id="authorposition" placeholder="Position">
+                </div>
+                <div class="col-sm-1">
+                  <button ng-click="(author.name.trim()!=''||author.position.trim()!='')? writeup.authors.pushIfNotExist(author):''; author.name='';author.position='';" type="submit" class="btn btn-primary" tooltip-placement="bottom" uib-tooltip="Add author">
+                    <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div class="col-md-offset-2 col-md-10">
+              <div class="small text-left" ng-if="writeup.authors.length > 0">
+                <h6 class="text-muted">Authors</h6>
+                <ul class="list-group">
+                  <li class="list-group-item" ng-repeat="a in writeup.authors track by $index">
+                    <div class="row">
+                      <div class="col-md-6 text-left">
+                        {{a.name}} ({{a.position}})
+                      </div>
+                      <div class="col-md-6 text-right">
+                        <a href ng-click="writeup.authors.splice($index, 1)"><span class="glyphicon glyphicon-remove text-danger text-right"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Body</h4>
+            <summernote ng-model="writeup.body" config="options"></summernote>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="EditWriteUp(writeup)" ladda="contentLoading" data-style="expand-right" data-spinner-size="10">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="editThumbnail" tabindex="-1" role="dialog" aria-labelledby="editThumbnail">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="editThumbnail1">Edit Thumbnail</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" action="index.html" method="post">
+          <div class="form-group">
+            <label for="thumbnail" class="col-sm-2 control-label">Thumbnail</label>
+            <div class="col-sm-10">
+                <button id="thumbnail" type="button" class="btn btn-default btn-block" ng-click="toggleUpload()">
+                  {{(inputImage)? inputImage.name: 'Upload an Image'}}
+                </button>
+              <input ng-hide="true" class="form-control" id="upload" type="file" ngf-select="" ng-model="inputImage" name="file" ngf-accept="'image/*'" required=""/>
+              <div class="container-fluid" style="width: 95%" ng-if="inputImage">
+                <br>
+                <div class="media" style="width:100%;">
+                  <div class="media-left media-middle" style="width:40%">
+                    <a href>
+                      <img class="media-object img-rounded" ngf-src="inputImage" alt="" style="width: 100%;"/>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="EditWriteUpImage(inputImage, selectedImage)" ladda="contentImageLoading" data-style="expand-right" data-spinner-size="10">Upload</button>
+      </div>
+    </div>
+  </div>
+</div>

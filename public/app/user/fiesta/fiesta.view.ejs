@@ -1,0 +1,35 @@
+<div ng-controller="FiestaCtrl">
+  <div id="navigation" class="navbar-fixed-top">
+    <ol class="breadcrumb navigation-breadcrumb">
+      <li><a ng-href="http://dpitc.net">HOME</a></li>
+      <li><a ng-href="/">FIESTA</a></li>
+    </ol>
+    <ul class="nav navbar-nav navbar-right navigation-login">
+      <li ng-if="!loggedIn"><a ng-href="/login">Login</a></li>
+      <li class="dropdown" ng-if="loggedIn">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          {{name}} <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#" ng-click="goTo('/admin')">Manage FIESTA</a></li>
+          <li><a href="#" ng-click="goTo('/admin/customize')">Customize Pages</a></li>
+          <li><a href="#" ng-click="goTo('/admin/analytics')">Analytics</a></li>
+          <li><a href="#" ng-click="goTo('/admin/comments')">Manage Comments</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#" ng-click="goTo('/admin/accounts')" ng-if="isAdmin">Manage Accounts</a></li>
+          <li><a href="/admin/settings">Account Settings</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <div class="banner" ng-cloak ng-if="::fiesta_cms.banner || undefined" ng-show="fiesta_cms.banner"
+         ng-style="{'background-image':'url(' + fiesta_cms.banner + ')'}"></div>
+    <div class="text-center"><span class="bold fiesta-header" ng-cloak ng-if="::fiesta_cms.header || undefined"
+        ng-show="fiesta_cms.header">{{fiesta_cms.header}}</span></div>
+    <fiesta-carousel ng-cloak></fiesta-carousel>
+    <fiesta-list ng-cloak ng-if="::fiestas.length || undefined" ng-show="fiestas.length"></fiesta-list>
+  </div>
+</div>
+<link rel="stylesheet" href="assets/user/css/fiesta/fiesta.css">

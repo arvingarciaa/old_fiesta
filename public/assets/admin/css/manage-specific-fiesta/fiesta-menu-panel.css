@@ -1,0 +1,36 @@
+.profile-pic-container, .fiesta-title-holder {
+  display: block;
+  width: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.disabled-menu {
+  pointer-events: none;
+  cursor: none;
+  background-color: rgba(230, 230, 230, 0.21);
+  border-radius: 2px;
+  color: black!important;
+  font-weight: 600;
+  border: 1px solid darkgrey;
+}
+
+.nav.flex-column>li>a:focus, .nav.flex-column>li>a:hover {
+  background-color: rgba(230, 230, 230, 0.21);
+  border-radius: 2px;
+  border: 1px solid darkgrey;
+  padding-left: 14px;
+  padding-bottom: 9px;
+}
+
+.fix-top:hover {
+  padding-top: 9px;
+}
+
+.nav-link {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.profile-picture-holder {
+  padding: 4px;
+}

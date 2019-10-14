@@ -1,0 +1,68 @@
+.photo-uploader {
+  position: relative;
+  display: block;
+  margin: auto;
+  width: 90%;
+  text-align: center;
+  background-color: rgba(209, 209, 209, 0.63);
+  border-radius: 5px;
+}
+
+.photo-uploader.focused {
+  width: 100%;
+}
+
+
+.photo-preview, .photo-select, .photo-loading{
+  width: 100%;
+  position: relative;
+}
+
+
+.photo-loading, .photo-loading > .progress-striped {
+  height: 300px;
+  opacity: 0.8;
+}
+
+
+.photo-select {
+  border: 3px dashed grey;
+  height: 300px;
+  border-radius: 5px;
+}
+.photo-select > div {
+  top: 40%;
+  left: 40%;
+  position: absolute;
+}
+.photo-select > div > .glyphicon {
+  font-size: 3rem;
+  opacity: .7;
+}
+.photo-select > div > p {
+  font-size: 1.4rem;
+}
+
+
+.photo-uploader:hover {
+  cursor: pointer;
+}
+.photo-uploader:hover > .photo-select > div {
+  top: 39%;
+}
+.photo-uploader:hover > .photo-select > div > .glyphicon {
+  font-size: 3.3rem;
+  opacity: .9;
+}
+.photo-uploader:hover > .photo-preview {
+  opacity: .7;
+}
+
+
+.photo-preview {
+  width: 100%;
+}
+.photo-preview > img {
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

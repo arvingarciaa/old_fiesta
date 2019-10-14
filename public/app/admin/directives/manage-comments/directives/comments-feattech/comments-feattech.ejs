@@ -1,0 +1,48 @@
+<div>
+  <br>
+  <div ng-repeat="(key, tech) in ft_comments">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span class="bold">
+          {{key}}
+        </span>
+      </div>
+      <div class="panel-body">
+        <div ng-repeat="(ke, val) in tech">
+          <p class="bold lead">
+            {{ke}}
+          </p>
+          <div ng-repeat="(k, v) in val">
+            <blockquote>
+              {{v[0].tech.name}}
+            </blockquote>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="col-md-2 col-lg-2 col-xs-2 col-sm-2"> Username </th>
+                  <th class="col-md-6 col-lg-6 col-xs-6 col-sm-6"> Comment </th>
+                  <th class="col-md-2 col-lg-2 col-xs-2 col-sm-2"> Date </th>
+                  <th class="text-center col-md-1 col-lg-1 col-xs-1 col-sm-1"> Approve </th>
+                  <th class="text-center col-md-1 col-lg-1 col-xs-1 col-sm-1"> Disapprove </th>
+                <tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="comm in v | orderBy: '-timestamp'">
+                  <td>{{comm.username}}</td>
+                  <td>{{comm.comment}}</td>
+                  <td am-time-ago="comm.timestamp"></td>
+                  <td class="text-center"><span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green; cursor: pointer;"
+                    ng-click="approveFeattech(comm)"></span></td>
+                  <td class="text-center"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red; cursor: pointer;"
+                    ng-click="removeFeattech(comm)"></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <hr ng-hide="$last">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

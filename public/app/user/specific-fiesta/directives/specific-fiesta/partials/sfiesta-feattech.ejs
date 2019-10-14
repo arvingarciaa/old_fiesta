@@ -1,0 +1,244 @@
+<div ng-controller="SFiestaFeatTechCtrl">
+  <div class="row">
+    <img class="no-padding col-lg-3 col-md-3 col-sm-3 col-xs-3"
+         ng-src="/assets/user/images/specific-fiesta/featured-technologies/aanr_aquatic.jpg"
+         data-toggle="collapse" data-parent="#accordion" href=".sector-A"
+         ng-click="SetFeatTechHeaderFocus('Aquatic')"/>
+    <img class="no-padding col-lg-3 col-md-3 col-sm-3 col-xs-3"
+         ng-src="/assets/user/images/specific-fiesta/featured-technologies/aanr_crops.jpg"
+         data-toggle="collapse" data-parent="#accordion" href=".sector-C"
+         ng-click="SetFeatTechHeaderFocus('Crops')"/>
+    <img class="no-padding col-lg-3 col-md-3 col-sm-3 col-xs-3"
+         ng-src="/assets/user/images/specific-fiesta/featured-technologies/aanr_forestenvi.jpg"
+         data-toggle="collapse" data-parent="#accordion" href=".sector-F"
+         ng-click="SetFeatTechHeaderFocus('Forest and Environment')"/>
+    <img class="no-padding col-lg-3 col-md-3 col-sm-3 col-xs-3"
+         ng-src="/assets/user/images/specific-fiesta/featured-technologies/aanr_livestock.jpg"
+         data-toggle="collapse" data-parent="#accordion" href=".sector-L"
+         ng-click="SetFeatTechHeaderFocus('Livestock')"/>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-3 no-padding dropdown-sectors">
+      <div class="panel-group" id="accordion">
+        <div class="panel panel-default" ng-repeat="sector in sectors | orderBy: 'name'">
+          <div class="panel-heading" id="sector-{{sector.name[0]}}" ng-click="isCollapsed = !isCollapsed">
+            <h4 class="panel-title">
+              <a class="sector" ng-cloak>{{sector.name}}</a>
+            </h4>
+          </div>
+          <div class="sector-{{sector.name[0]}}" uib-collapse="isCollapsed" >
+            <div class="panel-body">
+              <table class="table">
+                <tr ng-if="tech[comm] && tech[comm].length > 0"
+                  ng-init="sec[sector.name] = sec[sector.name]+1"
+                  ng-repeat="comm in sector.commodities | orderBy: '' track by $index" id="{{comm.split(' ').join('')}}">
+                  <td class="no-padding comm">
+                    <a class="commodity" ng-click="isCommCollapsed = !isCommCollapsed">
+                      <span class="badge">{{tech[comm].length}}</span>&nbsp;
+                      {{comm}}
+                      <i class="collapse-arrow glyphicon" ng-class="{'glyphicon-chevron-down': !isCommCollapsed, 'glyphicon-chevron-right': isCommCollapsed}"></i>
+                    </a>
+                    <div class="feattechs" uib-collapse="isCommCollapsed">
+                      <table class="table table-hover">
+                        <tr class="tech" ng-cloak ng-repeat="t in tech[comm] | orderBy: 'name'" ng-init="SetInitialFeatTechFocus()">
+                          <td ng-cloak ng-click="SetFeatTechFocus(t._id)" ng-class="{'selected-tech': t._id == featTechFocus._id}"> {{t.name}} </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </td>
+                </tr>
+                <tr ng-show="!sec[sector.name]">
+                  <td class="commodity">No technologies to show.</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9 col-md-9 ft-body" ng-click="SetInitialFeatTechFocus()">
+      <div ng-if="technologies.length" ng-show="technologies.length">
+        <h1 class="ft-name" ng-cloak>{{featTechFocus.name}}</h1>
+        <div class="row">
+          <div class="col-lg-7 col-md-7 col-sm-7 ft-description" ng-if="featTechFocus.description">
+            <p class="text-justify" ng-cloak>{{featTechFocus.description}}</p>
+          </div>
+          <img class="ft-thumbnail-lg col-lg-5 col-md-5 col-sm-5 hidden-xs" ng-cloak ng-src="{{featTechFocus.image.path}}" ng-if="featTechFocus.image.path"/>
+          <img class="ft-thumbnail hidden-lg hidden-md hidden-sm visible-xs" ng-cloak ng-src="{{featTechFocus.image.path}}" ng-if="featTechFocus.image.path"/>
+          <span class="ft-credits hidden-xs" ng-cloak ng-if="featTechFocus.image.credits">&copy;{{featTechFocus.image.credits}}</span>
+        </div>
+        <br>
+        <div class="row">
+          <div class="ft-table panel panel-default" ng-cloak ng-if="featTechFocus.benefits.length">
+            <table class="table table-responsive">
+              <thead>
+                <tr>
+                  <th class="bold lead">Benefits</th>
+                </tr>
+              <thead>
+              <tbody>
+                <tr ng-repeat="benefit in featTechFocus.benefits | orderBy: ''">
+                  <td class="text-justify" ng-cloak>{{benefit}}</td>
+                </tr>
+              <tbody>
+            </table>
+          </div>
+          <div class="ft-table panel panel-default" ng-if="featTechFocus.targetBeneficiaries.length">
+            <table class="table table-responsive">
+              <thead>
+                <tr>
+                  <th class="bold lead">Target Beneficiaries</th>
+                </tr>
+              <thead>
+              <tbody>
+                <tr ng-repeat="beneficiaries in featTechFocus.targetBeneficiaries | orderBy: ''">
+                  <td class="text-justify" ng-cloak>{{beneficiaries}}</td>
+                </tr>
+              <tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="ft-table panel panel-default" ng-if="featTechFocus.locations.length">
+            <table class="table table-responsive">
+              <thead>
+                <tr>
+                  <th class="bold lead">Locations</th>
+                </tr>
+              <thead>
+              <tbody>
+                <tr ng-repeat="location in featTechFocus.locations | orderBy: ''">
+                  <td class="text-justify" ng-cloak>{{location}}</td>
+                </tr>
+              <tbody>
+            </table>
+          </div>
+          <div class="ft-table panel panel-default" ng-if="featTechFocus.partnerInstitutions.length">
+            <table class="table table-responsive">
+              <thead>
+                <tr>
+                  <th class="bold lead">Partner Institutions</th>
+                </tr>
+              <thead>
+              <tbody>
+                <tr ng-repeat="institution in featTechFocus.partnerInstitutions | orderBy: ''">
+                  <td class="text-justify" ng-cloak>{{institution}}</td>
+                </tr>
+              <tbody>
+            </table>
+          </div>
+        </div>
+
+
+        <div class="row" ng-show="featTechFocus" ng-if="sfiesta_cms.feattech.react">
+          <hr>
+          <p class="lead bold"> YOUR REACTION? </p>
+          <div class="col-lg-5 col-md-5 text-center">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <div ng-click="AddReact('like')"><i class="fa fa-thumbs-o-up fa-5x reaction-btn" aria-hidden="true"></i></div>
+              <div>
+                <span class="lead">Like</span>
+                <br>
+                <span>{{likeCount}}</span>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <div ng-click="AddReact('happy')"><i class="fa fa-smile-o fa-5x reaction-btn" aria-hidden="true"></i></div>
+              <div>
+                <span class="lead">Happy</span>
+                <br>
+                <span>{{happyCount}}</span>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <div ng-click="AddReact('sad')"><i class="fa fa-frown-o fa-5x reaction-btn" aria-hidden="true"></i></div>
+              <div>
+                <span class="lead">Sad</span>
+                <br>
+                <span>{{sadCount}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" ng-init="goingToComment=false" ng-show="featTechFocus" ng-if="sfiesta_cms.feattech.comment">
+          <div class="col-md-12">
+            <div class="bs-comment" style="margin-left: 10px; margin-right: 10px;">
+              <span ng-cloak class="bs-comment-number">Comments about this technology &middot; {{ftcomments.length}}</span>
+              <br>
+              <!-- Enter comment -->
+              <div class="row">
+                <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">
+                  <div class="thumbnail hidden-xs hidden-sm">
+                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                  </div>
+                </div>
+                <div class="col-md-10 col-lg-10 col-xs-10 col-sm-10">
+                  <div class="panel panel-default whole-comment-box">
+                    <div class="panel-heading">
+                      <input class="comment-name" ng-model="ftcomment.username" type="text" name="" value="" placeholder="Enter your name" ng-focus="highlightCommentBox(); goingToComment=true" ng-blur="removeHighlight()">
+                    </div>
+                    <div class="panel-body special">
+                      <textarea msd-elastic ng-model="ftcomment.comment" ng-focus="highlightCommentBox(); goingToComment=true" ng-blur="removeHighlight()" class="comment-box" name="name" rows="1" cols="80" placeholder="Add a comment"></textarea>
+                    </div>
+                    <div class="panel-footer">
+                      <span class="text-muted small" style="font-style: italic;">Note: All comments should be approved by the admin.</span>
+                    </div>
+                  </div>
+                  <div class="row" ng-show="goingToComment">
+                    <div class="col-md-4 col-md-offset-8 text-right">
+                      <button type="button" class="btn btn-default btn-xs" ng-click="ftcomment.comment=''; ftcomment.username=''; goingToComment=false">
+                        Cancel
+                      </button>
+                      &nbsp;
+                      <button type="button" class="btn btn-primary btn-xs" ng-click="AddComment()">
+                        Comment
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <hr>
+
+              <!-- Comment List -->
+              <div class="row" ng-repeat="comment in ftcomments.slice(((ftcommentsPage-1)*30), ((ftcommentsPage)*30))">
+                <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">
+                  <div class="thumbnail hidden-xs hidden-sm">
+                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                  </div>
+                </div>
+                <div class="col-md-10 col-lg-10 col-xs-10 col-sm-10 posted-comment-holder">
+                  <div class="panel panel-default posted-comment">
+                    <div class="panel-heading">
+                      <strong ng-cloak>{{comment.username}}</strong>
+                      <span class="text-muted small" am-time-ago="comment.timestamp"></span>
+                    </div>
+                    <div class="panel-body" ng-cloak>
+                      {{comment.comment}}
+                      <span ng-if="adminId == fiesta.createdBy || isAdmin" ng-click="deleteFtComment(comment)" class="btn pull-right" title="Delete comment"><a><i class="fa fa-remove" style="color:red"></i><a></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="paginations text-center" ng-show="ftcomments.length>30">
+                <ul class="pagination-sm" uib-pagination total-items="ftcomments.length" ng-model="ftcommentsPage"
+                    items-per-page="30" boundary-link-numbers="true"
+                    rotate="false" previous-text="&laquo;" next-text="&raquo;">
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <div class="text-center no-feattech" ng-show="!featTechFocus">
+        <p class="lead text-muted">Select featured technology on the dropdown to view.</p>
+      </div>
+
+      </div>
+      <div class="text-center no-feattech" ng-if="!technologies.length" ng-show="!technologies.length">
+        <p class="lead text-muted">No featured technologies to show.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="assets/user/css/specific-fiesta/sfiesta-feattech.css">

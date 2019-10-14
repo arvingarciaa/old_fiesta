@@ -1,0 +1,16 @@
+<br><br>
+<div class="container-fluid" ng-controller="ManageAccountCtrl">
+
+  <div class="row" style="padding-top: 10px; padding-bottom: 40px;">
+    <div class="col-sm-2">
+      <ul class="nav nav-pills nav-stacked side-bar" ng-init="account=true; message=false;">
+        <li role="presentation" ng-class="{'active': account}"><a href ng-click="account = true; message=false;">Accounts</a></li>
+        <!-- <li role="presentation" ng-class="{'active': message}"><a href ng-click="message = true; account=false;">Messages</a></li> -->
+      </ul>
+    </div>
+    <div class="col-sm-10">
+      <accounts ng-if="account"></accounts>
+      <!-- <messages ng-if="message"></messages> -->
+    </div>
+  </div>
+</div>

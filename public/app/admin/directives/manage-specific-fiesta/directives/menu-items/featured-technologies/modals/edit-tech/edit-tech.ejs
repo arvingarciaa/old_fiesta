@@ -1,0 +1,234 @@
+<div class="modal centered-modal" id="editTechnology" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!techLoading">&times;</button>
+        <h4 class="modal-title" id="">Add a featured technology</h4>
+      </div>
+      <div class="modal-body">
+        <ol class="breadcrumb small">
+          <li class="0 crumbs active"><a href ng-click="showMenu(0)">Commodity</a></li>
+          <li class="1 crumbs"><a href ng-click="showMenu(1)">Details</a></li>
+          <li class="2 crumbs"><a href ng-click="showMenu(2)">Picture</a></li>
+          <li class="3 crumbs"><a href ng-click="showMenu(3)">Benefits</a></li>
+          <li class="4 crumbs"><a href ng-click="showMenu(4)">Locations</a></li>
+          <li class="5 crumbs"><a href ng-click="showMenu(5)">Target Beneficiaries</a></li>
+          <li class="6 crumbs"><a href ng-click="showMenu(6)">Partner Institutions</a></li>
+        </ol>
+        <div class="container-fluid">
+          <div ng-if="menu[0]">
+            <blockquote>
+              <p class="lead">Commodity</p>
+              <p class="text-muted small">To add or remove commodity items, go to <strong>About</strong> > <strong>General</strong> > <strong> Commodity</strong>.</p>
+            </blockquote>
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+                <div class="input-group">
+                  <select class="form-control" ng-model="technology.commodity" style="width: 100%;">
+                    <option value="" selected disabled>Choose a commodity</option>
+                    <option ng-repeat="commodity in fiesta.commodity | orderBy: ''" value="{{commodity}}">{{commodity}}</option>
+                  </select>
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+
+          <div ng-if="menu[1]">
+            <blockquote>
+              <p class="lead">Name and Description</p>
+            </blockquote>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-horizontal">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="formGroupInputLarge">Name</label>
+                    <div class="col-sm-10">
+                      <input ng-model="technology.name" class="form-control" type="text" id="formGroupInputLarge" placeholder="Add a name to your technology"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-horizontal">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="formGroupInputLarge">Description</label>
+                    <div class="col-sm-10">
+                      <textarea ng-model="technology.description" id="inputText" class="form-control"  name="name" rows="5" cols="80" wrap="soft" placeholder="Add a description"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div ng-show="menu[2]">
+            <blockquote>
+              <p class="lead">Technology Image</p>
+            </blockquote>
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2">
+                <!-- Image input -->
+                <div ng-if="!updateDetails" class="photo-uploader" type="file" ngf-select="" ng-model="technology.image.input" name="file" ngf-accept="'image/jpeg'">
+                  <div class="photo-preview">
+                    <img ngf-src="technology.image.input" alt="">
+                  </div>
+                  <div class="photo-select"  ng-hide="(technology.image.input)">
+                    <div>
+                      <span class="glyphicon glyphicon-picture"></span>
+                      <p>Upload a photo</p>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div class="form-group">
+                  <label for="creditsInput">Credits</label>
+                  <input ng-model="technology.image.credits" type="text" class="form-control" id="creditsInput" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div ng-if="menu[3]">
+            <blockquote>
+              <p class="lead">Benefits</p>
+            </blockquote>
+            <h5 class="text-center" ng-if="technology.benefits.length == 0">No benefits added.</h5>
+            <table class="table table-bordered">
+              <tr ng-repeat="benefit in technology.benefits track by $index">
+                <td class="col-md-1 small text-muted">{{$index + 1}}</td>
+                <td class="col-md-10">{{benefit}}</td>
+                <td class="col-md-1"><button ng-click="technology.benefits.splice($index, 1)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td>
+              </tr>
+            </table>
+            <form class="form-inline">
+              <div class="row">
+                <div class="col-xs-10">
+                    <textarea ng-model="benefit" class="form-control" name="name" rows="1" cols="80" wrap="soft" style="width:100%"></textarea>
+                </div>
+                <div class="col-xs-2">
+                  <button ng-click="technology.benefits.pushIfNotExist(benefit); benefit = ''" type="submit" class="btn btn-info btn-block">Add</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div ng-if="menu[4]">
+            <blockquote>
+              <p class="lead">Locations</p>
+            </blockquote>
+            <h5 class="text-center" ng-if="technology.locations.length == 0">No locations added.</h5>
+            <table class="table table-bordered">
+              <tr ng-repeat="location in technology.locations track by $index">
+                <td class="col-md-1 small text-muted">{{$index + 1}}</td>
+                <td class="col-md-10">{{location}}</td>
+                <td class="col-md-1"><button ng-click="technology.locations.splice($index, 1)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td>
+              </tr>
+            </table>
+            <form class="form-inline">
+              <div class="row">
+                <div class="col-xs-10">
+                  <input type="text" ng-model="location" uib-typeahead="place for place in locations | filter:$viewValue | limitTo:10" class="form-control" style="width: 100%;">
+                </div>
+                <div class="col-xs-2">
+                  <button ng-click="technology.locations.pushIfNotExist(location); location=''" type="submit" class="btn btn-info btn-block">Add</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div ng-if="menu[5]">
+            <blockquote>
+              <p class="lead">Target Beneficiaries</p>
+            </blockquote>
+            <h5 class="text-center" ng-if="technology.targetBeneficiaries.length == 0">No target beneficiaries added.</h5>
+            <table class="table table-bordered">
+              <tr ng-repeat="targetBeneficiary in technology.targetBeneficiaries track by $index">
+                <td class="col-md-1 small text-muted">{{$index + 1}}</td>
+                <td class="col-md-10">{{targetBeneficiary}}</td>
+                <td class="col-md-1"><button ng-click="technology.targetBeneficiaries.splice($index, 1)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td>
+              </tr>
+            </table>
+            <form class="form-inline">
+              <div class="row">
+                <div class="col-xs-10">
+                    <input ng-model="targetBeneficiary" class="form-control" uib-typeahead="ben for ben in beneficiaries | filter:$viewValue | limitTo:10" style="width:100%" type="text" name="" value="">
+                </div>
+                <div class="col-xs-2">
+                  <button ng-click="technology.targetBeneficiaries.pushIfNotExist(targetBeneficiary); targetBeneficiary=''" type="submit" class="btn btn-info btn-block">Add</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div ng-if="menu[6]">
+            <blockquote>
+              <p class="lead">Partner Institutions</p>
+            </blockquote>
+            <h5 class="text-center" ng-if="technology.partnerInstitutions.length == 0">No partner institutions added.</h5>
+            <table class="table table-bordered">
+              <tr ng-repeat="partnerInstitution in technology.partnerInstitutions track by $index">
+                <td class="col-md-1 small text-muted">{{$index + 1}}</td>
+                <td class="col-md-10">{{partnerInstitution}}</td>
+                <td class="col-md-1"><button ng-click="technology.partnerInstitutions.splice($index, 1)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td>
+              </tr>
+            </table>
+            <form class="form-inline">
+              <div class="row">
+                <div class="col-xs-10">
+                  <input ng-model="partnerInstitution" type="text" ng-model="partnerInstitution" uib-typeahead="institution for institution in institutions | filter:$viewValue | limitTo:10" class="form-control" style="width: 100%;">
+                </div>
+                <div class="col-xs-2">
+                  <button ng-click="technology.partnerInstitutions.pushIfNotExist(partnerInstitution);partnerInstitution=''" type="submit" class="btn btn-info btn-block">Add</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button ng-if="!menu[0]" ng-click="toggleMenu('prev')" type="button" class="btn btn-default btn-xs" ng-hide="techLoading"><span class="glyphicon glyphicon-chevron-left"></span>Go back</button>
+        <button ng-if="!menu[6]" ng-click="toggleMenu('next')" type="button" class="btn btn-primary" ng-hide="techLoading">Next<span class="glyphicon glyphicon-chevron-right"></span></button>
+        <button ng-if="menu[6] && !updateDetails" ng-click="AddTechnology()" type="button" class="btn btn-primary" ladda="techLoading" data-style="expand-right" data-spinner-size="10">Done, add the technology </button>
+        <button ng-if="updateDetails" ng-click="EditTechnology()" type="button" class="btn btn-primary" ladda="techLoading" data-style="expand-right" data-spinner-size="10">Update details</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal centered-modal" id="editImage" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!loading">&times;</button>
+        <h5 class="modal-title" id="">Change image for technology '{{techPointer.name}}'</h5>
+      </div>
+      <div class="modal-body">
+
+        <!-- Image input -->
+        <div class="photo-uploader" type="file" ngf-select="" ng-model="inputImage" name="file" ngf-accept="'image/jpeg'">
+          <div class="photo-preview" ng-hide="(!inputImage || loading)">
+            <img ngf-src="inputImage" alt="">
+          </div>
+          <div class="photo-select" ng-hide="(inputImage || loading)">
+            <div>
+              <span class="glyphicon glyphicon-picture"></span>
+              <p>Upload photo</p>
+            </div>
+          </div>
+          <div class="photo-loading" ng-show="loading">
+            <uib-progressbar class="progress-striped active" value="100"></uib-progressbar>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!loading">Close</button>
+        <button type="button" class="btn btn-primary" ng-class="{'disabled': loading}" ng-click="EditImage(inputImage, techPointer)">Update image</button>
+      </div>
+    </div>
+  </div>
+</div>

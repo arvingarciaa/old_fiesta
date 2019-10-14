@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <base href="/"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta charset="UTF-8"/>
+    <title><%= title %></title>
+    <%- include partials/fonts.ejs %>
+    <%- include partials/stylesheets.ejs %>
+    <%- include partials/scripts.ejs %>
+    <script src="app/app.js"></script>
+    <script src="app/common/services/database/fiesta.srvc.js"></script>
+    <script src="app/common/services/database/authenticate.srvc.js"></script>
+    <script src="app/common/services/utils/utils.srvc.js"></script>
+    <script src="app/common/directives/fallback-src/fallback-src.js"></script>
+    <script src="app/common/directives/navbar/navbar.js"></script>
+    <script src="app/common/directives/socials/socials.js"></script>
+    <script src="app/common/directives/footer/footer.js"></script>
+  </head>
+  <body>
+    <div ng-app="app">
+      <toast></toast>
+      <navbar></navbar>
+      <socials></socials>
+      <div ng-view autoscroll="true"></div>
+      <footer-tag></footer-tag>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,263 @@
+<div ng-controller="SFiestaMediaCtrl">
+  <!-- PHOTOS -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <span class="bold lead"><i class="fa fa-picture-o" aria-hidden="true"></i> Photos</span>
+      <span class="media-count pull-right small text-muted" ng-cloak
+            ng-if="::photos.length || undefined" ng-show="photos.length">{{photos.length}} Photos</span>
+    </div>
+    <div class="panel-body" ng-cloak ng-if="::photos.length || undefined" ng-show="photos.length">
+      <div class="text-center">
+        <div class="row">
+          <div class="photo-container col-lg-3 col-sm-4 col-xs-6" ng-cloak
+               ng-repeat="photo in photos.slice(((photosPage-1)*photosPageSize), ((photosPage)*photosPageSize)) track by $index">
+            <div class="photo-thumbnail media-thumbnail" ng-style="{'background-image':'url(' + photo.image.path + ')'}"
+                 data-ng-click="SetMediaFocus('photo', $index)" data-toggle="modal" data-target="#photo-modal">
+                 <div class="photo-caption">
+                   <span>
+                     <p>{{photo.caption}}</p>
+                     <p class="small">By: {{photo.image.credits}}</p>
+                   </span>
+                 </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body no-media" ng-cloak ng-if="::photos.length == 0 || undefined" ng-show="photos.length == 0">
+      <div class="text-center lead text-muted">No photos to show.</div>
+    </div>
+  </div>
+  <!-- PHOTOS Pagination  -->
+  <div class="paginations text-center" ng-show="photos.length">
+    <ul class="pagination-sm" uib-pagination total-items="photos.length" ng-model="photosPage"
+        items-per-page="photosPageSize" boundary-link-numbers="true"
+        rotate="false" previous-text="&laquo;" next-text="&raquo;">
+    </ul>
+  </div>
+  <!-- VIDEOS -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <span class="bold lead"><i class="fa fa-film" aria-hidden="true"></i> Videos</span>
+      <span class="media-count pull-right small text-muted" ng-cloak
+            ng-if="::videos.length || undefined" ng-show="videos.length">{{videos.length}} Videos</span>
+    </div>
+    <div class="panel-body" ng-cloak ng-if="::videos.length || undefined" ng-show="videos.length">
+      <div class="text-center">
+        <div class="row">
+          <div class="video-container col-lg-3 col-sm-4 col-xs-6" ng-cloak
+               ng-repeat="video in videos.slice(((videosPage-1)*videosPageSize), ((videosPage)*videosPageSize)) track by $index">
+            <div data-ng-click="SetMediaFocus('video', $index)" data-toggle="modal" data-target="#video-modal">
+              <div class="media-thumbnail" ng-style="{'background-image':'url(https://img.youtube.com/vi/' + video.youtubeId + '/hqdefault.jpg)'}"
+                ng-mouseover="getVidDetails(video.youtubeId)">
+                <div class="photo-caption">
+                  <span>
+                    <p>{{hoverYt}}</p>
+                  </span>
+                </div>
+              </div>
+              <img class="youtube-logo" src="assets/admin/images/manage-specific-fiesta/YouTube-logo-full_color.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body no-media" ng-cloak ng-if="::videos.length == 0 || undefined" ng-show="videos.length == 0">
+      <div class="text-center lead text-muted">No videos to show.</div>
+    </div>
+  </div>
+  <!-- VIDEOS Pagination -->
+  <div class="paginations text-center" ng-show="videos.length">
+    <ul uib-pagination total-items="videos.length" ng-model="videosPage"
+        items-per-page="videosPageSize" class="pagination-sm" boundary-link-numbers="true"
+        rotate="false" previous-text="&laquo;" next-text="&raquo;">
+    </ul>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal fade" id="video-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" type="button" data-dismiss="modal">&times;</button>
+          <span ng-cloak ng-bind="mediaFocus.title"></span>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 modal-picture">
+              <div>
+                <div class="video" ng-cloak ng-if="mediaFocus.youtubeId && mediaFocus.youtubeId.trim() != ''">
+                  <ng-youtube-embed video="mediaFocus.youtubeId" autoplay="false" color="white" disablekb="true" width="100%">
+                  </ng-youtube-embed>
+                </div>
+              </div>
+              <a class="ext" target="_blank" ng-cloak ng-href="https://www.youtube.com/watch?v={{mediaFocus.youtubeId}}">
+                <i class="fa fa-2x fa-external-link" aria-hidden="true"></i>
+              </a>
+              <a class="prev" ng-cloak ng-show="mediaActive > 0" ng-click="SetMediaFocus('video-next', mediaActive-1)">
+                <i class="navigation fa fa-lg fa-chevron-left" aria-hidden="true"></i>
+              </a>
+              <a class="next" ng-cloak ng-show="mediaActive < (mediaCount-1)" ng-click="SetMediaFocus('video-next', mediaActive+1)">
+                <i class="navigation fa fa-lg fa-chevron-right" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <br>
+              <blockquote class="small" ng-if="mediaFocus.description">
+                <p class="ng-cloak">
+                  <span class="small youtube-description">
+                    {{mediaFocus.credits}} <br>
+                    {{mediaFocus.description}}
+                  </span>
+                </p>
+              </blockquote>
+              <span>
+                <span ng-show="mediaFocus.tags.length > 0"><i class="fa fa-tags" aria-hidden="true"></i></span>
+                <span ng-repeat="tag in mediaFocus.tags | orderBy: ''">
+                  <span class="text-muted small tags" ng-cloak><a>{{tag}}</a><span ng-hide="$last">, </span> </span>
+                </span>
+              </span>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- PHOTO Modal -->
+  <div class="modal fade" id="photo-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" type="button" data-dismiss="modal">&times;</button>
+          <span>{{mediaFocus.caption}}</span>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 modal-picture">
+              <div ng-cloak ng-style="{'background-image':'url(' + mediaFocus.image.path + ')'}"></div>
+              <a class="ext" target="_blank" ng-cloak ng-href="{{mediaFocus.image.path}}">
+                <i class="fa fa-2x fa-external-link" aria-hidden="true"></i>
+              </a>
+              <a class="prev" ng-cloak ng-show="mediaActive > 0" ng-click="SetMediaFocus('photo-next', mediaActive-1)">
+                <i class="navigation fa fa-lg fa-chevron-left" aria-hidden="true"></i>
+              </a>
+              <a class="next" ng-cloak ng-show="mediaActive < (mediaCount-1)" ng-click="SetMediaFocus('photo-next', mediaActive+1)">
+                <i class="navigation fa fa-lg fa-chevron-right" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <blockquote class="small">
+                <p class="small" ng-cloak> &copy; {{mediaFocus.image.credits}}<br>
+                  {{mediaFocus.timestamp | date: 'MMMM d, y'}}
+                </p>
+              </blockquote>
+              <span>
+                <span ng-show="mediaFocus.tags.length > 0"><i class="fa fa-tags" aria-hidden="true"></i></span>
+                <span ng-repeat="tag in mediaFocus.tags | orderBy: ''">
+                  <span class="text-muted small tags" ng-cloak><a>{{tag}}</a><span ng-hide="$last">, </span> </span>
+                </span>
+              </span>
+              <div class="panel panel-default" ng-show="mediaType == 'photo' || mediaType == 'photo-next'">
+                <div class="panel-heading container-fluid">
+                  <div class="text-center row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                      <div ng-click="AddReactMedia('like')">
+                        <span>{{likeCountPhoto}}</span>
+                        <i class="fa fa-lg fa-thumbs-o-up reaction-btn" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                      <div ng-click="AddReactMedia('happy')">
+                        <span>{{happyCountPhoto}}</span>
+                        <i class="fa fa-lg fa-smile-o reaction-btn" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                      <div ng-click="AddReactMedia('sad')">
+                        <span>{{sadCountPhoto}}</span>
+                        <i class="fa fa-lg fa-frown-o reaction-btn" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row" ng-init="goingToComment=false">
+                    <div class="col-md-10 col-md-offset-1">
+                      <div class="bs-comment">
+                        <span ng-cloak class="bs-comment-number">Comments &middot; {{photocomments.length}}</span>
+                        <br>
+                        <!-- Enter comment -->
+                        <div class="row">
+                          <div class="col-md-2 col-sm-1 col-xs-1 col-lg-2">
+                            <div class="thumbnail hidden-xs hidden-sm">
+                              <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                            </div>
+                          </div>
+                          <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10">
+                            <div class="panel panel-default whole-comment-box">
+                              <div class="panel-heading">
+                                <input class="comment-name" ng-model="photocomment.username" type="text" name="" value="" placeholder="Enter your name" ng-focus="highlightCommentBox(); goingToComment=true" ng-blur="removeHighlight()">
+                              </div>
+                              <div class="panel-body">
+                                <textarea msd-elastic ng-model="photocomment.comment" ng-focus="highlightCommentBox(); goingToComment=true" ng-blur="removeHighlight()" class="comment-box" name="name" rows="1" cols="80" placeholder="Add a comment"></textarea>
+                              </div>
+                              <div class="panel-footer">
+                                <span class="text-muted small" style="font-style: italic;">Note: All comments should be approved by the admin.</span>
+                              </div>
+                            </div>
+                            <div class="row" ng-show="goingToComment">
+                              <div class="col-sm-3 col-sm-offset-9 text-right">
+                                <button type="button" class="btn btn-default btn-xs" ng-click="photocomment.comment=''; photocomment.username=''; goingToComment=false">
+                                  Cancel
+                                </button>
+                                &nbsp;
+                                <button type="button" class="btn btn-primary btn-xs" ng-click="AddComment()">
+                                  Comment
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <hr>
+
+                        <!-- Comment List -->
+                        <div class="row" ng-repeat="comment in photocomments.slice(((photocommentsPage-1)*10), ((photocommentsPage)*10))">
+                          <div class="col-md-2 col-lg-2 col-sm-1 col-xs-1">
+                            <div class="thumbnail hidden-xs hidden-sm">
+                              <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                            </div>
+                          </div>
+                          <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10 posted-comment-holder">
+                            <div class="panel panel-default posted-comment">
+                              <div class="panel-heading">
+                                <strong ng-cloak>{{comment.username}}</strong>
+                                <span class="text-muted small" am-time-ago="comment.timestamp"></span>
+                              </div>
+                              <div class="panel-body" ng-cloak>
+                                {{comment.comment}}
+                                <span ng-if="adminId == fiesta.createdBy || isAdmin" ng-click="deletePhotoComment(comment)" class="btn pull-right" title="Delete comment"><a><i class="fa fa-remove" style="color:red"></i><a></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="paginations text-center" ng-show="photocomments.length>10">
+                          <ul class="pagination-sm" uib-pagination total-items="photocomments.length" ng-model="photocommentsPage"
+                              items-per-page="10" boundary-link-numbers="true"
+                              rotate="false" previous-text="&laquo;" next-text="&raquo;">
+                          </ul>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<link rel="stylesheet" href="/assets/user/css/specific-fiesta/sfiesta-media.css">

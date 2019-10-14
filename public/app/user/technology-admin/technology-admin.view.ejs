@@ -1,0 +1,320 @@
+<div ng-controller="TechnologyAdminCtrl">
+  <div id="navigation" class="navbar-fixed-top">
+    <ol class="breadcrumb navigation-breadcrumb">
+      <li><a ng-href="http://dpitc.net">HOME</a></li>
+      <li><a ng-href="/technology">TECHNOLOGY</a></li>
+      <li><a ng-href="/technology/admin">ADMIN</a></li>
+    </ol>
+    <ul class="nav navbar-nav navbar-right navigation-login">
+      <!-- <li ng-if="!loggedIn"><a ng-href="http://technology-dashboard-admin.herokuapp.com">Login</a></li>
+      <li ng-if="loggedIn"> <a ng-href="/technology/admin">Admin</a></li> -->
+      <li> <a ng-href="/technology/admin">Admin</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="text-center"><span class="bold tech-header"><br>Manage Technologies</span></div>
+    <div class="text-center">
+      <a target="_blank" ng-href="/technology"><span class="bold small text-muted"><i class="fa fa-eye"> </i>&nbsp;Preview Page</span></a>
+      &nbsp;&middot;&nbsp;
+      <a target="_blank" ng-href="http://technology-dashboard-admin.herokuapp.com"><span class="bold small text-muted"><i class="fa fa-info-circle"></i>&nbsp;Manage Information</span></a>
+    </div>
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span class="lead"> Header </span>
+          <span class="pull-right long-pull-right text-muted small">Add header to your page.</span>
+        </div>
+        <div class="form-group panel-body">
+          <div class="input-group">
+            <input type="text" ng-model="header" class="form-control" placeholder="Page header">
+            <span ladda="headerLoading"  style="cursor:pointer;" ng-click="UpdateHeader()" class="input-group-addon success"><span class="glyphicon glyphicon-floppy-disk"></span> Save</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- UPLOAD CAROUSEL IMAGES -->
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Technology Slider</h4>
+        </div>
+        <div class="panel-body">
+
+          <form name="form">
+            <div class="btn btn-success" ngf-select ng-model="slider" name="file" ngf-pattern="'image/*'"
+            ngf-accept="'image/*'">Add Image</div>
+
+            <button ladda="sliderLoading"class="btn btn-success"type="submit" ng-click="addImageSlider()">
+              <span class="glyphicon glyphicon-floppy-disk"></span> Save
+            </button>
+          </form>
+
+          <br><br>
+          <div class="flex panel-container col-lg-3 col-md-4 col-sm-4 col-xs-6" ng-cloak
+            ng-repeat="image in sliderImages track by $index">
+            <div class="thumbnail" ng-cloak style="height: 150px; background-size: cover;"
+              ng-style="{'background-image':'url('+image+')'}">
+              <span class="pull-right" ng-click="removeImageSlider($index)"><i class="fa fa-2x fa-times" style="color: red;  text-shadow: 1px 1px 1px #ccc;"> </i></span>
+            </div>
+          </div>
+          <div
+            class="flex panel-container col-lg-3 col-md-4 col-sm-4 col-xs-6" ng-cloak
+            ng-if="slider" class="thumbnail" ng-cloak style="height: 150px;">
+            <img ngf-thumbnail="slider">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION TO HIDE -->
+    <div class="container-fluid">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span class="lead"> Technologies List options </span>
+            <span class="pull-right long-pull-right text-muted small">Customize Technologies list options</span>
+          </div>
+          <div class="panel-body">
+            <button ladda="technologyListLoading" class="pull-right btn btn-success"type="submit" ng-click="UpdateList()">
+              <span class="glyphicon glyphicon-floppy-disk"></span> Save
+            </button>
+            <!-- SORT -->
+            <div>
+              <span class="lead bold">Sort</span>
+              <span class="italic small text-muted">Click to enable/disable sort. If enabled, choose sort options.</span>
+              <div class="container-fluid">
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="sort-show" ng-model="list.sort.show">
+                  <label class="onoffswitch-label" for="sort-show">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </label>
+                </div>
+                <div ng-show="list.sort.show">
+                  <div class="form-group checkbox-inline" style="padding: 0;">
+                    <input type="checkbox" name="sort-title" id="sort-title" autocomplete="off"
+                      value="true" ng-model="list.sort.options.title"/>
+                    <div class="btn-group">
+                      <label for="sort-title" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        <span> </span>
+                      </label>
+                      <label for="sort-title" class="btn btn-default active checkbox-title-tech">
+                          Title
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group checkbox-inline">
+                    <input type="checkbox" name="sort-industry" id="sort-industry" autocomplete="off"
+                      value="true" ng-model="list.sort.options.industry"/>
+                    <div class="btn-group">
+                      <label for="sort-industry" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        <span> </span>
+                      </label>
+                      <label for="sort-industry" class="btn btn-default active checkbox-title-tech">
+                          Industry
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group checkbox-inline">
+                    <input type="checkbox" name="sort-year" id="sort-year" autocomplete="off"
+                      value="true" ng-model="list.sort.options.year"/>
+                    <div class="btn-group">
+                      <label for="sort-year" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        <span> </span>
+                      </label>
+                      <label for="sort-year" class="btn btn-default active checkbox-title-tech">
+                          Year
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group checkbox-inline">
+                    <input type="checkbox" name="sort-commodity" id="sort-commodity" autocomplete="off"
+                      value="true" ng-model="list.sort.options.commodity"/>
+                    <div class="btn-group">
+                      <label for="sort-commodity" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        <span> </span>
+                      </label>
+                      <label for="sort-commodity" class="btn btn-default active checkbox-title-tech">
+                          Commodity
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- FILTER -->
+            <div>
+              <span class="lead bold">Filter</span>
+              <span class="italic small text-muted">Click to enable/disable filter. If enabled, choose filter options.</span>
+              <div class="container-fluid">
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="filter-show" ng-model="list.filter.show">
+                  <label class="onoffswitch-label" for="filter-show">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </label>
+                </div>
+
+                <div ng-show="list.filter.show">
+                  <div class="form-group checkbox-inline" style="padding: 0;">
+                    <input type="checkbox" name="filter-industry" id="filter-industry" autocomplete="off"
+                      value="true" ng-model="list.filter.options.industry"/>
+                    <div class="btn-group">
+                      <label for="filter-industry" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        <span> </span>
+                      </label>
+                      <label for="filter-industry" class="btn btn-default active checkbox-title-tech">
+                          Industry
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group checkbox-inline">
+                    <input type="checkbox" name="filter-year" id="filter-year" autocomplete="off"
+                      value="true" ng-model="list.filter.options.year"/>
+                    <div class="btn-group">
+                      <label for="filter-year" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        <span> </span>
+                      </label>
+                      <label for="filter-year" class="btn btn-default active checkbox-title-tech">
+                          Year
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group checkbox-inline">
+                    <input type="checkbox" name="filter-commodity" id="filter-commodity" autocomplete="off"
+                      value="true" ng-model="list.filter.options.commodity"/>
+                    <div class="btn-group">
+                      <label for="filter-commodity" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        <span> </span>
+                      </label>
+                      <label for="filter-commodity" class="btn btn-default active checkbox-title-tech">
+                          Commodity
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- FIESTA Counter -->
+            <div>
+              <span class="lead bold">Technologies Counter</span>
+              <span class="italic small text-muted">Click to enable/disable counter. (e.g. 1 - 12 of 16 Technologies)</span>
+              <div class="container-fluid">
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="counter-show" ng-model="list.counter">
+                  <label class="onoffswitch-label" for="counter-show">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sort -->
+            <div class="form-group">
+              <div class="col-lg-6 col-md-6 col-sm-6" style="padding: 0">
+                <span for="sel1" class="lead bold">Technologies Initial Sort Option</span>
+                <div class="container-fluid">
+                  <select class="form-control" id="sel1" ng-model="list.cards.option">
+                    <option value="title">Title</option>
+                    <option value="industry">Industry</option>
+                    <option value="industry">Sector</option>
+                    <option value="year">Year</option>
+                    <option value="commodity">Commodity</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <span for="sel1" class="lead bold">Technologies Initial Sort Order</span>
+                <div class="container-fluid">
+                  <select class="form-control" id="sel2" ng-model="list.cards.order">
+                    <option value="Ascending">Ascending</option>
+                    <option value="Descending">Descending</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pagiation -->
+            <div class="form-group col-lg-6 col-md-6 col-sm-6" style="padding: 0;">
+              <div>
+                <span for="sel1" class="lead bold">Technologies per page</span>
+                <span class="italic small text-muted">Choose the number of technologies per page. <br>(Total number of Technologies: {{techs.length}})</span>
+                <div class="container-fluid">
+                  <select class="form-control" id="sel1" ng-model="list.pagination.pageSize">
+                    <option value="12">12</option>
+                    <option ng-if="24 <= techs.length" value="24">24</option>
+                    <option ng-if="36 <= techs.length" value="36">36</option>
+                    <option ng-if="techs.length != 12" value="{{techs.length}}">All</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading lead"> Manage Information Requests</div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Email</th>
+                  <th>Approve</th>
+                  <th>Disapprove</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="req in requests.slice(((requestCurrentPage-1)*requestPageSize),
+                           ((requestCurrentPage)*requestPageSize))">
+                  <td>{{req.title}}</td>
+                  <td>{{req.email}}</td>
+                  <td ng-show="req.status" class="italic" colspan="2"> Request {{req.status}} </td>
+                  <td ng-hide="req.status" class="text-center">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green; cursor: pointer;"
+                    ng-click="changeStatus(req, 'Approved')"></span>
+                  </td>
+                  <td ng-hide="req.status" class="text-center"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red; cursor: pointer;"
+                    ng-click="changeStatus(req, 'Disapproved')"></span>
+                  </td>
+                </tr>
+                <tr ng-show="requests.length <= 0">
+                  <td class="text-center" colspan="4">Currently No Request Available
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-center">
+              <div class="row pagination" ng-cloak>
+                <ul uib-pagination total-items="requests.length" ng-model="requestCurrentPage"
+                items-per-page="requestPageSize" class="pagination-sm" boundary-link-numbers="true"
+                rotate="false" previous-text="&laquo;" next-text="&raquo;"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<link rel="stylesheet" href="assets/user/css/technology/technology.css">
+<link rel="stylesheet" href="assets/admin/css/customize/customize-specific.css">

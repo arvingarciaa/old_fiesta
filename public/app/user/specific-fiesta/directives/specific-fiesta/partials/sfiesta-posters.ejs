@@ -1,0 +1,94 @@
+<div ng-controller="SFiestaPostersCtrl">
+  <!-- POSTER CAROUSEL -->
+  <div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span class="bold lead"><i class="fa fa-file-image-o" aria-hidden="true"></i> Posters </span>
+        <span class="poster-count pull-right small text-muted" ng-cloak
+        ng-if="::posters.length || undefined" ng-show="posters.length">{{posters.length}} Posters </span>
+      </div>
+      <div class="panel-body no-posters" ng-if="::posters.length == 0 || undefined" ng-show="posters.length == 0">
+        <div class="text-center lead text-muted">
+          No posters to show.
+        </div>
+      </div>
+    </div>
+    <div class="posters-container" ng-show="posters.length > 0">
+      <div class="row">
+        <div class="carousel-container col-lg-10 col-md-10 col-sm-10 col-xs-10">
+          <div uib-carousel active="posterActive" interval="posterInterval" no-wrap="false">
+            <div uib-slide ng-repeat="poster in posters track by $index" index="$index" id="carousel">
+              <div class="poster-photo" ng-cloak ng-style="{'background-image':'url(' + poster.image.path + ')'}"> </div>
+            </div>
+            <div class="carousel-caption">
+              <span class="pull-right lead">
+                <a data-ng-click="SetPosterFocus(posterActive)" data-toggle="modal" data-target="#poster-modal">
+                  <i class="fa fa-expand" aria-hidden="true"></i>
+                </a>
+              </span>
+              <span class="lead" ng-cloak> &copy; {{posters[posterActive].image.credits}}<span>
+              <p>
+                <span ng-cloak ng-show="posters[posterActive].tags.length > 0"><i class="fa fa-tags" aria-hidden="true"></i></span>
+                <span ng-repeat="tag in posters[posterActive].tags | orderBy: ''">
+                  <span ng-cloak class="small text-muted"><a>{{tag}}</a><span ng-hide="$last">, </span> </span>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- POSTER THUMBNAILS -->
+        <div class="thumbnail-container col-lg-2 col-md-2 col-sm-2 col-xs-2">
+          <div class="carousel-thumbnail thin">
+            <div class="window">
+              <ul class="clr">
+                <div class="thumbnail" ng-cloak ng-repeat="poster in posters track by $index"
+                     ng-style="{'background-image':'url(' + poster.image.path + ')'}"
+                     ng-click="SetPosterActive($index)" >
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POSTER MODAL -->
+  <div class="modal fade" id="poster-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" type="button" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="modal-picture text-center">
+              <img ng-cloak ng-src="{{posterFocus.image.path}}">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <p class="modal-tags pull-left">
+            <span class="pull-left" ng-cloak> &copy; {{posters[posterActive].image.credits}}</span>
+            <br>
+            <span class="pull-left" ng-show="posterFocus.tags.length > 0">
+              <i class="fa fa-tags" aria-hidden="true"></i>
+              <span ng-repeat="tag in posterFocus.tags | orderBy: ''">
+                <span class="text-muted" ng-cloak>
+                  <a>{{tag}}</a>
+                  <span ng-hide="$last">, </span>
+                </span>
+              </span>
+            </span>
+
+          </p>
+          <a class="btn btn-default" target="_blank" ng-cloak ng-href="{{posterFocus.image.path}}">
+            <i class="fa fa-external-link" aria-hidden="true"></i>
+          </a>
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="/assets/user/css/specific-fiesta/sfiesta-posters.css">

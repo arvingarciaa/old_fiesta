@@ -1,0 +1,28 @@
+.lost-body{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 7%;
+  padding-right: 7%;
+  background-image: url(/assets/banderitas.jpg);
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-attachment: local;
+  background-size: contain;
+}
+
+.lost-logo {
+  width: 100%;
+  max-width: 450px;
+}
+
+.jumbotron {
+  background: none;
+}
+
+.page-not-found {
+  font-size: 4rem !important;
+}
+
+.lost-info {
+  font-weight: 300 !important;
+}

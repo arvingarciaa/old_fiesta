@@ -1,0 +1,110 @@
+<div class="container-fluid" ng-controller="CustomizeCtrl">
+  <div class="main-header">
+    <div class="section-header">
+      <div class="title">Customize Pages
+      </div>
+      <div class="triangle"></div>
+    </div>
+  </div>
+  <uib-tabset type="pills" active="activePill" class="pages-tabs">
+    <uib-tab index="0" heading="Published" ng-click="GetPages('published')"></uib-tab>
+    <uib-tab index="1" heading="Drafts" ng-click="GetPages('draft')"></uib-tab>
+    <uib-tab index="2" heading="Trashed" ng-click="GetPages('trash')"></uib-tab>
+  </uib-tabset>
+  <br>
+  <!-- PUBLISHED: FIESTA -->
+  <div class="pages" ng-show="activePill == 0" ng-if="isAdmin">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 page-thumbs"
+      ng-style="{'background-image': 'url(/assets/fiesta-logo.jpg)'}">
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+      <p class="lead"><span><span class="bold">FIESTA</span> Page</p>
+    </div>
+    <div class="customize-options col-lg-2 col-md-2 col-sm-2 col-xs-2">
+      <a class="btn" ng-href="/admin/customize/fiesta"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a> <br>
+      <a class="btn" ng-href="/fiesta" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Preview</a> <br>
+    </div>
+  </div>
+
+  <!-- PUBLISHED -->
+  <div ng-if="filtered.length == 0 && activePill == 0">
+    <div class="panel panel-default">
+      <div class="panel-body text-center">
+        <p class="lead bold">You don't have any published FIESTA.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pages" ng-repeat="fiesta in fiestas | filter: {published: true, _active: true} | orderBy: 'title' as filtered" ng-show="activePill == 0">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 page-thumbs"
+      ng-style="{'background-image': 'url('+ fiesta.picture.path +')'}">
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+      <p class="lead bold">
+        <span uib-tooltip="{{fiesta.title}}" tooltip-placement="bottom" tooltip-append-to-body="true" >
+          {{fiesta.title | uppercase | limitTo: 34 }}</span>
+        <span ng-if="fiesta.title.length > 34"> ... </span>
+      </p>
+    </div>
+    <div class="customize-options col-lg-2 col-md-2 col-sm-2 col-xs-2">
+      <a class="btn" ng-href="/admin/customize/{{fiesta._id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a> <br>
+      <a class="btn" ng-href="/admin/manage/{{fiesta._id}}" target="_blank"><i class="fa fa-cogs" aria-hidden="true"></i> Manage</a> <br>
+      <a class="btn" ng-click="publishFiesta(fiesta, false)"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Unpublish </a> <br>
+      <a class="btn" ng-href="/fiesta/{{fiesta._id}}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Preview</a> <br>
+      <a class="btn" ng-click="removeFiesta(fiesta)"><i class="fa fa-trash-o" aria-hidden="true"></i> Trash</a>
+    </div>
+  </div>
+
+  <!-- Drafts -->
+  <div ng-if="filteredDraft.length == 0 && activePill == 1">
+    <div class="panel panel-default">
+      <div class="panel-body text-center">
+        <p class="lead bold">You don't have any FIESTA drafts.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pages" ng-repeat="fiesta in fiestas | filter: {published: false, _active: true} | orderBy: 'title' as filteredDraft" ng-show="activePill == 1">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 page-thumbs"
+      ng-style="{'background-image': 'url('+ fiesta.picture.path +')'}">
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+      <p class="lead bold" style="padding-left: 0;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <span uib-tooltip="{{fiesta.title}}" tooltip-placement="bottom" tooltip-append-to-body="true" >
+          {{fiesta.title }} </span>
+      </p>
+    </div>
+    <div class="customize-options col-lg-2 col-md-2 col-sm-2 col-xs-2">
+      <a class="btn" ng-href="/admin/customize/{{fiesta._id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a> <br>
+      <a class="btn" ng-href="/admin/manage/{{fiesta._id}}" target="_blank"><i class="fa fa-cogs" aria-hidden="true"></i> Manage</a> <br>
+      <a class="btn" ng-click="publishFiesta(fiesta, true)"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Publish </a> <br>
+      <a class="btn" ng-href="/fiesta/{{fiesta._id}}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Preview</a> <br>
+      <a class="btn" ng-click="removeFiesta(fiesta)"><i class="fa fa-trash-o" aria-hidden="true"></i> Trash</a>
+    </div>
+  </div>
+
+
+  <!-- Trashed -->
+  <div ng-if="filteredTrash.length == 0 && activePill == 2">
+    <div class="panel panel-default">
+      <div class="panel-body text-center">
+        <p class="lead bold">You don't have any FIESTA in your trash folder.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pages" ng-repeat="fiesta in fiestas | filter: {_active: false} | orderBy: 'title' as filteredTrash" ng-show="activePill == 2">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 page-thumbs"
+      ng-style="{'background-image': 'url('+ fiesta.picture.path +')'}">
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+      <p class="lead bold" style="padding-left: 0;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <span uib-tooltip="{{fiesta.title}}" tooltip-placement="bottom" tooltip-append-to-body="true" >
+          {{fiesta.title }} </span>
+      </p>
+    </div>
+    <div class="customize-options col-lg-2 col-md-2 col-sm-2 col-xs-2">
+      <a class="btn" style="width: 100%;" ng-click="restoreFiesta(fiesta)"><i class="fa fa-undo" aria-hidden="true"></i> Restore</a><br>
+      <a class="btn" style="width: 100%;" ng-click="deleteFiesta(fiesta)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+    </div>
+  </div>
+  <br><br><br>
+</div>
+<link rel="stylesheet" href="assets/admin/css/customize/customize.css">

@@ -1,0 +1,92 @@
+<div class="panel panel-default">
+  <!-- Panel Title -->
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-1">
+        <h3 class="panel-title">Events</h3>
+      </div>
+      <div class="col-md-2 col-md-offset-9">
+        <button class="btn btn-xs btn-primary pull-right" type="button" name="button" ng-click="add()" data-toggle="modal" data-target="#editEvent">
+          Add Event
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel Body -->
+  <div class="panel-body">
+
+    <div class="" ng-if="!events || events.length == 0">
+      <li class="list-group-item">
+        <div class="no-data-large">
+          <span class="glyphicon glyphicon-list-alt"></span> <br/><br/>
+          <span class="lead">Add Events in the Fiesta</span>
+          <span class="text-muted">
+            <p>No activities added in the fiesta. <a href ng-click="add()" data-toggle="modal" data-target="#editEvent">Add one</a>?</p>
+          </span><br/>
+          <br/>
+        </div>
+      </li>
+    </div>
+
+    <ul class="list-group blog-holder" ng-repeat="event in events">
+      <li class="list-group-item blog">
+        <table style="width:100%; height:100%">
+          <tr>
+            <td class="col-md-4 blog-img-header text-right"
+              ng-click="focus(event)" data-toggle="modal" data-target="#viewEvent"
+              ng-style="{'background-image':'url(' + event.image.path + ')'}">
+              <span ng-if="(event.image && event.image.credits && event.image.credits.trim() != '')" class="small blog-img-header-credits">&copy; {{event.image.credits}}</span>
+            </td>
+            <td class="col-md-6 text-left blog-info">
+              <h3>
+                <a href style="color:black;" ng-click="focus(event)" data-toggle="modal" data-target="#viewEvent">{{event.title}} </a>
+                <small>{{event.type}}</small>
+              </h3>
+              <span class="small text-muted text-capitalize" ng-if="event.author.trim() != ''">
+                By &nbsp; {{event.author}}
+              </span>
+              <br>
+              <span class="small text-muted">
+                <strong>
+                  {{event.timestamp | date:'MMMM dd, yyyy'}}
+                </strong>
+              </span>
+
+            </td>
+            <td class="col-md-1 text-right">
+              <table style="height:100%">
+                <tr>
+                  <td>
+                    <a href ng-click="select(event)" data-toggle="modal" data-target="#editEvent" tooltip-placement="left" uib-tooltip="Edit Details">
+                      <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href ng-click="point(event)" data-toggle="modal" data-target="#editImage" tooltip-placement="left" uib-tooltip="Change Image">
+                      <span class="glyphicon glyphicon-camera"></span>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href ng-click="DeleteEvent(event._id)" tooltip-placement="left" uib-tooltip="Delete">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+<edit-event></edit-event>
+<view-event></view-event>

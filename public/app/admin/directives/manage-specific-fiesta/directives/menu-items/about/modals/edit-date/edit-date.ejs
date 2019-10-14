@@ -1,0 +1,35 @@
+
+<div class="modal centered-modal" id="editDate" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal">
+    <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!dateLoading">&times;</button>
+          <h4 class="modal-title" id="">Edit dates</h4>
+        </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="startDate" class="col-sm-3 control-label">Start Date</label>
+                <div class="col-sm-9">
+                  <input class="form-control" ng-model="startDate" type="date" id="startDate" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="endDate" class="col-sm-3 control-label">End Date</label>
+                <div class="col-sm-9">
+                  <input class="form-control" ng-model="endDate" type="date" id="endDate" />
+                </div>
+              </div>
+            </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!dateLoading">Close</button>
+        <button type="button" class="btn btn-primary" ladda="dateLoading" data-style="expand-right" data-spinner-size="10" ng-click="EditDate(startDate, endDate)">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

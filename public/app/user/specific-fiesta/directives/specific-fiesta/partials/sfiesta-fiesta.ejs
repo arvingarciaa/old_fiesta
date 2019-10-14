@@ -1,0 +1,234 @@
+<div ng-init="getWriteUps()">
+  <div ng-if="executive.title" class="container-fluid no-padding">
+    <div class="row exec-header-cont">
+      <div class="exec-header">Message</div>
+      <div class="triangle"></div>
+    </div>
+    <div class="hidden-xs hidden-sm container exec-main-cont" ng-if="executive.image.path"
+      ng-style="{'background-image':'url(' + executive.image.path + ')'}" ng-class="{'no-mag': !fiesta.magazine}">
+      <div>
+        <div class="pdf-cont pull-right col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-show="fiesta.magazine && sfiesta_cms.fiesta.execdir.download">
+          <a target="_blank" ng-href="{{fiesta.magazine}}">
+            <img title="{{fiesta.title}} Magazine" ng-src="{{fiesta.mag_thumb}}">
+          </a>
+          <a class="piwik_download pdf-download btn btn-success" target="_self" download="{{fiesta.title}} Magazine.pdf" ng-href={{fiesta.magazine}}>
+            <i class="fa fa-download" aria-hidden="true"></i> Download Magazine
+          </a>
+        </div>
+        <div ng-if="fiesta.magazine" class="pull-right col-lg-5 col-md-5 col-sm-5 col-xs-5" ng-show="executive.body">
+          <blockquote class="quote-card">
+            <p class="">{{executive.transformedBody}}</p>
+            <cite class="see-more text-right" ng-click="setTabContent(tabs[6],'Message')"> See more >>> </cite>
+            <cite>
+              <span ng-if="executive.authors.length" ng-repeat="author in executive.authors">
+                {{author.name}} <span class="small"> {{author.position}} </span>
+              </span>
+              <span> DOST-PCAARRD </span>
+            </cite>
+          </blockquote>
+        </div>
+        <div ng-if="!fiesta.magazine" class="pull-right col-lg-7 col-md-7 col-sm-7 col-xs-7" ng-show="executive.body">
+          <blockquote class="quote-card">
+            <p>{{executive.transformedBody}}</p>
+            <cite class="see-more text-right" ng-click="setTabContent(tabs[6],'Message')"> See more >>> </cite>
+            <cite>
+              <span ng-if="executive.authors.length" ng-repeat="author in executive.authors">
+                {{author.name}} <span class="small"> {{author.position}} </span>
+              </span>
+              <span> DOST-PCAARRD </span>
+            </cite>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+    <div class="hidden-xs hidden-sm container exec-main-cont" ng-if="::sfiesta_cms.fiesta.execdir.default && !executive.image.path"
+      ng-style="{'background-image':'url(' + sfiesta_cms.fiesta.execdir.default + ')'}" ng-class="{'no-mag': !fiesta.magazine}">
+      <div>
+        <div class="pdf-cont pull-right col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-show="fiesta.magazine && sfiesta_cms.fiesta.execdir.download">
+          <a target="_blank" ng-href="{{fiesta.magazine}}">
+            <img title="{{fiesta.title}} Magazine" ng-src="{{fiesta.mag_thumb}}">
+          </a>
+          <a class="pdf-download btn btn-success" target="_self" download="{{fiesta.title}} Magazine.pdf" ng-href={{fiesta.magazine}}>
+            <i class="fa fa-download" aria-hidden="true"></i> Download Magazine
+          </a>
+        </div>
+        <div ng-if="fiesta.magazine" class="pull-right col-lg-5 col-md-5 col-sm-5 col-xs-5" ng-show="sfiesta_cms.fiesta.execdir.message">
+          <blockquote class="quote-card"> <p class="clamp-me">{{sfiesta_cms.fiesta.execdir.message}}</p>
+            <cite>
+              <span ng-if="sfiesta_cms.fiesta.execdir.director.length">
+                {{sfiesta_cms.fiesta.execdir.director}} <br>
+                <span class="small">Executive Director</span>
+              </span>
+              <span> DOST-PCAARRD </span>
+            </cite>
+          </blockquote>
+        </div>
+        <div ng-if="!fiesta.magazine" class="pull-right col-lg-7 col-md-7 col-sm-7 col-xs-7" ng-show="sfiesta_cms.fiesta.execdir.message">
+          <blockquote class="quote-card"> <p class="clamp-me">{{sfiesta_cms.fiesta.execdir.message}}</p>
+            <cite>
+              <span ng-if="sfiesta_cms.fiesta.execdir.director.length">
+                {{sfiesta_cms.fiesta.execdir.director}} <br>
+                <span class="small">Executive Director</span>
+              </span>
+              <span> DOST-PCAARRD </span>
+            </cite>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+    <div class="hidden-md hidden-lg" ng-if="sfiesta_cms.fiesta.execdir.default || executive.image.path">
+      <div class="col-sm-4 col-xs-12 no-padding text-center">
+        <img ng-if="executive.image.path" class="exec-photo" ng-src="{{executive.image.path}}">
+        <img ng-if="!executive.image.path" class="exec-photo" ng-src="{{sfiesta_cms.fiesta.execdir.default}}">
+      </div>
+      <div class="col-sm-5 col-xs-12 no-padding" ng-show="sfiesta_cms.fiesta.execdir.message">
+        <blockquote class="quote-card-sm"> <p>{{sfiesta_cms.fiesta.execdir.message}}</p>
+          <cite>
+            <span ng-if="sfiesta_cms.fiesta.execdir.director.length">
+              {{sfiesta_cms.fiesta.execdir.director}} <br>
+              <span class="small">Executive Director</span>
+            </span>
+            <span> DOST-PCAARRD </span>
+          </cite>
+        </blockquote>
+        </div>
+      <div class="text-center col-sm-3 col-xs-12 pdf-pic-mag no-padding" ng-show="fiesta.magazine && sfiesta_cms.fiesta.execdir.download">
+        <a target="_blank" ng-href="{{fiesta.magazine}}">
+          <img title="{{fiesta.title}} Magazine" ng-src="{{fiesta.mag_thumb}}">
+        </a>
+        <a class="pdf-download btn btn-success" target="_self" download="{{fiesta.title}} Magazine.pdf" ng-href={{fiesta.magazine}}>
+          <i class="fa fa-download" aria-hidden="true"></i> Download Magazine
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid no-padding" ng-if="sfiesta_cms.fiesta.about">
+    <div class="row exec-header-cont" ng-class="{'about-header-cont' : !executive.title}">
+      <div class="exec-header">About this FIESTA</div>
+      <div class="triangle"></div>
+    </div>
+    <div class="about-corner">
+      <div class="col-lg-5 col-md-5 col-sm-5 hidden-xs about-logo no-padding" ng-style="{'background-image':'url(' + fiesta.picture.path + ')'}"></div>
+      <div class="hidden-lg hidden-md hidden-sm about-logo-sm no-padding" ng-style="{'background-image':'url(' + fiesta.picture.path + ')'}"></div>
+      <div class="col-lg-7 col-md-7 about-desc no-padding">
+        <div class="well">
+          <p class="about-title lead text-center bold">{{fiesta.title | uppercase }}</p>
+          <p class="bold text-center">{{fiesta.startDate | date: "MMMM d, y"}} - {{fiesta.endDate | date: "MMMM d, y"}}</p>
+          <p class="small text-center">
+            <span ng-if="::fiesta.region || undefined" ng-show="fiesta.region">{{fiesta.region}} </span>
+            <span ng-if="::fiesta.venue || undefined" ng-show="fiesta.venue">&middot; {{fiesta.venue}} </span>
+            <span ng-if="::fiesta.consortiumFull || undefined" ng-show="fiesta.consortiumFull"><br>
+              {{fiesta.consortiumFull}} ({{fiesta.consortium}})</span>
+            <div class="text-center" ng-if="::fiesta.commodity || undefined" ng-show="fiesta.commodity" ng-style="{'columns': ''+ commcolumns +''}">
+              <div class="small text-center" ng-repeat="commodity in fiesta.commodity | orderBy: ''"> {{commodity}} </div>
+            </div>
+          </p>
+          <p class="about-fiesta-desc">{{fiesta.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row"  ng-if="sfiesta_cms.fiesta.react">
+    <hr>
+    <p class="lead bold container" ng-init="updateReact()"> HOW DID THIS FIESTA MADE YOU FEEL? </p>
+    <div class="text-center">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <div ng-click="AddReactFiesta('like')"><i class="fa fa-thumbs-o-up fa-5x reaction-btn" aria-hidden="true"></i></div>
+        <div>
+          <span class="lead">Like</span>
+          <br>
+          <span>{{likeCountFiesta}}</span>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <div ng-click="AddReactFiesta('happy')"><i class="fa fa-smile-o fa-5x reaction-btn" aria-hidden="true"></i></div>
+        <div>
+          <span class="lead">Happy</span>
+          <br>
+          <span>{{happyCountFiesta}}</span>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <div ng-click="AddReactFiesta('sad')"><i class="fa fa-frown-o fa-5x reaction-btn" aria-hidden="true"></i></div>
+        <div>
+          <span class="lead">Sad</span>
+          <br>
+          <span>{{sadCountFiesta}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" ng-init="goingToComment=false"  ng-if="sfiesta_cms.fiesta.comment">
+    <hr>
+    <div class="col-md-10 col-md-offset-1">
+      <div class="bs-comment">
+        <span ng-cloak class="bs-comment-number">Comments &middot; {{comments.length}}</span>
+        <br>
+        <!-- Enter comment -->
+        <div class="row">
+          <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">
+            <div class="thumbnail hidden-xs hidden-sm">
+              <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+            </div>
+          </div>
+          <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10">
+            <div class="panel panel-default whole-comment-box">
+              <div class="panel-heading">
+                <input class="comment-name" ng-model="comment.username" type="text" name="" value="" placeholder="Enter your name" ng-focus="highlightCommentBox(); goingToComment=true" ng-blur="removeHighlight()">
+              </div>
+              <div class="panel-body">
+                <textarea msd-elastic ng-model="comment.comment" ng-focus="highlightCommentBox(); goingToComment=true" ng-blur="removeHighlight()" class="comment-box" name="name" rows="1" cols="80" placeholder="Add a comment"></textarea>
+              </div>
+              <div class="panel-footer">
+                <span class="text-muted small italic">Note: All comments should be approved by the admin.</span>
+              </div>
+            </div>
+            <div class="row" ng-show="goingToComment">
+              <div class="col-sm-3 col-sm-offset-9 text-right">
+                <button type="button" class="btn btn-default btn-xs" ng-click="comment.comment=''; comment.username=''; goingToComment=false">
+                  Cancel
+                </button>
+                &nbsp;
+                <button type="button" class="btn btn-primary btn-xs" ng-click="AddComment()">
+                  Comment
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      <hr>
+
+        <!-- Comment List -->
+        <div class="row" ng-repeat="comment in comments.slice(((commentsPage-1)*30), ((commentsPage)*30))">
+          <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">
+            <div class="thumbnail hidden-xs hidden-sm">
+              <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+            </div>
+          </div>
+          <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10 posted-comment-holder">
+            <div class="panel panel-default posted-comment">
+              <div class="panel-heading">
+                <strong ng-cloak>{{comment.username}}</strong>
+                <span class="text-muted small" am-time-ago="comment.timestamp"></span>
+              </div>
+              <div class="panel-body" ng-cloak>
+                {{comment.comment}}
+                <span ng-if="adminId == fiesta.createdBy || isAdmin" ng-click="deleteFiestaComment(comment)" class="btn pull-right" title="Delete comment"><a><i class="fa fa-remove" style="color:red"></i><a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="paginations text-center" ng-show="comments.length>30">
+          <ul class="pagination-sm" uib-pagination total-items="comments.length" ng-model="commentsPage"
+              items-per-page="30" boundary-link-numbers="true"
+              rotate="false" previous-text="&laquo;" next-text="&raquo;">
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="/assets/user/css/specific-fiesta/sfiesta-fiesta.css">

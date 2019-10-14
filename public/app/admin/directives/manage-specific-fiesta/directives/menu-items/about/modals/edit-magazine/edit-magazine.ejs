@@ -1,0 +1,37 @@
+
+<div class="modal centered-modal" id="editMagazine" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!magazineLoading">&times;</button>
+        <h4 class="modal-title" id="">Edit Magazine</h4>
+      </div>
+      <div class="modal-body">
+
+        <!-- Magazine input -->
+        <div class="photo-uploader" type="file" ngf-select="" ng-model="inputMagazine" name="file" ngf-accept="'application/pdf'">
+          <div class="photo-preview" ng-hide="(!inputMagazine || magazineLoading)">
+            <span class="lead">
+              Filename: <strong>{{inputMagazine.name}}</strong><br>
+              Size: <strong>{{inputMagazine.size}}B</strong>
+            </span>
+          </div>
+          <div class="photo-select" ng-hide="(inputMagazine || magazineLoading)">
+            <div>
+              <span class="glyphicon glyphicon-book"></span>
+              <p>Upload magazine</p>
+            </div>
+          </div>
+          <div class="photo-loading" ng-show="magazineLoading">
+            <uib-progressbar class="progress-striped active" value="100"></uib-progressbar>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!magazineLoading">Close</button>
+        <button type="button" class="btn btn-primary" ng-class="{'disabled': magazineLoading}" ng-click="EditMagazine(inputMagazine)" ladda="magazineLoading">Update magazine</button>
+      </div>
+    </div>
+  </div>
+</div>

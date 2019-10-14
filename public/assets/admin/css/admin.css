@@ -1,0 +1,143 @@
+#navigation {
+    height: 45px;
+    background-color: #3062b7;
+    border-bottom: #3062b7 !important;
+}
+
+@media only screen and (min-width:941px) {
+    #navigation {
+        margin-top: 85px
+    }
+}
+
+@media only screen and (max-width:940px) {
+    #navigation {
+        margin-top: 50px
+    }
+}
+
+@media only screen and (max-width:320px) {
+    #navigation {
+        margin-top: 50px
+    }
+}
+
+.navigation-breadcrumb {
+    background-color: unset;
+    float: left;
+    padding: 10px 15px 9px
+}
+
+.navigation-breadcrumb>li>a {
+    line-height: 25px;
+    font-size: 16px;
+    color: #fff
+}
+
+.navigation-breadcrumb>li>a:hover {
+    text-decoration: none;
+    color: #c3d8f7
+}
+
+.navigation-login {
+    float: right;
+    margin: 0 1% 0 0;
+    height: 45px
+}
+
+.navigation-login>li>a {
+    font-size: 16px;
+    color: #fff;
+    padding: 13px
+}
+
+.nav .open>a,
+.nav .open>a:focus,
+.nav .open>a:hover,
+.navigation-login>li>a:hover {
+    background-color: unset;
+    color: #c3d8f7
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #fff!important;
+  background-clip: padding-box!important;
+  border: 1px solid #ccc!important;
+  border: 1px solid rgba(0, 0, 0, .15)!important;
+  border-radius: 4px!important;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175)!important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175)!important
+}
+
+.nav-justified {
+  position: fixed;
+}
+
+.tab-container {
+  padding-top: 4%;
+}
+
+.tab-container>div {
+  width: 94%;
+}
+
+.nav-justified,
+.nav-tabs {
+  margin-top: 40px;
+  padding-left: 0;
+  background-color: #000000;
+  z-index: 1000;
+}
+
+.nav-tabs>li>a,
+.nav-tabs.nav-justified>li>a {
+  border: 1px solid #000000;
+  color: #ffffff;
+  border-radius: 0;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+  background-color: #3062B7;
+  border-color: #3062B7;
+}
+
+.nav-tabs.nav-justified>li.active>a,
+.nav-tabs.nav-justified>li.active>a:focus,
+.nav-tabs.nav-justified>li.active>a:hover,
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus {
+  border: 1px solid #3062B7;
+  background-color: #3062B7;
+  border-radius: 0;
+  color: #ffffff;
+}
+
+
+.side-bar > li.active > a {
+  background-color: #3062B7;
+}
+
+.side-bar > li > a:hover, .side-bar > li > a:focus{
+  background-color: #eee;
+}
+
+.settings-holder {
+  max-width: 900px;
+}
+
+.setting-selected {
+  background-color: whitesmoke;
+}

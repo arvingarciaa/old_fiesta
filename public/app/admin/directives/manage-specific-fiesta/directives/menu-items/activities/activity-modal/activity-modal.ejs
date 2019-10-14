@@ -1,0 +1,73 @@
+
+
+<!-- ********************************
+ Modal for Adding and Editing Activity
+***********************************-->
+<div class="modal centered-modal" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"  data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!activityLoading">&times;</button>
+        <h4 class="modal-title"> {{(fromAdd)?'Add':'Edit'}} a Activity</h4>
+      </div>
+      <div class="modal-body">
+
+        <!-- Credits and Tags -->
+        <div class="row">
+          <br>
+          <div class="col-md-10 col-md-offset-1">
+            <div class="form-group activity-title">
+              <label for="titleInput">Title</label>
+              <input ng-model="activity.title" type="text" class="form-control" id="titleInput" />
+            </div>
+            <div class="form-group activity-location">
+              <label for="locationInput">Location</label>
+              <input ng-model="activity.location" type="text" class="form-control" id="locationInput" />
+            </div>
+            <div class="form-group activity-date">
+              <label for="dateInput">Date</label>
+              <input class="form-control" id="dateInput" ng-model="activity.date" type="date" name="" value="">
+            </div>
+            <div class="form-group activity-time">
+              <label for="timeInput">Time</label>
+              <input class="form-control" id="timeInput" ng-model="activity.time" type="time" name="" value="">
+            </div>
+            <div class="form-group activity-time">
+              <label for="sectorInput">Sector</label>
+              <select class="form-control" name="" ng-model="activity.sector">
+                <option value="" selected="">None</option>
+                <option value="Aquatic">Aquatic</option>
+                <option value="Livestock">Livestock</option>
+                <option value="Crops">Crops</option>
+                <option value="Forest and Environment">Forest and Environment</option>
+              </select>
+            </div>
+            <h5 ng-init="togglepeople=false" ng-hide="togglepeople || activity.people.length > 0">
+              <a href ng-click="togglepeople=true">
+                + Add guests or people in the activity
+              </a>
+            </h5>
+            <div class="form-group" ng-if="togglepeople || activity.people.length > 0">
+              <label for="peopleInput">People</label>
+              <tags-input replace-spaces-with-dashes="false" id="peopleInput" class="tags-input" placeholder="Add people" ng-model="activity.people"></tags-input>
+            </div>
+            <h5 ng-init="togglesubtitle=false" ng-hide="togglesubtitle || activity.subtitle.length > 0">
+              <a href ng-click="togglesubtitle=true">
+                + Add subtitles for the activity
+              </a>
+            </h5>
+            <div class="form-group" ng-if="togglesubtitle || activity.subtitle.length > 0">
+              <label for="subtitleInput">Subtitle</label>
+              <tags-input replace-spaces-with-dashes="false" id="subtitleInput" class="tags-input" placeholder="Add subtitle" ng-model="activity.subtitle"></tags-input>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!activityLoading">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="SubmitActivity()" ladda="activityLoading" data-style="expand-right" data-spinner-size="10">{{(fromAdd)?'Add':'Update'}}</button>
+      </div>
+    </div>
+  </div>
+</div>

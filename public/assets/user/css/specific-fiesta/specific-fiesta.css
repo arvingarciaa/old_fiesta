@@ -1,0 +1,339 @@
+#navigation {
+  height: 45px;
+  background-color: #3062b7
+}
+
+@media only screen and (min-width:941px) {
+  #navigation {
+    margin-top: 85px
+  }
+}
+
+@media only screen and (max-width:940px) {
+  #navigation {
+    margin-top: 50px
+  }
+}
+
+@media only screen and (max-width:320px) {
+  #navigation {
+    margin-top: 50px
+  }
+}
+
+.navigation-breadcrumb {
+  background-color: unset;
+  float: left;
+  padding: 10px 15px 9px
+}
+
+.navigation-breadcrumb>li>a {
+  line-height: 25px;
+  color: #fff
+}
+
+.navigation-breadcrumb>li>a:hover {
+  text-decoration: none;
+  color: #c3d8f7
+}
+
+.navigation-login {
+  float: right;
+  margin: 0 1% 0 0;
+  height: 45px
+}
+
+.navigation-login>li>a {
+  font-size: 16px;
+  color: #fff;
+  padding: 13px
+}
+
+.nav .open>a,
+.nav .open>a:focus,
+.nav .open>a:hover,
+.navigation-login>li>a:hover {
+  background-color: unset;
+  color: #c3d8f7
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #fff!important;
+  -webkit-background-clip: padding-box!important;
+  background-clip: padding-box!important;
+  border: 1px solid #ccc!important;
+  border: 1px solid rgba(0, 0, 0, .15)!important;
+  border-radius: 4px!important;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175)!important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175)!important
+}
+
+.footer {
+  position: relative;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.hide-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Navbar: tabs */
+.nav-justified,
+.nav-tabs {
+  padding-left: 0;
+  background-color: #f8f8f8;
+  z-index: 4;
+}
+
+.nav-tabs>li>a {
+  color: #000000;
+}
+
+.nav-tabs.nav-justified>.active>a,
+.nav-tabs.nav-justified>.active>a:focus,
+.nav-tabs.nav-justified>.active>a:hover,
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus {
+  border-radius: 0;
+  border: 1px solid #000000;
+  background-color: #000000;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* Navbar: title */
+.fiesta-title {
+  padding: 0 !important;
+  width: 100%;
+  border: 1px solid #3062B7;
+  border-radius: 0;
+  background-size: contain;
+  background-repeat: repeat;
+  background-color: #3062B7;
+  z-index: 4;
+  color: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.fiesta-title,
+.fiesta-title > div {
+  height: inherit;
+}
+
+.fiesta-title2 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fiesta-title2 > span {
+  padding: 10px;
+  color: #ffffff;
+  background-color: rgba(30, 62, 117, .6);
+  font-weight: bold;
+}
+
+@media only screen and (min-width : 0px){
+  .nav-tabs>li>a {
+    font-size: 11px;
+    padding: 5px;
+  }
+  .navigation-breadcrumb>li>a {
+    font-size: 11px;
+  }
+  .nav-tabs { position: relative;
+  margin-top: 45px;}
+  .fiesta-title { font-size: 18px; }
+  .sfiesta-main { padding-top: 0px; }
+}
+
+@media only screen and (min-width : 480px){
+  .nav-tabs>li>a {
+    font-size: 9px;
+    padding: 5px;
+  }
+  .navigation-breadcrumb>li>a {
+    font-size: 9px;
+  }
+  .fiesta-title { font-size: 19px; }
+}
+
+@media only screen and (min-width : 768px){
+  .nav-tabs>li>a {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .navigation-breadcrumb>li>a {
+    font-size: 14px;
+  }
+  .fiesta-title { font-size: 20px;}
+}
+
+@media only screen and (min-width : 992px){
+  .nav-tabs>li>a {
+    font-size: 10px;
+    padding: 6px;
+  }
+  .navigation-breadcrumb>li>a {
+    font-size: 10px;
+  }
+  .fiesta-title { font-size: 28px;}
+}
+
+@media only screen and (min-width : 1024px){
+  .fiesta-title {
+    position: fixed;
+    margin-top: 31px;
+    padding: auto;
+  }
+  .navigation-breadcrumb>li>a {
+    font-size: 16px;
+  }
+  .nav-tabs>li>a {
+    font-size: 13px;
+    padding: 7px .5px;
+  }
+
+  .nav-justified { position: fixed; }
+  .sfiesta-main { padding-top: 73px; }
+}
+
+@media only screen and (min-width : 1440px){
+  .nav-tabs>li>a {
+    font-size: 16px;
+    padding: 6px;
+  }
+  .navigation-breadcrumb>li>a {
+    font-size: 16px;
+  }
+  .fiesta-title { margin-top: 35px; }
+}
+
+
+.fa-smile-o:hover,
+.fa-frown-o:hover,
+.fa-thumbs-o-up:hover {
+  color: #3062b7 !important;
+}
+
+.fa-smile-o.selected,
+.fa-frown-o.selected {
+  position: relative;
+}
+
+.fa-smile-o.selected:before,
+.fa-frown-o.selected:before {
+  content: "\f111";
+  color: #ffff00;
+}
+
+.fa-smile-o.selected:after {
+  left: 0;
+  position: absolute;
+  content: "\f118";
+}
+
+.fa-frown-o.selected:after {
+  left: 0;
+  position: absolute;
+  content: "\f119";
+}
+
+@media (min-width: 768px) {
+  .bs-comment {
+      margin-right: 0;
+      margin-left: 0;
+      background-color: #fff;
+      border-color: #ddd;
+      border-width: 1px;
+      border-radius: 4px 4px 0 0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+}
+.bs-comment {
+    position: relative;
+    padding: 45px 15px 15px;
+    margin: 0 -15px 15px;
+    border-color: #e5e5e5 #eee #eee;
+    border-style: solid;
+    border-width: 1px 1px;
+}
+
+.bs-comment-number {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #959595;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.comment-box {
+  width: 100%;
+  resize: none !important;
+  border: none;
+  outline: none;
+}
+
+.comment-name{
+  border: none;
+  outline: none;
+  width: 100%;
+  background: none;
+  font-weight: bold;
+}
+
+.whole-comment-box {
+  border-radius: 2px;
+}
+
+.posted-comment {
+  border: none;
+  background: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.posted-comment > .panel-heading {
+  background: none;
+  border: none;
+}
+
+.posted-comment > .panel-heading, .posted-comment > .panel-body {
+  padding: 0;
+}
+
+.posted-comment-holder {
+  padding-left: 0;
+}
+
+.special {
+  padding: 15px !important;
+}
+
+.sfiesta-main {
+  width: 92%;
+}

@@ -1,0 +1,27 @@
+.footer {
+  width: 100%;
+  background-color: rgba(0,0,0,.9);
+  text-align: justify;
+  color: #ffffff;
+}
+
+.footer-copyright{
+  width: 100%;
+  line-height: 30px;
+  background-color: #000000;
+}
+
+.footer ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.footer a {
+  color: #ffffff;
+}
+
+.footer li>a:hover {
+  cursor: pointer;
+  color: #999999;
+  text-decoration: none;
+}

@@ -1,0 +1,52 @@
+<div class="panel panel-default">
+  <!-- Panel Title -->
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-1">
+
+        <h3 class="panel-title">Photos</h3>
+      </div>
+      <div class="col-md-2 col-md-offset-9">
+        <button class="btn btn-xs btn-primary pull-right" type="button" name="button" ng-click="AddPhoto()" data-toggle="modal" data-target="#photoModal">
+          Add Photo
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel Body -->
+  <div class="panel-body">
+
+    <!-- List of Photos -->
+    <div class="list-display text-center">
+      <div class="list-holder row">
+        <!-- NG-REPEAT for photos -->
+        <div class="col-md-3 photo-holder" ng-repeat ="photo in photos track by $index" >
+          <div class="photo-thumbnail text-right" ng-cloak ng-style="{'background-image':'url(' + photo.image.path + ')'}" ng-click="FocusPhoto(photo)" data-toggle="modal" data-target="#focusPhotoModal">
+          </div>
+          <span class="photo-info">
+            <a href ng-click="EditPhoto(photo)" data-toggle="modal" data-target="#photoModal">
+              Edit Details
+            </a>
+            <span ng-click="DeletePhoto(photo._id)" class="glyphicon glyphicon-trash"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="" ng-if="photos.length == 0">
+      <li class="list-group-item">
+        <div class="no-data-large">
+          <span class="glyphicon glyphicon-picture"></span> <br/><br/>
+          <span class="lead">Add Photos in the Fiesta</span>
+          <span class="text-muted">
+            <p>No photos uploaded in fiesta. <a href ng-click="AddPhoto()" data-toggle="modal" data-target="#photoModal">Add one</a>?</p>
+          </span><br/>
+          <br/>
+        </div>
+      </li>
+    </div>
+  </div>
+</div>
+<photo-modal></photo-modal>

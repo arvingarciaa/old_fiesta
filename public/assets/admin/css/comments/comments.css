@@ -1,0 +1,30 @@
+.bold {
+  font-weight: bold;
+}
+
+.main-header {
+  background-color: #3062b7;
+  height: 5vh;
+  width: 100%;
+}
+
+.section-header .title {
+  height: 5vh;
+  background-color: #000000;
+  color: #FFFFFF;
+  float: left;
+  font-weight: bold;
+  font-size: 1.5vw;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  width: 50%;
+}
+
+.section-header .triangle {
+  width: 0;
+  height: 0;
+  border-top: 5vh solid #000000;
+  border-right: 5vh solid transparent;
+  float: left;
+}

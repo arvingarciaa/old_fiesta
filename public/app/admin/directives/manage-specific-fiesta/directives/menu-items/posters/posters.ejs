@@ -1,0 +1,50 @@
+<div class="panel panel-default">
+  <!-- Panel Title -->
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-1">
+        <h3 class="panel-title"> Posters</h3>
+      </div>
+      <div class="col-md-2 col-md-offset-9">
+        <button class="btn btn-xs btn-primary pull-right" type="button" name="button" ng-click="AddPoster()" data-toggle="modal" data-target="#posterModal">
+          Add Poster
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel Body -->
+  <div class="panel-body">
+    <!-- List of Posters -->
+    <div class="list-display text-center">
+      <div class="list-holder row">
+        <!-- NG-REPEAT for posters -->
+        <div class="col-md-3 photo-holder" ng-repeat ="poster in posters track by $index" >
+          <div class="photo-thumbnail text-right" ng-cloak ng-style="{'background-image':'url(' + poster.image.path + ')'}" ng-click="FocusPoster(poster)" data-toggle="modal" data-target="#focusPosterModal">
+          </div>
+          <span class="photo-info">
+            <a href ng-click="EditPoster(poster)" data-toggle="modal" data-target="#posterModal">
+              Edit Details
+            </a>
+            <span ng-click="DeletePoster(poster._id)" class="glyphicon glyphicon-trash"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- Show this if no posters in fiesta -->
+    <div class="" ng-if="posters.length == 0">
+      <li class="list-group-item">
+        <div class="no-data-large">
+          <span class="glyphicon glyphicon-blackboard"></span> <br/><br/>
+          <span class="lead">Add Posters in the Fiesta</span>
+          <span class="text-muted">
+            <p>No posters showcased in fiesta. <a href ng-click="AddPoster()" data-toggle="modal" data-target="#posterModal">Add one</a>?</p>
+          </span><br/>
+          <br/>
+        </div>
+      </li>
+    </div>
+  </div>
+</div>
+
+<poster-modal></poster-modal>

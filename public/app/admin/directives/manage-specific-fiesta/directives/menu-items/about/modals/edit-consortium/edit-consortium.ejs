@@ -1,0 +1,35 @@
+
+<div class="modal centered-modal" id="editConsortium" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal">
+    <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!consortiumLoading">&times;</button>
+          <h4 class="modal-title" id="">Edit consortium</h4>
+        </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- Consortium -->
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon"><span class="glyphicon glyphicon-bookmark"></span></span>
+                <input ng-model="consortiumFull" type="text" class="form-control" placeholder="Consortium full name" aria-describedby="sizing-addon2"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-font"></span></span>
+                <input ng-model="consortium" type="text" class="form-control" placeholder="Consortium acronym" aria-describedby="sizing-addon2"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!consortiumLoading">Close</button>
+        <button type="button" class="btn btn-primary" ladda="consortiumLoading" data-style="expand-right" data-spinner-size="10" ng-click="EditConsortium(consortium, consortiumFull)">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

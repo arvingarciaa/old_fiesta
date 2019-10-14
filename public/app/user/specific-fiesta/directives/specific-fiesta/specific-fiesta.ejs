@@ -1,0 +1,76 @@
+<div>
+  <div id="navigation" class="navbar-fixed-top">
+    <ol class="breadcrumb navigation-breadcrumb">
+      <li><a ng-href="http://dpitc.net">HOME</a></li>
+      <li><a ng-href="/">FIESTA</a></li>
+      <li class="hidden-xs hidden-sm"><a ng-href="/fiesta/{{fiesta._id}}">{{fiesta.title | uppercase}}</a></li>
+    </ol>
+    <ul class="nav navbar-nav navbar-right navigation-login">
+      <li ng-if="!loggedIn"><a ng-href="/login">Login</a></li>
+      <li class="dropdown" ng-if="loggedIn">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          {{name}} <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#" ng-click="goTo('/admin')">Manage FIESTA</a></li>
+          <li><a href="#" ng-click="goTo('/admin/customize')">Customize Pages</a></li>
+          <li><a href="#" ng-click="goTo('/admin/analytics')">Analytics</a></li>
+          <li><a href="#" ng-click="goTo('/admin/comments')">Manage Comments</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#" ng-click="goTo('/admin/accounts')" ng-if="isAdmin">Manage Accounts</a></li>
+          <li><a href="/admin/settings">Account Settings</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <uib-tabset class="hidden-xs hidden-sm" active="activeJustified" active="true" justified="true">
+    <uib-tab ng-hide="tab.title == 'MORE' || (tab.title == 'SCHEDULE' &&
+    (!sfiesta_cms.schedule.sched || activity.length == 0) &&
+    (!sfiesta_cms.schedule.map || !fiesta.vicinityMap.path) &&
+    (!sfiesta_cms.schedule.googlemap || fiesta.coordinates.lat)
+    )"
+    index="$index + 1" ng-repeat="tab in tabs" id="{{tab.slug}}" disable="tab.disable" heading="{{tab.title}}" ng-click="!tab.disable && setTabContent(tab, '')">
+    </uib-tab>
+  <li uib-dropdown is-open="status.isopen" ng-class="{disabled: tabs[6].disable, active: activeJustified == 7}">
+      <a id="single-button" uib-dropdown-toggle ng-disabled="tabs[6].disable">
+        {{tabs[6].title}} <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li role="menuitem"><a ng-click="setTabContent(tabs[6],'Message')">Message</a></li>
+        <li class="divider"></li>
+        <li role="menuitem"><a ng-click="setTabContent(tabs[6],'Contents')">Content</a></li>
+        <li role="menuitem"><a ng-click="setTabContent(tabs[6],'Profiles')">Profiles</a></li>
+        <li role="menuitem"><a ng-click="setTabContent(tabs[6],'Events')">Events</a></li>
+        <li role="menuitem"><a ng-click="setTabContent(tabs[6],'Blogs')">Blogs</a></li>
+      </ul>
+    </li>
+  </uib-tabset>
+  <uib-tabset class="no-padding visible-xs visible-sm" active="activeJustified" active="true">
+    <uib-tab ng-hide="tab.title == 'MORE' || (tab.title == 'SCHEDULE' && !sfiesta_cms.schedule.sched && !sfiesta_cms.schedule.map && !sfiesta_cms.schedule.googlemap)"
+      index="$index + 1" ng-repeat="tab in tabs" id="{{tab.slug}}" disable="tab.disable" heading="{{tab.title}}" ng-click="!tab.disable && setTabContent(tab, '')">
+    </uib-tab>
+  <li uib-dropdown is-open="status.isopen" ng-class="{disabled: tabs[6].disable, active: activeJustified == 7}">
+      <a id="single-button" uib-dropdown-toggle ng-disabled="tabs[6].disable">
+        {{tabs[6].title}} <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li role="menuitem"><a ng-click="setTabContent(tabs[6],'Message')">Message</a></li>
+        <li class="divider"></li>
+        <li role="menuitem"><a ng-click="setTabContent(tabs[6],'Contents')">Content</a></li>
+        <li role="menuitem"><a ng-click="setTabContent(tabs[6],'Profiles')">Profiles</a></li>
+        <li role="menuitem"><a ng-click="setTabContent(tabs[6],'Events')">Events</a></li>
+        <li role="menuitem"><a ng-click="setTabContent(tabs[6],'Blogs')">Blogs</a></li>
+      </ul>
+    </li>
+  </uib-tabset>
+  <div class="hidden-md hidden-lg fiesta-title text-center flex" ng-style="{'background-image':'url(' + fiesta_cms.banner + ')'}">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+    <div class="fiesta-title2 col-lg-10 col-md-10 col-sm-10 col-xs-10">
+      <span>{{fiesta.title}}<span>
+      </div>
+      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+    </div>
+</div>
+<link rel="stylesheet" href="assets/user/css/specific-fiesta/specific-fiesta.css">
+<div class="container-fluid sfiesta-main" ng-include="tabTemplateUrl"></div>

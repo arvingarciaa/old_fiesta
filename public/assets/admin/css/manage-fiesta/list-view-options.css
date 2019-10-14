@@ -1,0 +1,57 @@
+@media screen and (max-width: 1140px){
+	.sort-options {
+    display: block;
+    clear: both;
+    width: 100%;
+    text-align: left;
+    margin-left: 5px;
+    margin-top: 18px;
+	}
+
+	.filter-options {
+    display: block;
+    clear: both;
+    width: 100%;
+    text-align: left;
+	}
+}
+
+@media screen and (min-width: 1141px){
+	.filter-options{
+		float: left;
+	  text-align: left;
+	}
+
+	.sort-options {
+		float: right;
+	  text-align: right;
+	  min-width: 46%;
+	}
+}
+
+
+.view-options {
+	width: 100%;
+}
+
+.fiesta-view-menu {
+  margin-top: 7px;
+  min-width: 100px;
+  border-radius: 2px;
+}
+
+.view-choice {
+  color: #777 !important;
+}
+
+.emphasized {
+  font-weight: 500;
+  color: rgb(31, 31, 31) !important;
+}
+
+
+
+.focused-sort {
+  font-weight: bolder;
+  color: black !important;
+}

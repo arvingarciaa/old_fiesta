@@ -1,0 +1,88 @@
+
+
+<div class="view-options">
+
+  <!-- Filter Options -->
+  <div class="filter-options">
+
+    <span uib-dropdown>
+      <!-- Consortium Filter Option -->
+      <a href class="text-muted with-glyphicon tool" id="cons-dropdown" uib-dropdown-toggle  >
+        <span ng-class="{'emphasized': consorChoice!=null}">
+          &nbsp;{{ consorChoice==null? 'Any consortium': consorChoice }}
+        </span>
+        <span class="glyphicon glyphicon-triangle-bottom tool-glyphicon" ></span>
+      </a>
+      <ul class="dropdown-menu fiesta-view-menu" uib-dropdown-menu aria-labelledby="cons-dropdown" >
+        <li>
+          <a href class="view-choice" ng-click="filter(null, 'consortium')">Any consortium</a>
+        </li>
+        <li ng-repeat="consor in consorOptions | orderBy: consor">
+          <a href class="view-choice" ng-click="filter(consor, 'consortium')">{{ ::consor }}</a>
+        </li>
+      </ul>
+    </span>
+
+    <!-- Region Filter Option -->
+    <span uib-dropdown>
+      <a href class="text-muted with-glyphicon tool" id="place-dropdown" uib-dropdown-toggle >
+        <span  ng-class="{'emphasized': regionChoice!=null}">
+          &nbsp;{{ regionChoice==null? 'Any region': regionChoice }}
+        </span>
+        <span class="glyphicon glyphicon-triangle-bottom tool-glyphicon" ></span>
+      </a>
+      <ul class="dropdown-menu fiesta-view-menu text-muted" uib-dropdown-menu aria-labelledby="place-dropdown" >
+        <li>
+          <a href class="view-choice" ng-click="filter(null, 'region')">Any region</a>
+        </li>
+        <li ng-repeat="region in regionOptions | orderBy: region">
+          <a href class="view-choice" ng-click="filter(region, 'region')">{{ ::region }}</a>
+        </li>
+      </ul>
+    </span>
+
+    <!-- Year Filter Option -->
+    <span uib-dropdown>
+      <a href class="text-muted with-glyphicon tool" id="year-dropdown" uib-dropdown-toggle  >
+        <span ng-class="{'emphasized': yearChoice!=null}">
+          &nbsp;{{ yearChoice==null? 'Any year': yearChoice }}
+        </span>
+        <span class="glyphicon glyphicon-triangle-bottom tool-glyphicon" ></span>
+      </a>
+      <ul class="dropdown-menu fiesta-view-menu text-muted" uib-dropdown-menu aria-labelledby="year-dropdown" >
+        <li>
+          <a href class="view-choice" ng-click="filter(null, 'year')">Any year</a>
+        </li>
+        <li ng-repeat="year in yearOptions | orderBy: year : true">
+          <a href class="view-choice" ng-click="filter(year, 'year')">{{ ::year }}</a>
+        </li>
+      </ul>
+    </span>
+
+    <!-- Commodity Filter Option -->
+    <span>
+      <a href class="text-muted tool"  data-toggle="modal" data-target="#chooseCommodity" ng-class="{ emphasized: filteredByCommodity }">
+        {{ (filteredByCommodity)? 'Filtered by commodity': 'Any commodity' }}
+      </a>
+    </span>
+  </div>
+
+  <!-- Sorting Options -->
+  <div class="sort-options">
+    <!-- Sort by Title -->
+    <a id="title" href class="sort-option text-muted tool" ng-init="reverse['title']=false" ng-click="sort('title', reverse['title']);">
+      Title
+      <span class="glyphicon" ng-class="{'glyphicon-sort-by-alphabet': !reverse['title'], 'glyphicon-sort-by-alphabet-alt': reverse['title']}"></span>
+    </a>
+    <!-- Sort by Start Date -->
+    <a id="startDate" href class="sort-option text-muted tool" ng-init="reverse['startDate']=false" ng-click="sort('startDate', reverse['startDate']);">
+      Date
+      <span class="glyphicon" ng-class="{'glyphicon-arrow-down': !reverse['startDate'], 'glyphicon-arrow-up': reverse['startDate']}"></span>
+    </a>
+    <!-- Sort by Consortium -->
+    <a id="consortium" href class="sort-option text-muted tool" ng-init="reverse['consortium']=false" ng-click="sort('consortium', reverse['consortium']);">
+      Consortium
+      <span class="glyphicon" ng-class="{'glyphicon-sort-by-alphabet': !reverse['consortium'], 'glyphicon-sort-by-alphabet-alt': reverse['consortium']}"></span>
+    </a>
+  </div>
+</div>

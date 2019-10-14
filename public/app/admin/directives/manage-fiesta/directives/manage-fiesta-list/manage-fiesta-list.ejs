@@ -1,0 +1,126 @@
+<!-- Results Section -->
+<div class="text-left">
+  <!-- Statistics and List view options -->
+  <div class="fiesta-list-info">
+    <div class="fiesta-view-options pull-left">
+      <div class="super-flip">
+        <div class="super-card" ng-class="{'super-flipped':isFlipped}">
+          <div class="super-face super-front text-muted" ng-cloak>
+            About {{fiestaNumber }} fiesta(s)
+          </div>
+          <div class="super-face super-back">
+            <list-view-options></list-view-options>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <commodity-filter-modal>
+      <!-- Modal for filtering fiesta list  -->
+    </commodity-filter-modal>
+    <!-- Tool Toggle Button -->
+    <span class="tool-toggle">
+      <a href class="text-muted tool" ng-class="{'selected': isFlipped}" ng-click="isFlipped=!isFlipped">
+        Tools
+      </a>
+    </span>
+  </div>
+
+  <!-- No Fiesta Hidden Message  -->
+  <p class="lead text-center no-found-fiesta" ng-show="noFiesta">
+    No fiesta found. Would you like to
+    <a href data-toggle="modal" data-target="#createFiesta"> create one</a>?
+    or
+    <a href ng-click="resetFilter()">reset the filter</a>?
+  </p>
+
+  <!-- Fiesta List -->
+  <div class="results">
+    <!-- Fiesta Item -->
+    <div class="row equal row-fiesta" ng-repeat="row in rows">
+      <div class="col-md-3 fiesta-column" ng-repeat="fiesta in row">
+        <div class="panel panel-default fiesta-panel">
+
+          <!-- Fiesta Heading with image -->
+          <div class="panel-heading fiesta-panel-heading text-center">
+            <div class="fiesta-picture" ng-style="{'background-image': 'url(' + fiesta.picture.path + ')'}" ng-click="manageFiesta(fiesta._id)">
+            </div>
+          </div>
+
+          <!-- Fiesta Body with info -->
+          <div class="panel-body">
+            <div class="title-head">
+              <!-- Fiesta Title -->
+              <div class="fiesta-title lead" uib-tooltip="{{::fiesta.title}}"
+                tooltip-placement="bottom-left" tooltip-append-to-body="true">
+                <a href ng-click="manageFiesta(fiesta._id)">{{::fiesta.title}}</a>
+              </div>
+              <!-- Fiesta Select Option Button -->
+              <div class="fiesta-options">
+                <div uib-dropdown >
+                  <button class="btn btn-lg manage-option-button" type="button" name="button" uib-dropdown-toggle>
+                    <span class="glyphicon glyphicon-option-vertical"></span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-right fiesta-dropdown" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                    <li role="menuitem"><a href ng-click="manageFiesta(fiesta._id)">Manage</a></li>
+                    <li role="menuitem"><a href ng-click="deleteFiesta(fiesta._id)">Delete</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Start Date to End Date Section -->
+            <div class="overflow small">
+              <span uib-tooltip="{{ ::fiesta.startDate | date: 'mediumDate'}} - {{fiesta.endDate | date: 'mediumDate'}}"
+                  tooltip-placement="bottom-left" tooltip-append-to-body="true">
+                {{::fiesta.startDate | date: 'mediumDate'}} - {{::fiesta.endDate | date: 'mediumDate'}}
+              </span>
+            </div>
+            <!-- Venue Section -->
+            <div class="overflow">
+              <span uib-tooltip="{{::fiesta.venue}}"
+                tooltip-placement="bottom-left" tooltip-append-to-body="true">
+                <span class="small"><em>{{::fiesta.venue}}</em></span>
+              </span>
+            </div>
+            <!-- Consortium Section -->
+            <div class="overflow">
+              <span uib-tooltip="{{::fiesta.consortium}}"
+                tooltip-placement="bottom-left" tooltip-append-to-body="true">
+                <span class="small">{{::fiesta.consortium}}</span>
+              </span>
+            </div>
+            <!-- Commodity Section -->
+            <div class="overflow">
+              <em class="text-muted small" ng-repeat="comm in fiesta.commodity">{{::comm}}
+                <em ng-hide="$last"> &middot; </em>
+              </em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Pagination Section -->
+<div class="text-center">
+  <ul class="pagination center">
+    <li class="page-item">
+      <a class="page-link" ng-click="prevPage()" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+
+    <li class="page-item" ng-repeat="i in pages track by $index" id="page_{{$index+1}}">
+      <a class="page-link" ng-cloak ng-click="changePage($index+1)">{{:: $index+1}}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" ng-click="nextPage()" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+</div>

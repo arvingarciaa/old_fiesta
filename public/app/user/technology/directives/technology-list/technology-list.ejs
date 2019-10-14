@@ -1,0 +1,301 @@
+<div class="technology-list container-fluid" style="width: 88%;">
+  <div class="flex technology-logo-desc">
+    <div class="input-group col-md-12">
+      <form ng-submit="search(key)" class="ng-valid ng-dirty ng-valid-parse ng-submitted">
+          <div class="input-group">
+              <input class="form-control input-lg ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" type="text" ng-model="key" placeholder="Search...">
+              <span class="input-group-btn">
+                <button class="btn btn-success btn-lg" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+              </span>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<div class="tools-row container-fluid">
+  <hr ng-show="tech_cms.sort.show || tech_cms.filter.show">
+  <div>
+    <div class="col-lg-6" ng-if="::tech_cms.filter.show || undefined" ng-show="tech_cms.filter.show">
+      <span>
+        Filter: <br class="visible-xs">
+        <div class="btn-group" uib-dropdown>
+          <a class="tools text-muted btn" id="industryFilter" uib-dropdown-toggle ng-cloak
+            ng-if="::tech_cms.filter.options.industry || undefined" ng-show="tech_cms.filter.options.industry">
+             <span ng-if="!industryFilter">Any Industry</span>
+             <span class="bold black" ng-cloak ng-if="industryFilter">{{industryFilter}}</span>
+             <span class="glyphicon glyphicon-triangle-bottom tool-glyphicon"></span>
+          </a>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+            <li role="menuitem"><a ng-click="filter('industry', '')">Any Industry</a></li>
+            <li role="menuitem" ng-repeat="industry in industries | orderBy: ''">
+              <a ng-cloak ng-click="filter('industry', industry)">{{industry}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="btn-group" uib-dropdown>
+          <a class="tools text-muted btn" id="yearFilter" uib-dropdown-toggle ng-cloak
+          ng-if="::tech_cms.filter.options.year || undefined" ng-show="tech_cms.filter.options.year">
+             <span ng-if="!yearFilter">Any year</span>
+             <span class="bold black" ng-cloak ng-if="yearFilter">{{yearFilter}}</span>
+             <span class="glyphicon glyphicon-triangle-bottom tool-glyphicon"></span>
+          </a>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+            <li role="menuitem"><a ng-click="filter('year', '')">Any Year</a></li>
+            <li role="menuitem" ng-repeat="year in years | orderBy: ''">
+              <a ng-cloak ng-click="filter('year', year)">{{year}}</a>
+            </li>
+          </ul>
+        </div>
+        <a class="tools text-muted btn" id="commodityFilter" ng-cloak
+          ng-if="::tech_cms.filter.options.commodity || undefined" ng-show="tech_cms.filter.options.commodity"
+          data-toggle="modal" data-target="#chooseCommodity">
+           <span ng-if="!commoditiesFilter.length">Any commodity</span>
+           <span class="bold black" ng-if="commoditiesFilter.length">Filtered by commodity</span>
+        </a>
+      </span>
+    </div>
+
+    <div class="col-lg-6" ng-if="::tech_cms.sort.show || undefined" ng-show="tech_cms.sort.show">
+      <span>
+        Sort by: <br class="visible-xs">
+        <a class="tools text-muted btn" id="title" ng-cloak
+          ng-if="::tech_cms.sort.options.title || undefined" ng-show="tech_cms.sort.options.title"
+          ng-init="reverse['title']=false" ng-click="sort('title', reverse['title']);"> Title
+          <span class="glyphicon" ng-class="{'glyphicon-sort-by-alphabet': !reverse['title'], 'glyphicon-sort-by-alphabet-alt': reverse['title']}"></span>
+        </a>
+        <a class="tools text-muted btn" id="industrySort" ng-cloak
+          ng-if="::tech_cms.sort.options.industry || undefined" ng-show="tech_cms.sort.options.industry"
+          ng-init="reverse['industrySort']=false" ng-click="sort('industrySort', reverse['industrySort']);"> Industry
+          <span class="glyphicon" ng-class="{'glyphicon-sort-by-alphabet': !reverse['industrySort'], 'glyphicon-sort-by-alphabet-alt': reverse['industrySort']}"></span>
+        </a>
+        <a class="tools text-muted btn" id="year" ng-cloak
+          ng-if="::tech_cms.sort.options.year || undefined" ng-show="tech_cms.sort.options.year"
+          ng-init="reverse['year']=false" ng-click="sort('year', reverse['year']);"> Year
+          <span class="glyphicon" ng-class="{'glyphicon-arrow-down': !reverse['year'], 'glyphicon-arrow-up': reverse['year']}"></span>
+        </a>
+        <a class="tools text-muted btn" id="commoditySort" ng-cloak
+          ng-if="::tech_cms.sort.options.commodity || undefined" ng-show="tech_cms.sort.options.commodity"
+          ng-init="reverse['commoditySort']=false" ng-click="sort('commoditySort', reverse['commoditySort']);"> Commodity
+          <span class="glyphicon" ng-class="{'glyphicon-sort-by-alphabet': !reverse['commoditySort'], 'glyphicon-sort-by-alphabet-alt': reverse['commoditySort']}"></span>
+        </a>
+      </span>
+    </div>
+    <br>
+    <hr ng-show="tech_cms.sort.show || tech_cms.filter.show">
+
+    <div class="pull-right" ng-if="::tech_cms.counter || undefined" ng-show="tech_cms.counter">
+      <span class="text-muted pages">
+        <span ng-cloak ng-if="filteredCount > 0">{{(tech_cms.pagination.currentPage-1)*tech_cms.pagination.pageSize + 1}} - </span>
+        <span ng-cloak ng-if="tech_cms.pagination.currentPage*tech_cms.pagination.pageSize < filteredCount">{{tech_cms.pagination.currentPage*tech_cms.pagination.pageSize}}</span>
+        <span ng-cloak ng-if="tech_cms.pagination.currentPage*tech_cms.pagination.pageSize >= filteredCount">{{filteredCount}}</span>
+        of {{filteredCount}} Technologies
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid text-center" ng-if="filteredCount === 0">
+  <div class="well">
+    <span class="lead"> No technologies found.
+      <a class="reset-filter" ng-click="filter('industry', ''); filter('year',''); filter('commodities',''); emptyCommodityFilter()">
+      Reset the filter</a>?
+    </span>
+  </div>
+</div>
+
+<div class="container-fluid text-center">
+  <div class="flex">
+    <div class="flex panel-container col-lg-3 col-md-4 col-sm-4 col-xs-6" ng-cloak
+    ng-repeat="tech in filtered_techs.slice(((tech_cms.pagination.currentPage-1)*tech_cms.pagination.pageSize),
+               ((tech_cms.pagination.currentPage)*tech_cms.pagination.pageSize))" >
+      <div class="panel panel-default cards-panel">
+        <div class="panel-heading cards-heading">
+          <a>
+            <div class="fiesta-picture" ng-cloak
+              ng-style="{'background-image':'url('+tech.picture+')'}"></div>
+          </a>
+        </div>
+        <div class="panel-body text-left">
+          <div class="lead overflow bold" uib-tooltip="{{tech.title}}" tooltip-placement="bottom-left" tooltip-append-to-body="true">
+                <a ng-if="tech.title" ng-href="http://technology-dashboard.herokuapp.com/#/technology/{{tech._id}}/">{{tech.title | uppercase}}</a>
+                <a ng-if="!tech.title">&nbsp;</a>
+          </div>
+
+          <div class="overflow" ng-if="isArray(tech.industries)">
+            <span ng-repeat="ind in tech.industries">
+              <span class="small">{{ind}}</span> <span ng-hide="$last"> &middot; </span>
+            </span>
+          </div>
+
+          <div class="overflow" ng-if="isArray(tech.commodities)">
+            <span ng-repeat="comm in tech.commodities">
+              <span class="text-muted small italic">{{comm}}</span> <span ng-hide="$last"> &middot; </span>
+            </span>
+          </div>
+
+          <div class="overflow" ng-cloak><span ng-hide="tech.year == 'N/A'" class="text-muted small">{{tech.year}}</span>
+            <span ng-show="tech.year == 'N/A'" class="text-muted small">&nbsp;</span>
+          </div>
+          <a ng-click="getInfo(tech._id)" ng-href="#" data-toggle="modal" data-target="#infoModal"><label for="primary" class="btn btn-xs btn-info">View Information</label></a>
+          <a ng-click="request(tech._id)" ng-href="#" data-toggle="modal" data-target="#requestModal"><label for="primary" class="btn btn-xs btn-success">Request</label></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Pagination -->
+  <div class="row pagination" ng-cloak ng-if="::filteredCount || undefined" ng-show="filteredCount">
+    <ul uib-pagination total-items="filteredCount" ng-model="tech_cms.pagination.currentPage"
+    items-per-page="tech_cms.pagination.pageSize" class="pagination-sm" boundary-link-numbers="true"
+    rotate="false" previous-text="&laquo;" next-text="&raquo;"></ul>
+  </div><br><br>
+</div>
+
+<!-- Modal Filter: Commodities -->
+<div class="modal centered-modal fade" id="chooseCommodity" tabindex="-1" role="dialog"
+     aria-labelledby="chooseCommodityLabel" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="chooseCommodityLabel">Choose commodities</h4>
+      </div>
+      <div class="modal-body">
+        <div class="well">
+          <button class="btn btn-sm btn-outline-primary commodity-tag" type="button" ng-cloak
+                  ng-repeat="commodity in commodities | orderBy: ''" ng-click="addCommodityFilter(commodity)">
+                  {{ commodity }}
+          </button>
+        </div>
+        <div class="text-right form-group">
+          <button class="btn btn-sm btn-outline-warning" type="button" name="button" ng-click="emptyCommodityFilter()">
+            Clear Selection
+          </button>&nbsp;&nbsp;
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">Selected commodities</div>
+          <div class="panel-body">
+            <button class="btn btn-sm btn-outline-success commodity-tag" type="button" ng-cloak
+              ng-repeat="commodity in selectComm" ng-click="removeCommodityFilter(commodity)"> {{ commodity }}
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" type="button" data-dismiss="modal" ng-click="emptyCommodityFilter()">Cancel</button>
+        <button class="btn btn-primary" type="button" ng-click="filter('commodities', selectComm)" data-dismiss="modal">Apply Filter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal centered-modal fade" id="requestModal" tabindex="-1" role="dialog"
+     aria-labelledby="requestModalLabel" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="requestModalLabel">Information Request</h4>
+      </div>
+      <div class="modal-body">
+        <p>Request for <em>{{requestFocus.title}}</em></p>
+
+        <div class="form-group">
+          <form name="emailForm">
+            <label for="email">Give us your email address:</label>
+            <input type="email"  class="form-control" id="email" name="input" ng-model="userEmail" required>
+            <div role="alert" style="color:red;">
+              <span class="error italic small" ng-show="emailForm.input.$error.required">
+                Required</span>
+              <span class="error italic small" ng-show="emailForm.input.$error.email">
+                Not valid email</span>
+            </div>
+          </form>
+
+          <div role="alert">
+            <span class="error" ng-show="myForm.input.$error.required">
+              Required!</span>
+            <span class="error" ng-show="myForm.input.$error.email">
+              Not valid email!</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" type="button" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" type="button" data-dismiss="modal" ng-click="requestSubmit()">Request</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal centered-modal fade" id="infoModal" tabindex="-1" role="dialog"
+     aria-labelledby="requestModalLabel" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg centered-modal" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="requestModalLabel">{{tech_focus.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <p class="small text-muted" ng-if="tech_focus.region || tech_focus.year">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          {{tech_focus.region}} &nbsp;
+          <span ng-hide="tech_focus.year == 'N/A'">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            Developed in {{tech_focus.year}}</span>
+        </p>
+        <blockquote>
+
+          <span ng-repeat="ind in tech_focus.industries"> {{ind}} <span ng-hide="$last"> &middot; </span> </span>
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+          <span ng-repeat="comm in tech_focus.commodities"> {{comm}} <span ng-hide="$last"> &middot; </span> </span>
+        </blockquote>
+        <p>
+          {{tech_focus.description}}
+        </p>
+        <p ng-if="tech_focus.categories.length">
+          <span class="bold">Categories <span>
+          <ul>
+            <li ng-repeat="cat in tech_focus.categories">{{cat}} </li>
+          </ul>
+        </p>
+
+        <p ng-if="countObject(tech_focus.generators)">
+          <span ng-if="countObject(tech_focus.generators) == 1" class="bold">Generator <span>
+          <span ng-if="countObject(tech_focus.generators) > 1" class="bold">Generators <span>
+          <ul>
+            <li ng-repeat="gen in tech_focus.generators" ng-if="isObject(gen)">
+                <span ng-if="gen.name"><strong> Name: </strong> {{gen.name}} <br></span>
+                <span ng-if="gen.phone"><strong>Phone Number: </strong> {{gen.phone}} <br></span>
+                <span ng-if="gen.expertise"><strong>Expertise: </strong>  {{gen.expertise}} <br></span>
+                <span ng-if="gen.agency"><strong>Agency: </strong> {{gen.agency}} <br></span>
+                <span ng-if="gen.availability"><strong>Availability: </strong> {{gen.availability}}<br></span>
+                <span ng-if="gen.address"><strong>Address: </strong> {{gen.address}} <br></span>
+            </li>
+          </ul>
+        </p>
+
+        <p ng-if="countObject(tech_focus.owners)">
+          <span ng-if="countObject(tech_focus.owners) == 1" class="bold">Owner <span>
+          <span ng-if="countObject(tech_focus.owners) > 1" class="bold">Owners <span>
+          <ul>
+            <li ng-repeat="gen in tech_focus.owners" ng-if="isObject(gen)">
+                <span ng-if="gen.name"><strong> Name: </strong> {{gen.name}} <br></span>
+                <span ng-if="gen.address"><strong>Address: </strong> {{gen.address}} <br></span>
+                <span ng-if="gen.phone"><strong>Phone Number: </strong> {{gen.phone}} <br></span>
+                <span ng-if="gen.fax"><strong>Fax Number: </strong> {{gen.fax}} <br></span>
+                <span ng-if="gen.email"><strong>Email Address: </strong> {{gen.email}} <br></span>
+            </li>
+          </ul>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="assets/user/css/technology/technology-list.css">

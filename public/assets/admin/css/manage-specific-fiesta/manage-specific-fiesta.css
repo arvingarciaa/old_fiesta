@@ -1,0 +1,199 @@
+
+
+@media screen and (max-width: 767px){
+  #manageSpecificFiestaHolder {
+    margin: 4px auto;
+  }
+}
+
+
+
+@media screen and (min-width: 768px){
+  #manageSpecificFiestaHolder {
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+}
+
+@media screen and (min-width: 1700px){
+  #manageSpecificFiestaHolder {
+    margin: auto;
+  }
+}
+
+#manageSpecificFiestaHolder {
+  margin-bottom: 4%;
+  max-width: 1566px;
+}
+
+
+.menu-panel, .view-panel {
+  height: 100%;
+}
+
+.menu-panel {
+  padding-top: 7px;
+}
+
+.view-panel {
+  margin-top: 20px;
+}
+
+.list-display {
+  margin: auto 15px;
+}
+
+.photo-holder {
+  padding: 0px 2px;
+}
+
+.photo-thumbnail{
+    background-color: black;
+    width: 100%;
+    height: 200px;
+    display: inline-block; /* makes it fit in like an <img> */
+    background-size: cover; /* or contain */
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    opacity: 1;
+}
+
+ .photo-info {
+  position: absolute;
+  top: 85%;
+  right: 5%;
+  opacity: 1;
+  visibility: hidden;
+}
+.photo-info > * {
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.photo-info > .glyphicon:hover {
+  font-weight: bold;
+}
+.photo-info > a:hover {
+  font-weight: 500;
+  color: white;
+}
+
+.photo-thumbnail:hover + .photo-info, .photo-info:hover {
+  visibility: visible;
+}
+
+.photo-holder:hover > .photo-thumbnail {
+  cursor: pointer;
+  opacity: 0.90;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), inset 0px -23px 139px 11px rgba(0, 0, 0, 0.55);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), inset 0px -23px 139px 11px rgba(0, 0, 0, 0.55);
+}
+
+button.close, button.close:hover {
+  z-index: 100;
+  position: absolute;
+  left: 101%;
+  color: white;
+  opacity: 1;
+  font-size: 5rem;
+  font-weight: 300;
+  text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.5);
+}
+
+.tags {
+  font-size: 1.1rem;
+}
+
+.tags-input {
+  padding: 0;
+}
+
+.tags-input > div {
+  margin: 0;
+}
+
+tags-input .tags {
+  border: 1px solid #bebebe;
+  -webkit-box-shadow: 1px 1px 1px 0 #dbdbdb inset;
+          box-shadow: 1px 1px 1px 0 #dbdbdb inset;
+  border-radius: 5px;
+}
+
+tags-input .tags .tag-item {
+  background: none!important;
+  color: #006dcc !important;
+  border: 1px solid;
+}
+
+tags-input .tags .tag-item .remove-button {
+  color: #006dcc !important;
+}
+
+div > div > div > table {
+  margin: auto;
+}
+
+.progress-bar {
+  background-color: darkgray;
+}
+
+textarea {
+  resize: vertical;
+}
+
+div > iframe {
+  width: 100%;
+}
+
+.navigation > .glyphicon {
+  font-size: 3rem;
+  position: absolute;
+  top: 45%;
+  color: gray;
+}
+.navigation:hover {
+  cursor: pointer;
+  background-color: rgba(196, 196, 196, 0.6);
+}
+
+.navigation:hover > .glyphicon {
+  color: black;
+}
+
+.equal, .equal > .col-md-* {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.note-group-select-from-files {
+    display:none;
+}
+
+.modal-xl {
+  width: 90%;
+}
+
+.summernote-bind {
+  padding-left: 10%;
+  padding-right: 10%;
+  display: block;
+  margin: auto;
+}
+
+.back-to-fiestas {
+  background-color: rgba(39, 96, 179, 0.8);
+  border-radius: 0
+}
+.back-to-fiestas > li > a {
+  color: white;
+  font-size: 1.5rem;
+}
+
+li.pull-right::before {
+  content: none !important;
+}

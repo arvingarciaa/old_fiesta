@@ -1,0 +1,16 @@
+.fiesta-list-panel-heading {
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  background-color: #3062B7 !important;
+  opacity: 0.9;
+  border-radius: 3px;
+  box-shadow: 0px 2px 4px lightgrey;
+  -moz-box-shadow: 0px 2px 4px lightgrey;
+  -webkit-box-shadow: 0px 2px 4px lightgrey;
+}
+
+#create-fiesta-button {
+  color: grey;
+  background-color: white;
+}

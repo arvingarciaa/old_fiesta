@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="assets/login/css/login.css">
+
+<div ng-controller="LoginCtrl">
+  <div class="row login" ng-show="noSession">
+    <div class="col-md-12">
+      <br><br>
+      <img class="logo" src="assets/logo-fiesta.jpg" alt="DOST-PCAARRD">
+      <br><br>
+    </div>
+    <div class="col-md-12" ng-if="loggedOut">
+      <div class="panel panel-success">
+        <div class="panel-body">
+          You have successfully logged out.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12" ng-if="(sessionExpired || authFailed) && !loggedOut">
+      <div class="panel panel-danger">
+        <div class="panel-body">
+          {{
+            (sessionExpired)? 'Your session has expired! Please login to proceed.': 'Authentication has failed! Please login to restart.'
+          }}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <form ng-submit="authenticate(user)">
+        <div class="form-group row">
+          <label for="email" class="col-2 col-form-label">Email</label>
+          <div class="col-10">
+            <input ng-model="user.email" class="form-control" type="email" id="email" placeholder="Enter your email" required/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="password" class="col-2 col-form-label">Password</label>
+          <div class="col-10">
+            <input ng-model="user.password" class="form-control" type="password" id="password" placeholder="Enter your password" required>
+            <p id="passwordHelpBlock" class="form-text text-muted">
+              <a href="/forgot-password" class="small text-muted"> Forgot your password?</a>
+            </p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="form-group row">
+            <div class="offset-sm-2 col-sm-10">
+              <button type="submit" class="btn btn-primary" ladda="loading" data-style="expand-right" data-spinner-size="10">
+                {{ loading? "Logging in...":"Login" }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+
+<div class="modal centered-modal" id="editVicinityMap" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!loading">&times;</button>
+        <h4 class="modal-title" id="">Edit Vicinity map</h4>
+      </div>
+      <div class="modal-body">
+
+        <!-- Image input -->
+        <div class="photo-uploader" type="file" ngf-select="" ng-model="inputImage" name="file" ngf-accept="'image/jpeg'">
+          <div class="photo-preview" ng-hide="(!inputImage || loading)">
+            <img ngf-src="inputImage" alt="">
+          </div>
+          <div class="photo-select" ng-hide="(inputImage || loading)">
+            <div>
+              <span class="glyphicon glyphicon-road"></span>
+              <p>Upload vicinity map</p>
+            </div>
+          </div>
+          <div class="photo-loading" ng-show="loading">
+            <uib-progressbar class="progress-striped active" value="100"></uib-progressbar>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!loading">Close</button>
+        <button type="button" class="btn btn-primary" ng-class="{'disabled': loading}" ng-click="EditVicinityMap(inputImage)">Update vicinity map</button>
+      </div>
+    </div>
+  </div>
+</div>

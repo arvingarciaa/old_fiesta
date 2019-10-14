@@ -1,0 +1,35 @@
+<div class="modal centered-modal" id="viewContent" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+  <div class="modal-dialog centered-modal modal-xl">
+    <div class="modal-content">
+      <div class="modal-header tech-image" ng-style="{'background-image':'url(' + writeup.image.path + ')','min-height':'200px'}">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <p class="small" style="top:171px;">
+          &copy; {{writeup.image.credits}}
+        </p>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+              <h2>{{writeup.title}} <small><strong class="small">{{selected}}</strong></small></h2>
+              <span class="small" ng-if="writeup.authors.length>0">
+                By: <span ng-repeat="a in writeup.authors track by $index">
+                  {{a.name}} <em class="small">({{a.position}})</em>
+                  <span ng-hide="$last">, </span>
+                </span>
+              </span>
+              <br/>
+              <br>
+              <div ng-bind-html="writeup.body">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

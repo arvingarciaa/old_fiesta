@@ -1,0 +1,44 @@
+<br><br>
+<div ng-controller="ManageCommentsCtrl">
+  <div ng-if="isEmpty(fiesta_comments) && isEmpty(photo_comments) && isEmpty(ft_comments)">
+    <div class="panel panel-default">
+      <div class="panel-body text-center">
+        <br>
+        <p class="lead"> All comments are already screened and there are no new comments to approve. </p>
+      </div>
+    </div>
+  </div>
+
+  <div ng-hide="isEmpty(fiesta_comments)">
+    <div class="main-header">
+      <div class="section-header">
+        <div class="title">Comments on FIESTA</div>
+        <div class="triangle"></div>
+      </div>
+    </div>
+    <comments-fiesta> </comments-fiesta>
+  </div>
+
+  <div ng-hide="isEmpty(ft_comments)">
+    <br>
+    <div class="main-header">
+      <div class="section-header">
+        <div class="title">Comments on Featured Technologies</div>
+        <div class="triangle"></div>
+      </div>
+    </div>
+    <comments-feat-tech> </comments-feat-tech>
+  </div>
+
+  <div ng-hide="isEmpty(photo_comments)">
+    <br>
+    <div class="main-header">
+      <div class="section-header">
+        <div class="title">Comments on Photos</div>
+        <div class="triangle"></div>
+      </div>
+    </div>
+    <comments-photo> </comments-photo>
+  </div>
+</div>
+<link rel="stylesheet" href="assets/admin/css/comments/comments.css">

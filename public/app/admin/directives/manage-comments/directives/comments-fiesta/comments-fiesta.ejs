@@ -1,0 +1,37 @@
+<div>
+  <br>
+  <div ng-repeat="(key, fiesta) in fiesta_comments" ng-if="fiesta.length > 0">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span class="bold">
+          {{key}}
+          <span class="badge"> {{fiesta.length}} </span>
+        </span>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="col-md-2 col-lg-2 col-xs-2 col-sm-2"> Username </th>
+              <th class="col-md-6 col-lg-6 col-xs-6 col-sm-6"> Comment </th>
+              <th class="col-md-2 col-lg-2 col-xs-2 col-sm-2"> Date </th>
+              <th class="text-center col-md-1 col-lg-1 col-xs-1 col-sm-1"> Approve </th>
+              <th class="text-center col-md-1 col-lg-1 col-xs-1 col-sm-1"> Disapprove </th>
+            <tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="value in fiesta | orderBy: '-timestamp'">
+              <td>{{value.username}}</td>
+              <td>{{value.comment}}</td>
+              <td am-time-ago="value.timestamp"></td>
+              <td class="text-center"><span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green; cursor: pointer;"
+                ng-click="approve(value)"></span></td>
+              <td class="text-center"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red; cursor: pointer;"
+                ng-click="remove(value)"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

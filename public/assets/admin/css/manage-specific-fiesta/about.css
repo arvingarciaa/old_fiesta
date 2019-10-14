@@ -1,0 +1,80 @@
+.dim-text {
+  color: darkslategrey;
+}
+
+.emphasize-text {
+  font-weight: 500;
+  margin-left: 5px;
+}
+
+.edit-button {
+  margin-top: 3px;
+}
+
+.fiesta-about-item {
+  padding-left: 0;
+}
+
+.no-data-large {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.no-data-large > .lead {
+  font-weight: 400;
+}
+
+.no-data-large > .glyphicon {
+  font-size: 4em;
+}
+
+.no-data-large > .text-muted > p {
+  max-width: 400px;
+  margin: auto;
+}
+
+.activity-infinite-scroll {
+  height: 500px;
+  background-color: skyblue;
+}
+
+.commodity-tag {
+  margin: 2px;
+}
+
+
+.btn-outline {
+  background-image: none;
+  background-color: transparent;
+}
+
+.btn-outline:hover {
+  color: #fff;
+}
+
+.btn-outline:focus, .btn-outline.focus {
+  box-shadow: 0 0 0 2px rgba(2, 117, 216, 0.5);
+}
+
+.btn-outline.disabled, .btn-outline:disabled {
+  color: #0275d8;
+  background-color: transparent;
+}
+
+.form-header{
+  font-size: 12px;
+  font-weight: 700;
+  color: #959595;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.vicinity-map {
+  display: block;
+  margin: auto;
+}
+.google-map {
+  padding: 5px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}

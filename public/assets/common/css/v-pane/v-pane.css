@@ -1,0 +1,24 @@
+.vAccordion--default v-pane.is-expanded > v-pane-header {
+  border-bottom-color: #1d89df !important;
+}
+
+.vAccordion--default v-pane-header::after, .vAccordion--default v-pane-header::before {
+  background-color: #1d89df !important;
+}
+
+.vAccordion--default v-pane-header:hover, .vAccordion--default v-pane-header:focus {
+  color: #1d89df !important;
+}
+
+
+.vAccordion--inside v-pane.is-expanded > v-pane-header {
+  border-bottom-color: #495865 !important;
+}
+
+.vAccordion--inside v-pane-header::after, .vAccordion--inside v-pane-header::before {
+  background-color: #495865 !important;
+}
+
+.vAccordion--inside v-pane-header:hover, .vAccordion--inside v-pane-header:focus {
+  color: #495865 !important;
+}

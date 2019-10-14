@@ -1,0 +1,117 @@
+<div class="panel panel-default" ng-init="edit=false">
+  <!-- Panel Title -->
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-4">
+        <h3 class="panel-title">Message</h3>
+      </div>
+      <div class="col-md-2 col-md-offset-6" ng-cloak>
+        <button ng-if="!edit" class="btn btn-xs btn-primary pull-right" type="button" name="button" ng-click="Edit()">
+          Edit
+        </button>
+        <button ng-if="edit" class="btn btn-xs btn-primary pull-right" type="button" ng-click="EditExecutive(writeup)" name="button" ladda="executiveLoading" data-style="expand-right" data-spinner-size="10">
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel Body -->
+  <div class="panel-body" >
+
+      <div class="no-data-large" ng-if="!edit && (!executive || executive.title=='')">
+        <span class="glyphicon glyphicon-user"></span> <br/><br/>
+        <span class="lead">Add Director's Corner in the Fiesta</span>
+        <span class="text-muted">
+          <p>Executive Director's Corner has not been published.
+            <a href ng-click="Edit()">
+              Add
+            </a>?
+          </p>
+        </span>
+      </div>
+
+      <div ng-if="edit || (executive && executive.title!='')">
+        <div class="row">
+          <div class="col-xs-6 col-md-3">
+            <a href class="thumbnail" ng-style="{'cursor':'default'}">
+              <img ng-if="inputImage" ngf-src="inputImage">
+              <img ng-if="!inputImage" ng-src="{{executive.image.path}}" alt="">
+              <div class="caption small text-muted">
+                <span ng-style="{'cursor':'pointer'}" type="file" ngf-select="" ng-model="inputImage" name="file" ngf-accept="'image/jpeg'">Click to update image.</span>
+                <button id="save" ng-style="{'margin-top':'5px'}" type="button" class="btn btn-primary btn-xs" ng-if="inputImage" ng-click="EditExecutivePicture(inputImage)" ladda="picLoading" data-style="expand-right" data-spinner-size="10">
+                  Save changes
+                </button>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="!edit && executive && executive.title!=''">
+        <h3>{{executive.title}}</h3>
+        <span class="small" ng-if="executive.authors.length>0">
+          By: <span ng-repeat="a in executive.authors track by $index">
+            {{a.name}} <em class="small">({{a.position}})</em>
+            <span ng-hide="$last">, </span>
+          </span>
+        </span>
+        <br/>
+        <br>
+        <div ng-bind-html="executive.body">
+        </div>
+      </div>
+
+      <div class="container-fluid" ng-if="edit">
+        <div class="row">
+          <div class="col-md-12">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="title" class="col-sm-1 control-label">Title</label>
+                <div class="col-sm-11">
+                  <input ng-model="writeup.title" type="text" class="form-control" placeholder="Add a title"/>
+                </div>
+              </div>
+              <div class="form-group" ng-init="author = {name: '', position: ''}">
+                <label for="title" class="col-sm-1 control-label">Author</label>
+                <div class="col-sm-5">
+                  <input ng-model="author.name" type="text" class="form-control" id="authorname" placeholder="Author name">
+                </div>
+                <div class="col-sm-5">
+                  <input ng-model="author.position" type="text" class="form-control" id="authorposition" placeholder="Position">
+                </div>
+                <div class="col-sm-1">
+                  <button ng-click="(author.name.trim()!=''||author.position.trim()!='')? writeup.authors.pushIfNotExist(author):''; author.name='';author.position='';" type="submit" class="btn btn-primary" tooltip-placement="bottom" uib-tooltip="Add author">
+                    <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div class="col-md-12">
+              <div class="small text-left" ng-if="writeup.authors.length > 0">
+                <h5>Authors</h5>
+                <ul class="list-group">
+                  <li class="list-group-item" ng-repeat="a in writeup.authors track by $index">
+                    <div class="row">
+                      <div class="col-md-6 text-left">
+                        {{a.name}} ({{a.position}})
+                      </div>
+                      <div class="col-md-6 text-right">
+                        <a href ng-click="writeup.authors.splice($index, 1)"><span class="glyphicon glyphicon-remove text-danger text-right"></span></a>
+                      </div>
+                    </div>
+                   </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5>Body</h5>
+            <summernote ng-model="writeup.body" config="options"></summernote>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

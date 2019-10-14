@@ -1,0 +1,90 @@
+<div ng-controller="SFiestaAwardsCtrl">
+  <!-- AWARD CAROUSEL -->
+  <div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span class="bold lead"><i class="fa fa-trophy" aria-hidden="true"></i> Awards</span>
+        <span class="award-count pull-right small text-muted" ng-cloak
+        ng-if="::awards.length || undefined" ng-show="awards.length">{{awards.length}} Awards</span>
+      </div>
+      <div class="panel-body no-awards" ng-if="::awards.length == 0 || undefined" ng-show="awards.length == 0">
+        <div class="text-center lead text-muted">
+          No awards to show.
+        </div>
+      </div>
+    </div>
+    <div class="awards-container" ng-show="awards.length > 0">
+      <div class="row">
+        <div class="carousel-container col-lg-10 col-md-10 col-sm-10 col-xs-10">
+          <div uib-carousel active="awardActive" interval="awardInterval" no-wrap="false">
+            <div uib-slide ng-repeat="award in awards track by $index" index="$index"  id="carousel">
+              <div class="award-photo" ng-style="{'background-image':'url(' + award.image.path + ')'}"> </div>
+            </div>
+            <div class="carousel-caption">
+              <span class="pull-right lead">
+                <a data-ng-click="SetAwardFocus(awardActive)" data-toggle="modal" data-target="#award-modal">
+                  <i class="fa fa-expand" aria-hidden="true"></i>
+                </a>
+              </span>
+              <span class="lead" ng-cloak> &copy; {{awards[awardActive].image.credits}}<span>
+              <p>
+                <span ng-cloak ng-show="awards[awardActive].tags.length > 0"><i class="fa fa-tags" aria-hidden="true"></i></span>
+                <span ng-repeat="tag in awards[awardActive].tags | orderBy: ''">
+                  <span ng-cloak class="small text-muted"><a>{{tag}}</a><span ng-hide="$last">, </span> </span>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- AWARD THUMBNAILS -->
+        <div class="thumbnail-container col-lg-2 col-md-2 col-sm-2 col-xs-2">
+          <div class="carousel-thumbnail thin">
+            <div class="window">
+              <ul class="clr">
+                <div class="thumbnail" ng-cloak ng-repeat="award in awards track by $index"
+                     ng-style="{'background-image':'url(' + award.image.path + ')'}"
+                     ng-click="SetAwardActive($index)" >
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AWARD MODAL -->
+  <div class="modal fade" id="award-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" type="button" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="modal-picture text-center">
+              <img ng-cloak ng-src="{{awardFocus.image.path}}">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <p class="modal-tags pull-left">
+            <span class="pull-left" ng-cloak> &copy; {{awards[awardActive].image.credits}}</span>
+            <br>
+            <span class="pull-left" ng-show="awardFocus.tags.length > 0">
+              <i class="fa fa-tags" aria-hidden="true"></i>
+              <span ng-repeat="tag in awardFocus.tags | orderBy: ''">
+                <span class="text-muted" ng-cloak><a>{{tag}}</a><span ng-hide="$last">, </span></span>
+              </span>
+            </span>
+          </p>
+          <a class="btn btn-default" target="_blank" ng-cloak ng-href="{{awardFocus.image.path}}">
+            <i class="fa fa-external-link" aria-hidden="true"></i>
+          </a>
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="/assets/user/css/specific-fiesta/sfiesta-awards.css">

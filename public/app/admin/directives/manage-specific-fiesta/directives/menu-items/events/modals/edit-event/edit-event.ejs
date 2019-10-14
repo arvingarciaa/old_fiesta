@@ -1,0 +1,175 @@
+<div class="modal" id="editEvent" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!eventLoading">&times;</button>
+        <div class="row">
+          <div class="col-md-6 text-left">
+            <h4 class="modal-title" id="">
+               {{action.charAt(0).toUpperCase() + action.slice(1, action.length)}} an Event
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
+                <div class="col-sm-10">
+                  <input ng-model="writeup.title" type="text" class="form-control" id="inputEmail3" placeholder="Title">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Type</label>
+                <div class="col-sm-10">
+                  <input ng-model="writeup.type" type="text" class="form-control" id="type" placeholder="Type">
+                </div>
+              </div>
+              <div class="form-group" ng-init="author = {name: '', position: ''}">
+                <label for="title" class="col-sm-2 control-label">Author</label>
+                <div class="col-sm-5">
+                  <input ng-model="author.name" type="text" class="form-control" id="authorname" placeholder="Author name">
+                </div>
+                <div class="col-sm-4">
+                  <input ng-model="author.position" type="text" class="form-control" id="authorposition" placeholder="Position">
+                </div>
+                <div class="col-sm-1">
+                  <a ng-click="addAuthor(author.name, author.position)" class="btn btn-primary" tooltip-placement="bottom" uib-tooltip="Add author">
+                    <span class="glyphicon glyphicon-plus"></span>
+                  </a>
+                </div>
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="small text-left" ng-if="writeup.authors.length > 0">
+                    <h6 class="text-muted">Authors</h6>
+                    <ul class="list-group">
+                      <li class="list-group-item" ng-repeat="a in writeup.authors track by $index">
+                        <div class="row">
+                          <div class="col-md-6 text-left">
+                            {{a.name}} ({{a.position}})
+                          </div>
+                          <div class="col-md-6 text-right">
+                            <a href ng-click="writeup.authors.splice($index, 1)"><span class="glyphicon glyphicon-remove text-danger text-right"></span></a>
+                          </div>
+                        </div>
+                       </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+              <div class="form-group">
+                <label for="date" class="col-sm-2 control-label">Date Published</label>
+                <div class="col-sm-10">
+                  <input ng-model="writeup.timestamp" type="date" class="form-control" id="date">
+                </div>
+              </div>
+
+              <div class="form-group" ng-if="action == 'edit'">
+                <label class="col-sm-2 control-label">Credits</label>
+                <div class="col-sm-10">
+                  <input ng-model="writeup.image.credits" type="text" class="form-control" id="credits" placeholder="Image credits">
+                </div>
+              </div>
+
+              <div class="form-group" ng-if="action == 'add'">
+                <label for="thumbnail" class="col-sm-2 control-label">Thumbnail</label>
+                <div class="col-sm-10">
+                    <button id="thumbnail" type="button" class="btn btn-default btn-block" ng-click="toggleUpload()">
+                      {{(writeup.inputImage)? writeup.inputImage.name: 'Upload an Image'}}
+                    </button>
+                  <input ng-hide="true" class="form-control" id="upload" type="file" ngf-select="" ng-model="writeup.inputImage" name="file" ngf-accept="'image/*'" required=""/>
+                  <div class="container-fluid" style="width: 95%" ng-if="writeup.inputImage">
+                    <br>
+                    <div class="media" style="width:100%;">
+                      <div class="media-left media-middle" style="width:40%">
+                        <a href>
+                          <img class="media-object img-rounded" ngf-src="writeup.inputImage" alt="" style="width: 100%;"/>
+                        </a>
+                      </div>
+                      <div class="media-body blog-thumbnail-preview">
+                        <h6 class="media-heading">
+                          {{writeup.inputImage.name}}
+                        </h6>
+                        <div class="container-fluid">
+                          <div class="form-group">
+                            <label for="credits">Credits</label>
+                            <input ng-model="writeup.image.credits" type="text" class="form-control" id="credits" placeholder="Image credits">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" ng-init="toggletags=false" ng-hide="toggletags || writeup.tags.length > 0">
+                <div class="col-sm-10 col-sm-offset-2">
+                  <h5>
+                    <a href ng-click="toggletags=true">
+                      + Add tags for this event
+                    </a>
+                  </h5>
+                </div>
+              </div>
+
+              <div class="form-group" ng-if="toggletags || writeup.tags.length > 0">
+                <label for="tagsInput" class="col-sm-2 control-label">Tags</label>
+                <div class="col-sm-10">
+                  <tags-input replace-spaces-with-dashes="false" id="tagsInput" class="tags-input" placeholder="Add tag" ng-model="writeup.tags"></tags-input>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <h5 class="text-center"><strong>Body</strong></h5>
+          <summernote ng-model="writeup.body" config="options"></summernote>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ladda="eventLoading" data-style="expand-right" data-spinner-size="10" ng-click="(action=='add')?AddEvent(writeup):EditEvent(writeup)">{{action.charAt(0).toUpperCase() + action.slice(1, action.length)}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal centered-modal" id="editImage" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!loading">&times;</button>
+        <h5 class="modal-title" id="">Update image for '{{eventPointer.title}}'</h5>
+      </div>
+      <div class="modal-body">
+
+        <!-- Image input -->
+        <div class="photo-uploader" type="file" ngf-select="" ng-model="inputImage" name="file" ngf-accept="'image/jpeg'">
+          <div class="photo-preview" ng-hide="(!inputImage || loading)">
+            <img ngf-src="inputImage" alt="">
+          </div>
+          <div class="photo-select" ng-hide="(inputImage || loading)">
+            <div>
+              <span class="glyphicon glyphicon-picture"></span>
+              <p>Upload photo</p>
+            </div>
+          </div>
+          <div class="photo-loading" ng-show="loading">
+            <uib-progressbar class="progress-striped active" value="100"></uib-progressbar>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!loading">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="EditImage(inputImage)" ng-class="{'disabled': loading}">Update image</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+
+
+<!-- ********************************
+ Modal for Adding and Editing Award
+***********************************-->
+<div class="modal centered-modal" id="awardModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!award.loading && !awardLoading">&times;</button>
+        <h4 class="modal-title"> {{(fromAdd)?'Add':'Edit'}} a Award</h4>
+      </div>
+      <div class="modal-body">
+
+        <!-- Image input -->
+        <div class="photo-uploader" ng-show="fromAdd" type="file" ngf-select="" ng-model="award.inputImage" name="file" ngf-accept="'image/jpeg'">
+          <div class="photo-preview" ng-hide="(!award.inputImage || award.loading) || !award.okay">
+            <img ngf-src="award.inputImage" alt="">
+          </div>
+          <div class="photo-select" ng-hide="(award.inputImage || award.loading) || !award.okay">
+            <div>
+              <span class="glyphicon glyphicon-star"></span>
+              <p>Upload a award</p>
+            </div>
+          </div>
+          <div class="photo-loading" ng-show="award.loading">
+            <uib-progressbar class="progress-striped active" value="100"></uib-progressbar>
+          </div>
+        </div>
+
+        <!-- Credits and Tags -->
+        <div class="row" ng-hide="award.loading">
+          <br>
+          <div class="col-md-10 col-md-offset-1">
+            <div class="form-group award-credits">
+              <label for="creditsInput">Credits</label>
+              <input ng-model="award.credits" type="text" class="form-control" id="creditsInput" />
+            </div>
+            <h5 ng-init="toggletags=false" ng-hide="toggletags || award.tags.length > 0">
+              <a href ng-click="toggletags=true">
+                + Add tags for this award
+              </a>
+            </h5>
+            <div class="form-group" ng-if="toggletags || award.tags.length > 0">
+              <label for="tagsInput">Tags</label>
+              <tags-input replace-spaces-with-dashes="false" id="tagsInput" class="tags-input" placeholder="Add tag" ng-model="award.tags"></tags-input>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!award.loading && !awardLoading">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="SubmitAward()" ladda="awardLoading || award.loading" data-style="expand-right" data-spinner-size="10">{{(fromAdd)?'Add':'Update'}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ******************************
+ Modal for Focusing Award
+*********************************-->
+<div class="modal centered-modal" id="focusAwardModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog  centered-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!focusedAward.loading">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Image input -->
+            <div class="photo-uploader focused" type="file" ngf-select="" ng-model="focusedAward.inputImage" name="file" ngf-accept="'image/jpeg'">
+              <div class="photo-preview"  ng-show="focusedAward.inputImage && !focusedAward.loading">
+                <img ngf-src="focusedAward.inputImage" alt="">
+              </div>
+              <div class="photo-preview" ng-show="!focusedAward.inputImage && !focusedAward.loading">
+                  <img ng-src="{{ focusedAward.image.path }}" alt="" />
+              </div>
+              <div class="photo-loading" ng-show="focusedAward.loading">
+                <uib-progressbar class="progress-striped active" value="100"></uib-progressbar>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- Credits and Tags -->
+        <div class="row">
+          <br>
+          <div class="col-md-12">
+            <blockquote>
+              <span>
+                &copy; - {{focusedAward.image.credits}}
+              </span>
+              <br/>
+              <span class="tags text-muted">
+                <span class="glyphicon glyphicon-tags"></span> &nbsp;&nbsp;
+                <span ng-repeat="tag in focusedAward.tags track by $index">
+                  {{ tag }}
+                  <span ng-hide="$last"> &middot; </span>
+                </span>
+              </span>
+            </blockquote>
+          </div>
+        </div>
+        <!-- Help -->
+        <div class="row">
+          <div class="col-md-12">
+            <p class="small text-muted">
+              <span class="glyphicon glyphicon-info-sign small"></span>
+              For <strong>updating</strong> the image for this award, click the image above and select a new one from your
+               <br/> &nbsp;&nbsp;&nbsp; computer. To apply changes, click on the update button below.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!focusedAward.loading">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="EditImageAward()" ng-class="{'disabled': focusedAward.loading}">Apply Changes</button>
+      </div>
+    </div>
+  </div>
+</div>

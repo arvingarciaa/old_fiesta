@@ -1,0 +1,136 @@
+<h3>Admin Accounts</h3>
+<hr>
+<div class="row">
+  <div class="col-sm-12 text-center">
+    <div class="row">
+      <div class="col-sm-1">
+        <span class="lead">Search: </span>
+      </div>
+      <div class="col-sm-8">
+        <div class="form-group">
+          <input ng-model="search" type="text" class="form-control" placeholder="Search accounts">
+        </div>
+      </div>
+      <div class="col-sm-offset-1 col-sm-2">
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addAccount">
+          <span class="glyphicon glyphicon-plus"></span> New Account
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 small text-center text-muted">
+    <dir-pagination-controls pagination-id="accounts.id"></dir-pagination-controls>
+  </div>
+  <div class="col-sm-12">
+    <table class="table table-responsive table-hover table-bordered">
+      <thead >
+        <tr class="active">
+          <th>Name</th>
+          <th>Email</th>
+          <th>City</th>
+          <th>Province</th>
+          <th>Region</th>
+        </tr>
+      </thead>
+
+      <tr  dir-paginate="a in accounts | filter: search | itemsPerPage: 10" pagination-id="accounts.id">
+        <td>{{ a.name }}</td>
+        <td>{{ a.email }}</td>
+        <td>{{ a.city }}</td>
+        <td>{{ a.province }}</td>
+        <td>{{ a.region }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+<div class="modal centered-modal fade" id="addAccount" tabindex="-1" role="dialog" aria-labelledby="createFiestaLabel" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal modal-lg" role="document">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-hide="loading">
+          <span aria-hidden="true"> &times; </span>
+        </button>
+        <h4 class="modal-title">  Add an account</h4>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body create-modal-body">
+        <fieldset ng-disabled="loading">
+          <!-- Form Section -->
+          <div class="form-horizontal">
+            <div class="form-group">
+              <label for="" class="col-sm-2 control-label">Email</label>
+              <div class="col-sm-10">
+                <input ng-model="acc.email" id="" type="email" class="form-control" aria-describedby="sizing-addon1"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="col-sm-2 control-label">Name</label>
+              <div class="col-sm-10">
+                <input ng-model="acc.name" id="" type="text" class="form-control" aria-describedby="sizing-addon1"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="col-sm-2 control-label">Region</label>
+              <div class="col-sm-10">
+                <select ng-model="acc.region" class="form-control" ng-change="regionToggled()">
+                  <option value="" disabled="">Choose a region</option>
+                  <option ng-repeat="r in philippines.regions" value="{{r.key +','+ r.name}}">{{r.name}} ({{r.long}})</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="col-sm-2 control-label">Province</label>
+              <div class="col-sm-10">
+                <select class="form-control" ng-model="acc.province" ng-disabled="regionEmpty" ng-change="provinceToggled()">
+                  <option value="" selected="" disabled="">Choose a province</option>
+                  <option ng-repeat="p in provinces" value="{{p.key +','+ p.name}}">{{p.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="col-sm-2 control-label">City</label>
+              <div class="col-sm-10">
+                <select class="form-control" ng-model="acc.city" ng-disabled="provinceEmpty">
+                  <option value="" selected="" disabled="">Choose a city</option>
+                  <option ng-repeat="c in cities" value="{{c.name}}">{{c.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="Create()" ladda="loading" data-style="expand-right" data-spinner-size="10">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal centered-modal" id="successfull" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-hide="loading">&times;</button>
+        <h4 class="modal-title" id="">Account was created!</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          An email was sent to <strong>{{name}}</strong> (<em>{{email}}</em>) for credentials.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Okay</button>
+      </div>
+    </div>
+  </div>
+</div>

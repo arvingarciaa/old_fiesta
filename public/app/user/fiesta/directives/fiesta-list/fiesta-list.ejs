@@ -1,0 +1,234 @@
+<!-- FIESTA Logo and tagline -->
+<div class="fiesta-list container-fluid">
+  <div class="flex fiesta-logo-desc">
+    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+      <img ng-cloak ng-if="::fiesta_cms.logo || undefined" ng-show="fiesta_cms.logo" ng-src="{{fiesta_cms.logo}}">
+    </div>
+    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+      <p class="lead" ng-cloak>{{fiesta_cms.tagline}}</p>
+    </div>
+  </div>
+</div>
+<div class="tools-row container-fluid">
+  <hr ng-show="fiesta_cms.sort.show || fiesta_cms.filter.show">
+  <div>
+    <!-- Tools: FILTERS -->
+    <div class="col-lg-7" ng-cloak ng-if="::fiesta_cms.filter.show || undefined" ng-show="fiesta_cms.filter.show">
+      <span>
+        Filter: <br class="visible-xs">
+        <div class="btn-group" uib-dropdown>
+          <a class="tools text-muted btn" id="consortium" uib-dropdown-toggle ng-cloak
+             ng-if="::fiesta_cms.filter.options.consortium || undefined" ng-show="fiesta_cms.filter.options.consortium">
+             <span ng-if="!consortiumFilter">Any consortium</span>
+             <span class="bold black" ng-cloak ng-if="consortiumFilter">{{consortiumFilter}}</span>
+             <span class="glyphicon glyphicon-triangle-bottom tool-glyphicon"></span>
+          </a>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+            <li role="menuitem"><a ng-click="filter('consortium', '')">Any Consortium</a></li>
+            <li role="menuitem" ng-repeat="consortium in consortiums | orderBy: ''">
+              <a ng-cloak ng-click="filter('consortium', consortium)">{{consortium}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="btn-group" uib-dropdown>
+          <a class="tools text-muted btn" id="region" uib-dropdown-toggle ng-cloak
+             ng-if="::fiesta_cms.filter.options.region || undefined" ng-show="fiesta_cms.filter.options.region">
+             <span ng-if="!regionFilter">Any region</span>
+             <span class="bold black" ng-cloak ng-if="regionFilter">{{regionFilter}}</span>
+             <span class="glyphicon glyphicon-triangle-bottom tool-glyphicon"></span>
+          </a>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+            <li role="menuitem"><a ng-click="filter('region', '')">Any Region</a></li>
+            <li role="menuitem" ng-repeat="region in regions | orderBy: ''">
+              <a ng-cloak ng-click="filter('region', region)">{{region}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="btn-group" uib-dropdown>
+          <a class="tools text-muted btn" id="year" uib-dropdown-toggle ng-cloak
+             ng-if="::fiesta_cms.filter.options.year || undefined" ng-show="fiesta_cms.filter.options.year">
+             <span ng-if="!yearFilter">Any year</span>
+             <span class="bold black" ng-cloak ng-if="yearFilter">{{yearFilter}}</span>
+             <span class="glyphicon glyphicon-triangle-bottom tool-glyphicon"></span>
+          </a>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+            <li role="menuitem"><a ng-click="filter('year', '')">Any Year</a></li>
+            <li role="menuitem" ng-repeat="year in years | orderBy: ''">
+              <a ng-cloak ng-click="filter('year', year)">{{year}}</a>
+            </li>
+          </ul>
+        </div>
+        <a class="tools text-muted btn" id="commodity" ng-cloak ng-if="::fiesta_cms.filter.options.commodity || undefined"
+           ng-show="fiesta_cms.filter.options.commodity" data-toggle="modal" data-target="#chooseCommodity">
+           <span ng-if="!commoditiesFilter.length">Any commodity</span>
+           <span class="bold black" ng-if="commoditiesFilter.length">Filtered by commodity</span>
+        </a>
+      </span>
+    </div>
+    <!-- Tools: SORTS -->
+    <div class="col-lg-5" ng-cloak ng-if="::fiesta_cms.sort.show || undefined" ng-show="fiesta_cms.sort.show">
+      <span>
+        Sort by: <br class="visible-xs">
+        <a class="tools text-muted btn" id="title" ng-cloak ng-if="::fiesta_cms.sort.options.title || undefined"
+           ng-show="fiesta_cms.sort.options.title" ng-init="reverse['title']=false" ng-click="sort('title', reverse['title']);"> Title
+          <span class="glyphicon" ng-class="{'glyphicon-sort-by-alphabet': !reverse['title'], 'glyphicon-sort-by-alphabet-alt': reverse['title']}"></span>
+        </a>
+        <a class="tools text-muted btn" id="startDate" ng-cloak ng-if="::fiesta_cms.sort.options.date || undefined"
+           ng-show="fiesta_cms.sort.options.date" ng-init="reverse['startDate']=false" ng-click="sort('startDate', reverse['startDate']);"> Date
+          <span class="glyphicon" ng-class="{'glyphicon-arrow-down': !reverse['startDate'], 'glyphicon-arrow-up': reverse['startDate']}"></span>
+        </a>
+        <a class="tools text-muted btn" id="consortium" ng-cloak ng-if="::fiesta_cms.sort.options.consortium || undefined"
+           ng-show="fiesta_cms.sort.options.consortium" ng-init="reverse['consortium']=false" ng-click="sort('consortium', reverse['consortium']);"> Consortium
+          <span class="glyphicon" ng-class="{'glyphicon-sort-by-alphabet': !reverse['consortium'], 'glyphicon-sort-by-alphabet-alt': reverse['consortium']}"></span>
+        </a>
+      </span>
+    </div>
+    <br>
+    <hr ng-show="fiesta_cms.sort.show || fiesta_cms.filter.show">
+    <!-- FIESTA Count -->
+    <div class="pull-right" ng-cloak ng-if="::fiesta_cms.counter || undefined" ng-show="fiesta_cms.counter">
+      <span class="text-muted pages">
+        <span ng-cloak ng-if="filteredCount > 0">{{(fiesta_cms.pagination.currentPage-1)*fiesta_cms.pagination.pageSize + 1}} - </span>
+        <span ng-cloak ng-if="fiesta_cms.pagination.currentPage*fiesta_cms.pagination.pageSize < filteredCount">{{fiesta_cms.pagination.currentPage*fiesta_cms.pagination.pageSize}}</span>
+        <span ng-cloak ng-if="fiesta_cms.pagination.currentPage*fiesta_cms.pagination.pageSize >= filteredCount">{{filteredCount}}</span>
+        of {{filteredCount}} FIESTA
+      </span>
+    </div>
+  </div>
+</div>
+<!-- No FIESTA : Result -->
+<div class="container-fluid text-center" ng-if="filteredCount === 0">
+  <div class="well">
+    <span class="lead"> No FIESTA found.
+      <a class="reset-filter" ng-click="filter('consortium', ''); filter('region',''); filter('year',''); filter('commodities', '')">
+      Reset the filter</a>?
+    </span>
+  </div>
+</div>
+<!-- FIESTA: Cards -->
+<div class="container-fluid text-center" ng-if="::filteredCount" ng-show="filteredCount">
+  <div class="flex">
+    <div class="flex panel-container col-lg-3 col-md-4 col-sm-4 col-xs-6" ng-cloak
+         ng-repeat="fiesta in fiestas.slice(((fiesta_cms.pagination.currentPage-1)*fiesta_cms.pagination.pageSize),
+                    ((fiesta_cms.pagination.currentPage)*fiesta_cms.pagination.pageSize))">
+        <div class="panel panel-default cards-panel" ng-click="FocusFiesta(fiesta._id)">
+        <div class="panel-heading cards-heading">
+          <a>
+            <div class="fiesta-picture" ng-cloak ng-if="fiesta.picture.path"
+              ng-style="{'background-image':'url(' + fiesta.picture.path + ')'}"></div>
+          </a>
+          <a>
+            <div class="fiesta-picture" ng-cloak ng-if="!fiesta.picture.path"
+              ng-style="{'background-image':'url(/assets/fiesta-logo.jpg)'}"></div>
+          </a>
+        </div>
+        <div class="panel-body text-left">
+          <div class="lead overflow bold" ng-cloak ng-if="::fiesta.title || undefined" ng-show="fiesta.title"
+               uib-tooltip="{{fiesta.title}}" tooltip-placement="bottom-left" tooltip-append-to-body="true">
+                <a ng-href="/fiesta/{{fiesta._id}}/">{{fiesta.title | uppercase}}</a>
+          </div>
+          <div class="overflow bold">
+            <span ng-cloak ng-if="::(fiesta.startDate && fiesta.endDate) || undefined" ng-show="(fiesta.startDate && fiesta.endDate)"
+                  uib-tooltip="{{fiesta.startDate | date: 'mediumDate'}} - {{fiesta.endDate | date: 'mediumDate'}}"
+                  tooltip-placement="bottom-left" tooltip-append-to-body="true" >
+                  {{fiesta.startDate | date: 'mediumDate'}} - {{fiesta.endDate | date: 'mediumDate'}}
+            </span>
+          </div>
+          <div class="overflow">
+            <span ng-cloak ng-if="::fiesta.venue || undefined" ng-show="fiesta.venue"
+                  uib-tooltip="{{fiesta.venue}}" tooltip-placement="bottom-left" tooltip-append-to-body="true">
+                  <span class="small italic">{{fiesta.venue}}</span>
+            </span>
+          </div>
+          <div class="overflow">
+            <span ng-cloak ng-if="::fiesta.consortium || undefined" ng-show="fiesta.consortium"
+                  uib-tooltip="{{fiesta.consortiumFull}}" tooltip-placement="bottom-left" tooltip-append-to-body="true">
+                  <span class="small">{{fiesta.consortium}}</span>
+            </span>
+          </div>
+          <div class="overflow" ng-cloak ng-if="::fiesta.commodity || undefined" ng-show="fiesta.commodity">
+            <span class="text-muted small italic" ng-cloak ng-repeat="comm in fiesta.commodity | orderBy: ''">{{comm}}
+              <span ng-hide="$last"> &middot; </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Pagination -->
+  <div class="row pagination" ng-cloak ng-if="::filteredCount || undefined" ng-show="filteredCount">
+    <ul uib-pagination total-items="filteredCount" ng-model="fiesta_cms.pagination.currentPage" ng-click="scrollFiesta()"
+    items-per-page="fiesta_cms.pagination.pageSize" class="pagination-sm" boundary-link-numbers="true"
+    rotate="false" previous-text="&laquo;" next-text="&raquo;"></ul>
+  </div><br><br>
+</div>
+
+<!-- PDF Footer -->
+<div ng-cloak ng-if="::fiesta_cms.pdf.show || undefined" ng-show="fiesta_cms.pdf.show">
+  <div class="container-fluid text-center" ng-if="fiestas_magazines.length" ng-show="fiestas_magazines.length">
+    <div class="fiesta-mag-header">
+      <div class="section-header">
+        <div class="bg"></div>
+        <div class="text-left title">FIESTA Magazines</div>
+        <div class="triangle"></div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body text-left flex">
+        <div class="magazine col-lg-2 col-md-2 col-sm-2 col-xs-6" ng-cloak
+             ng-repeat="fiesta in fiestas_magazines.slice(((fiesta_cms.pdf.pagination.currentPage-1)*fiesta_cms.pdf.pagination.pageSize),
+                        ((fiesta_cms.pdf.pagination.currentPage)*fiesta_cms.pdf.pagination.pageSize))">
+          <a target="_blank" title="{{fiesta.title}}" ng-cloak ng-href="{{fiesta.magazine}}">
+            <div class="bold overflow black">{{fiesta.title}}</div>
+            <div class="small overflow black">{{fiesta.startDate | date: 'mediumDate'}} - {{fiesta.endDate | date: 'mediumDate'}}</div>
+            <div class="pdf-picture" ng-cloak ng-if="fiesta.mag_thumb" ng-style="{'background-image':'url(' + fiesta.mag_thumb + ')'}"></div>
+          </a>
+        </div>
+      </div>
+      <div class="pagination">
+        <ul uib-pagination total-items="fiestas_magazines.length" ng-model="fiesta_cms.pdf.pagination.currentPage"
+        items-per-page="fiesta_cms.pdf.pagination.pageSize" class="pagination-sm" boundary-link-numbers="true"
+        rotate="false" previous-text="&laquo;" next-text="&raquo;"></ul>
+      </div><br><br>
+    </div>
+  </div>
+</div>
+<!-- Modal Filter: Commodities -->
+<div class="modal centered-modal fade" id="chooseCommodity" tabindex="-1" role="dialog"
+     aria-labelledby="chooseCommodityLabel" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="chooseCommodityLabel">Choose commodities</h4>
+      </div>
+      <div class="modal-body">
+        <div class="well">
+          <button class="btn btn-sm btn-outline-primary commodity-tag" type="button" ng-cloak
+                  ng-repeat="commodity in commodities | orderBy: ''" ng-click="addCommodityFilter(commodity)">
+                  {{ commodity }}
+          </button>
+        </div>
+        <div class="text-right form-group">
+          <button class="btn btn-sm btn-outline-warning" type="button" name="button" ng-click="emptyCommodityFilter()">
+            Clear Selection
+          </button>&nbsp;&nbsp;
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">Selected commodities</div>
+          <div class="panel-body">
+            <button class="btn btn-sm btn-outline-success commodity-tag" type="button" ng-cloak
+              ng-repeat="commodity in selectComm" ng-click="removeCommodityFilter(commodity)"> {{ commodity }}
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" type="button" data-dismiss="modal" ng-click="emptyCommodityFilter()">Cancel</button>
+        <button class="btn btn-primary" type="button" ng-click="filter('commodities', selectComm)" data-dismiss="modal">Apply Filter</button>
+      </div>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="assets/user/css/fiesta/fiesta-list.css">

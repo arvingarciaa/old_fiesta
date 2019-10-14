@@ -1,0 +1,67 @@
+<div class="modal" id="viewTechnology" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header tech-image" ng-style="{'background-image':'url(' + focusTech.image.path + ')'}">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <p class="small">
+          &copy; {{focusTech.image.credits}}
+        </p>
+      </div>
+      <div class="modal-body">
+        <div class="tech-info">
+          <h2>
+            {{focusTech.name}}
+          </h2>
+          <h4 class="small text-muted text-uppercase">
+            <strong>
+              {{focusTech.commodity}}
+            </strong>
+          </h4>
+          <p>
+            {{focusTech.description}}
+          </p>
+            <div class="row">
+              <div class="col-md-6" ng-if="focusTech.benefits.length > 0">
+                <h4>Benefits</h4>
+                <ul class="list-group">
+                  <li class="list-group-item" ng-repeat="benefit in focusTech.benefits track by $index">
+                    {{benefit}}
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-6" ng-if="focusTech.targetBeneficiaries.length > 0">
+                <h4>Target Beneficiaries</h4>
+                <ul class="list-group">
+                  <li class="list-group-item" ng-repeat="targetBeneficiary in focusTech.targetBeneficiaries track by $index">
+                    {{targetBeneficiary}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-md-6" ng-if="focusTech.locations.length > 0">
+                <h4>Locations</h4>
+                <ul class="list-group">
+                  <li class="list-group-item" ng-repeat="location in focusTech.locations track by $index">
+                    {{location}}
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-6" ng-if="focusTech.partnerInstitutions.length > 0">
+                <h4>Partner Institutions</h4>
+                <ul class="list-group">
+                  <li class="list-group-item" ng-repeat="partnerInstitution in focusTech.partnerInstitutions track by $index">
+                    {{partnerInstitution}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

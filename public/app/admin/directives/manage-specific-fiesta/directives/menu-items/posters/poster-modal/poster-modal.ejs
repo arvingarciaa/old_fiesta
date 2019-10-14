@@ -1,0 +1,124 @@
+
+
+<!-- ********************************
+ Modal for Adding and Editing Poster
+***********************************-->
+<div class="modal centered-modal" id="posterModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!poster.loading && !posterLoading">&times;</button>
+        <h4 class="modal-title"> {{(fromAdd)?'Add':'Edit'}} a Poster</h4>
+      </div>
+      <div class="modal-body">
+
+        <!-- Image input -->
+        <div class="photo-uploader" ng-show="fromAdd" type="file" ngf-select="" ng-model="poster.inputImage" name="file" ngf-accept="'image/jpeg'">
+          <div class="photo-preview" ng-hide="(!poster.inputImage || poster.loading) || !poster.okay">
+            <img ngf-src="poster.inputImage" alt="">
+          </div>
+          <div class="photo-select" ng-hide="(poster.inputImage || poster.loading) || !poster.okay">
+            <div>
+              <span class="glyphicon glyphicon-blackboard"></span>
+              <p>Upload a poster</p>
+            </div>
+          </div>
+          <div class="photo-loading" ng-show="poster.loading">
+            <uib-progressbar class="progress-striped active" value="100"></uib-progressbar>
+          </div>
+        </div>
+
+        <!-- Credits and Tags -->
+        <div class="row" ng-hide="poster.loading">
+          <br>
+          <div class="col-md-10 col-md-offset-1">
+            <div class="form-group poster-credits">
+              <label for="creditsInput">Credits</label>
+              <input ng-model="poster.credits" type="text" class="form-control" id="creditsInput" />
+            </div>
+            <h5 ng-init="toggletags=false" ng-hide="toggletags || poster.tags.length > 0">
+              <a href ng-click="toggletags=true">
+                + Add tags for this poster
+              </a>
+            </h5>
+            <div class="form-group" ng-if="toggletags || poster.tags.length > 0">
+              <label for="tagsInput">Tags</label>
+              <tags-input replace-spaces-with-dashes="false" id="tagsInput" class="tags-input" placeholder="Add tag" ng-model="poster.tags"></tags-input>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!poster.loading && !posterLoading">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="SubmitPoster()" ladda="posterLoading || poster.loading" data-style="expand-right" data-spinner-size="10">{{(fromAdd)?'Add':'Update'}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ******************************
+ Modal for Focusing Poster
+*********************************-->
+<div class="modal centered-modal" id="focusPosterModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog  centered-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!focusedPoster.loading">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Image input -->
+            <div class="photo-uploader focused" type="file" ngf-select="" ng-model="focusedPoster.inputImage" name="file" ngf-accept="'image/jpeg'">
+              <div class="photo-preview"  ng-show="focusedPoster.inputImage && !focusedPoster.loading">
+                <img ngf-src="focusedPoster.inputImage" alt="">
+              </div>
+              <div class="photo-preview" ng-show="!focusedPoster.inputImage && !focusedPoster.loading">
+                  <img ng-src="{{ focusedPoster.image.path }}" alt="" />
+              </div>
+              <div class="photo-loading" ng-show="focusedPoster.loading">
+                <uib-progressbar class="progress-striped active" value="100"></uib-progressbar>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- Credits and Tags -->
+        <div class="row">
+          <br>
+          <div class="col-md-12">
+            <blockquote>
+              <span>
+                &copy; - {{focusedPoster.image.credits}}
+              </span>
+              <br/>
+              <span class="tags text-muted">
+                <span class="glyphicon glyphicon-tags"></span> &nbsp;&nbsp;
+                <span ng-repeat="tag in focusedPoster.tags track by $index">
+                  {{ tag }}
+                  <span ng-hide="$last"> &middot; </span>
+                </span>
+              </span>
+            </blockquote>
+          </div>
+        </div>
+        <!-- Help -->
+        <div class="row">
+          <div class="col-md-12">
+            <p class="small text-muted">
+              <span class="glyphicon glyphicon-info-sign small"></span>
+              For <strong>updating</strong> the image for this poster, click the image above and select a new one from your
+               <br/> &nbsp;&nbsp;&nbsp; computer. To apply changes, click on the update button below.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!focusedPoster.loading">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="EditImagePoster()" ng-class="{'disabled': focusedPoster.loading}">Apply Changes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,644 @@
+<div ng-controller="SCustomizeCtrl">
+  <ol class="breadcrumb back-to-customize ng-scope">
+    <li style="width: 100%;"><a ng-href="/admin/customize">
+      <span class="glyphicon glyphicon-chevron-left small left"></span><span>&nbsp;Back to Customize Pages
+    </a>
+    <a ng-show="page_name == 'FIESTA'"ng-href="/fiesta" target="_blank">
+      <span class="pull-right" style="margin: 0;"> <i class="fa fa-eye"></i> Preview</span>
+    </a>
+    <a ng-show="page_name != 'FIESTA'"ng-href="/fiesta/{{page_cms.page}}" target="_blank">
+      <span class="pull-right" style="margin: 0;"> <i class="fa fa-eye"></i> Preview</span>
+    </a>
+    </li>
+  </ol>
+  <div class="specific-cont" ng-show="page_name == 'FIESTA'">
+    <div class="container-fluid">
+      <h3 class="text-center bold page-title">Customize {{page_name}} Page
+      </h3>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="lead"> Header </span>
+              <span class="pull-right long-pull-right text-muted small">Add header to your page.</span>
+            </div>
+            <div class="form-group panel-body">
+              <div class="input-group">
+                <input type="text" ng-model="header" class="form-control" placeholder="Page header">
+                <span ladda="headerLoading" ng-click="UpdateHeader()" class="input-group-addon success"><span class="glyphicon glyphicon-floppy-disk"></span> Save</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="lead"> Tag Line </span>
+              <span class="pull-right long-pull-right text-muted small">Add tag line to your page.</span>
+            </div>
+            <div class="form-group panel-body">
+              <div class="input-group">
+                <input type="text" ng-model="tagline" class="form-control" placeholder="Page tagline">
+                <span ladda="taglineLoading" ng-click="UpdateTagline()" class="input-group-addon success"><span class="glyphicon glyphicon-floppy-disk"></span> Save</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="display: flex;">
+        <div class="col-lg-6 col-md-6 col-sm-6" style="flex: 1;">
+          <div class="panel panel-default" style="height: 100%;">
+            <div class="panel-heading">
+              <span class="lead"> Banner </span>
+              <span class="pull-right text-muted small">Add FIESTA banner to your page.</span>
+            </div>
+            <div class="panel-body"><br><br>
+              <img ngf-thumbnail="banner">
+              <br><br><br>
+              <form name="form" class="pull-right button-bottom">
+                <div class="btn btn-info" ngf-select ng-model="banner" name="file" ngf-pattern="'image/*'"
+                ngf-accept="'image/*'">Select Banner</div>
+                <button ladda="bannerLoading"class="btn btn-success"type="submit" ng-click="UpdateBanner()">
+                  <span class="glyphicon glyphicon-floppy-disk"></span> Save
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6" style="flex: 1;">
+          <div class="panel panel-default" style="height: 100%;">
+            <div class="panel-heading">
+              <span class="lead"> Logo </span>
+              <span class="pull-right text-muted small">Add FIESTA logo to your page.</span>
+            </div>
+            <div class="panel-body"><br><br>
+              <img ngf-thumbnail="logo">
+              <br><br><br>
+              <form name="form" class="pull-right button-bottom">
+                <div class="btn btn-info" ngf-select ng-model="logo" name="file" ngf-pattern="'image/*'"
+                ngf-accept="'image/*'">Select Logo</div>
+                <button ladda="logoLoading" class="btn btn-success"type="submit" ng-click="UpdateLogo()">
+                  <span class="glyphicon glyphicon-floppy-disk"></span> Save
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="lead"> FIESTA Slider </span>
+              <span class="pull-right long-pull-right text-muted small">Customize page slider</span>
+            </div>
+            <div class="panel-body">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="border-right: 1px solid #eee">
+                <span class="italic small text-muted">Choose default FIESTA Logo image for the slider.</span>
+                <img ngf-thumbnail="carouselimage"><br>
+                <form name="form" class="pull-right">
+                  <div class="btn btn-info" ngf-select ng-model="carouselimage" name="file" ngf-pattern="'image/*'"
+                    ngf-accept="'image/*'">Select Default Image</div>
+                    <button ladda="carouseldefLoading" class="btn btn-success"type="submit" ng-click="UpdateCarouselImage()">
+                      <span class="glyphicon glyphicon-floppy-disk"></span> Save
+                    </button>
+                </form>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <p class="italic small text-muted">Choose FIESTA to feature in the slider.</p>
+
+                <div class="form-group checkbox-inline" style="padding: 0;">
+                  <input type="radio" name="latest" id="latest" autocomplete="off"
+                    value="latest" ng-model="choose"/>
+                  <div class="btn-group">
+                    <label for="latest" class="btn btn-warning">
+                      <span ng-show="choose == 'latest'" class="glyphicon glyphicon-ok"></span>
+                      <span> </span>
+                    </label>
+                    <label for="latest" class="btn btn-default active checkbox-title">
+                        Latest FIESTA
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group checkbox-inline" style="padding: 0;">
+                  <input type="radio" name="choose" id="choose" autocomplete="off"
+                    value="choose" ng-model="choose"/>
+                  <div class="btn-group">
+                    <label for="choose" class="btn btn-warning">
+                      <span ng-show="choose == 'choose'"class="glyphicon glyphicon-ok"></span>
+                      <span> </span>
+                    </label>
+                    <label for="choose" class="btn btn-default active checkbox-title">
+                        Select FIESTA
+                    </label>
+                  </div>
+                  </div>
+
+                <div style="height: 174px; overflow-x: auto; margin-top: 10px;">
+                  <div ng-show="choose == 'choose'" ng-repeat="fiesta in fiestas | orderBy: 'title'">
+                    <label style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                      <input type="checkbox" ng-model="carousel.selected[fiesta._id]" ng-true-value="'{{fiesta._id}}'" ng-false-value="''">
+                      <span>{{fiesta.title}}</span>
+                    </label>
+                  </div>
+                </div>
+                <button ladda="carouselfeatLoading" class="pull-right btn btn-success" type="submit" ng-click="UpdateCarouselFeature()"
+                style="margin-top: 3%;">
+                  <span class="glyphicon glyphicon-floppy-disk"></span> Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="lead"> FIESTA List options </span>
+              <span class="pull-right long-pull-right text-muted small">Customize FIESTA list options</span>
+            </div>
+            <div class="panel-body">
+              <button ladda="fiestalistLoading" class="pull-right btn btn-success"type="submit" ng-click="UpdateList()">
+                <span class="glyphicon glyphicon-floppy-disk"></span> Save
+              </button>
+              <!-- SORT -->
+              <div>
+                <span class="lead bold">Sort</span>
+                <span class="italic small text-muted">Click to enable/disable sort. If enabled, choose sort options.</span>
+                <div class="container-fluid">
+                  <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="sort-show" ng-model="list.sort.show">
+                    <label class="onoffswitch-label" for="sort-show">
+                      <span class="onoffswitch-inner"></span>
+                      <span class="onoffswitch-switch"></span>
+                    </label>
+                  </div>
+                  <div ng-show="list.sort.show">
+                    <div class="form-group checkbox-inline" style="padding: 0;">
+                      <input type="checkbox" name="sort-title" id="sort-title" autocomplete="off"
+                        value="true" ng-model="list.sort.options.title"/>
+                      <div class="btn-group">
+                        <label for="sort-title" class="btn btn-warning">
+                          <span class="glyphicon glyphicon-ok"></span>
+                          <span> </span>
+                        </label>
+                        <label for="sort-title" class="btn btn-default active checkbox-title">
+                            Title
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group checkbox-inline">
+                      <input type="checkbox" name="sort-date" id="sort-date" autocomplete="off"
+                        value="true" ng-model="list.sort.options.date"/>
+                      <div class="btn-group">
+                        <label for="sort-date" class="btn btn-warning">
+                          <span class="glyphicon glyphicon-ok"></span>
+                          <span> </span>
+                        </label>
+                        <label for="sort-date" class="btn btn-default active checkbox-title">
+                            Date
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group checkbox-inline">
+                      <input type="checkbox" name="sort-consortium" id="sort-consortium" autocomplete="off"
+                        value="true" ng-model="list.sort.options.consortium"/>
+                      <div class="btn-group">
+                        <label for="sort-consortium" class="btn btn-warning">
+                          <span class="glyphicon glyphicon-ok"></span>
+                          <span> </span>
+                        </label>
+                        <label for="sort-consortium" class="btn btn-default active checkbox-title">
+                            Consortium
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- FILTER -->
+              <div>
+                <span class="lead bold">Filter</span>
+                <span class="italic small text-muted">Click to enable/disable filter. If enabled, choose filter options.</span>
+                <div class="container-fluid">
+                  <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="filter-show" ng-model="list.filter.show">
+                    <label class="onoffswitch-label" for="filter-show">
+                      <span class="onoffswitch-inner"></span>
+                      <span class="onoffswitch-switch"></span>
+                    </label>
+                  </div>
+
+                  <div ng-show="list.filter.show">
+                    <div class="form-group checkbox-inline" style="padding: 0;">
+                      <input type="checkbox" name="filter-consortium" id="filter-consortium" autocomplete="off"
+                        value="true" ng-model="list.filter.options.consortium"/>
+                      <div class="btn-group">
+                        <label for="filter-consortium" class="btn btn-warning">
+                          <span class="glyphicon glyphicon-ok"></span>
+                          <span> </span>
+                        </label>
+                        <label for="filter-consortium" class="btn btn-default active checkbox-title">
+                            Consortium
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group checkbox-inline">
+                      <input type="checkbox" name="filter-region" id="filter-region" autocomplete="off"
+                        value="true" ng-model="list.filter.options.region"/>
+                      <div class="btn-group">
+                        <label for="filter-region" class="btn btn-warning">
+                          <span class="glyphicon glyphicon-ok"></span>
+                          <span> </span>
+                        </label>
+                        <label for="filter-region" class="btn btn-default active checkbox-title">
+                            Region
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group checkbox-inline">
+                      <input type="checkbox" name="filter-year" id="filter-year" autocomplete="off"
+                        value="true" ng-model="list.filter.options.year"/>
+                      <div class="btn-group">
+                        <label for="filter-year" class="btn btn-warning">
+                          <span class="glyphicon glyphicon-ok"></span>
+                          <span> </span>
+                        </label>
+                        <label for="filter-year" class="btn btn-default active checkbox-title">
+                            Year
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group checkbox-inline">
+                      <input type="checkbox" name="filter-commodity" id="filter-commodity" autocomplete="off"
+                        value="true" ng-model="list.filter.options.commodity"/>
+                      <div class="btn-group">
+                        <label for="filter-commodity" class="btn btn-warning">
+                          <span class="glyphicon glyphicon-ok"></span>
+                          <span> </span>
+                        </label>
+                        <label for="filter-commodity" class="btn btn-default active checkbox-title">
+                            Commodity
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- FIESTA Counter -->
+              <div>
+                <span class="lead bold">FIESTA Counter</span>
+                <span class="italic small text-muted">Click to enable/disable counter. (e.g. 1 - 12 of 16 FIESTA)</span>
+                <div class="container-fluid">
+                  <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="counter-show" ng-model="list.counter">
+                    <label class="onoffswitch-label" for="counter-show">
+                      <span class="onoffswitch-inner"></span>
+                      <span class="onoffswitch-switch"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <!-- Sort -->
+              <div class="form-group">
+                <div class="col-lg-6 col-md-6 col-sm-6" style="padding: 0">
+                  <span for="sel1" class="lead bold">FIESTA Initial Sort Option</span>
+                  <div class="container-fluid">
+                    <select class="form-control" id="sel1" ng-model="list.cards.option">
+                      <option value="title">Title</option>
+                      <option value="startDate">Date</option>
+                      <option value="consortium">Consortium</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <span for="sel1" class="lead bold">FIESTA Initial Sort Order</span>
+                  <div class="container-fluid">
+                    <select class="form-control" id="sel2" ng-model="list.cards.order">
+                      <option value="Ascending">Ascending</option>
+                      <option value="Descending">Descending</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pagiation -->
+              <div class="form-group col-lg-6 col-md-6 col-sm-6" style="padding: 0;">
+                <div>
+                  <span for="sel1" class="lead bold">FIESTA per page</span>
+                  <span class="italic small text-muted">Choose the number of FIESTA per page. (# of FIESTA: {{fiestas.length}})</span>
+                  <div class="container-fluid">
+                    <select class="form-control" id="sel1" ng-model="list.pagination.pageSize">
+                      <option value="12">12</option>
+                      <option ng-if="24 <= fiestas.length" value="24">24</option>
+                      <option ng-if="36 <= fiestas.length" value="36">36</option>
+                      <option ng-if="fiestas.length != 12" value="{{fiestas.length}}">All</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FIESTA MAGAZINE -->
+      <div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="lead"> FIESTA Magazine options </span>
+              <span class="pull-right long-pull-right text-muted small">Customize FIESTA magazine options</span>
+            </div>
+            <div class="panel-body">
+              <button ladda="fiestamagLoading" class="pull-right btn btn-success"type="submit" ng-click="UpdateMagazine()">
+                <span class="glyphicon glyphicon-floppy-disk"></span> Save
+              </button>
+              <span for="sel1" class="lead bold">FIESTA Magazine</span>
+              <span class="italic small text-muted">Click to enable/disable FIESTA Magazine. If enabled, FIESTA Magazine will be shown on the page.</span>
+              <div class="container-fluid">
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="mag-show" checked="" ng-model="mag.show">
+                  <label class="onoffswitch-label" for="mag-show">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group" ng-show="mag.show">
+                <div class="col-md-6" style="padding: 0;">
+                  <span for="sel1" class="lead bold">FIESTA Magazine Initial Sort Option</span>
+                  <div class="container-fluid">
+                    <select class="form-control" id="sel1" ng-model="mag.sortoption">
+                      <option value="title">Title</option>
+                      <option value="startDate">Date</option>
+                      <option value="consortium">Consortium</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <span for="sel1" class="lead bold">FIESTA Magazine Initial Sort Option</span>
+                  <div class="container-fluid">
+                    <select class="form-control" id="sel2" ng-model="mag.sortorder">
+                      <option>Ascending</option>
+                      <option>Descending</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- END OF FIESTA MAGAZINE -->
+    </div>
+  </div>
+
+  <!-- FIESTA Specifics -->
+  <div class="specific-cont" ng-show="page_name != 'FIESTA'">
+    <div class="container-fluid">
+      <h3 class="text-center bold page-title">Customize {{page_name}} Page
+      </h3>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="panel panel-default" style="height: 100%;">
+            <div class="panel-heading">
+              <span class="lead"> Executive Director's Corner </span>
+              <span class="pull-right long-pull-right text-muted small">Set default values to the executive director's corner</span>
+            </div>
+            <div class="form-group panel-body">
+              <div class="input-group">
+                <input type="text" ng-model="execdirname" class="form-control" placeholder="Executive Director's Name">
+                <span ladda="execdirnameLoading" ng-click="UpdateExecDir('execdirname')" class="input-group-addon success"><span class="glyphicon glyphicon-floppy-disk"></span> Save</span>
+              </div>
+              <span class="text-muted italic small">
+                &nbsp;Note: This name will only reflect on the page if the executive director's name is not set on
+                <a ng-href="/admin/manage/{{page_cms.page}}?view=executive" target="_blank">Manage.</a>
+              </span>
+              <br><br>
+              <div class="input-group">
+                <textarea type="text" ng-model="execdirmessage" class="form-control" placeholder="Executive Director's Message">
+                </textarea>
+                <span ladda="execdirmessageLoading" ng-click="UpdateExecDir()" class="input-group-addon success"><span class="glyphicon glyphicon-floppy-disk"></span> Save</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <div class="panel panel-default" style="height: 100%;">
+            <div class="panel-heading">
+              <span class="lead"> Executive Director's Image </span>
+              <span class="pull-right text-muted small">Set default executive director's image on your page.</span>
+              <br><br>
+            </div>
+            <div class="panel-body">
+              <img ngf-thumbnail="execdirimage">
+              <span class="text-muted italic small">
+                Note: This picture will only reflect on the page if the executive director's image is not set on
+                <a ng-href="/admin/manage/{{page_cms.page}}?view=executive" target="_blank">Manage.</a>
+              </span>
+              <form name="form" class="pull-right">
+                <div class="btn btn-info" ngf-select ng-model="execdirimage" name="file" ngf-pattern="'image/*'"
+                ngf-accept="'image/*'">Select Image</div>
+                <button ladda="execdirimageLoading"class="btn btn-success"type="submit" ng-click="UpdateExecDirImage()">
+                  <span class="glyphicon glyphicon-floppy-disk"></span> Save
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-8">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="lead"> FIESTA Options </span>
+              <span class="pull-right long-pull-right text-muted small">Customize FIESTA options</span>
+            </div>
+            <div class="panel-body">
+              <button ladda="fiestaoptionsLoading" class="pull-right btn btn-success"type="submit" ng-click="UpdateExecDir('fiestaoptions')">
+                <span class="glyphicon glyphicon-floppy-disk"></span> Save
+              </button>
+              <span class="lead bold">FIESTA Magazine Download</span>
+              <span class="italic text-muted small">Enable/Disable users to download the FIESTA magazine.</span>
+              <div class="container-fluid">
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="dlmag-show" checked="" ng-model="fiestadownload">
+                  <label class="onoffswitch-label" for="dlmag-show">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </label>
+                </div>
+              </div>
+              <span class="lead bold">FIESTA About</span>
+              <span class="italic text-muted small">Enable/Disable users to view the FIESTA about.</span>
+              <div class="container-fluid">
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="about-show" checked="" ng-model="fiestaabout">
+                  <label class="onoffswitch-label" for="about-show">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </label>
+                </div>
+              </div>
+              <span class="lead bold">React</span>
+              <span class="italic text-muted small">Enable/Disable users to react to this FIESTA.</span>
+              <div class="container-fluid">
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="react-show" checked="" ng-model="fiestareact">
+                  <label class="onoffswitch-label" for="react-show">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </label>
+                </div>
+              </div>
+              <span class="lead bold">Comment</span>
+              <span class="italic text-muted small">Enable/Disable users to comment to this FIESTA.</span>
+              <div class="container-fluid">
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="comment-show" checked="" ng-model="fiestacomment">
+                  <label class="onoffswitch-label" for="comment-show">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="lead"> Schedule </span>
+              <span class="pull-right long-pull-right text-muted small">Customize FIESTA Schedule options</span>
+            </div>
+            <div class="panel-body">
+              <button ladda="schedoptionsLoading" class="pull-right btn btn-success"type="submit" ng-click="UpdateSched()">
+                <span class="glyphicon glyphicon-floppy-disk"></span> Save
+              </button>
+              <span class="lead bold">Schedule</span>
+              <span class="italic text-muted small">Enable/Disable users to view the FIESTA schedule.</span>
+              <div class="container-fluid">
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="sched-show" checked="" ng-model="fiestasched">
+                  <label class="onoffswitch-label" for="sched-show">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </label>
+                </div>
+              </div>
+              <span class="lead bold">Venue Map</span>
+              <span class="italic text-muted small">Enable/Disable users to view the FIESTA venue map.</span>
+              <div class="container-fluid">
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="vmap-show" checked="" ng-model="fiestavmap">
+                  <label class="onoffswitch-label" for="vmap-show">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </label>
+                </div>
+              </div>
+              <span class="lead bold">Google Map</span>
+              <span class="italic text-muted small">Enable/Disable users to view to this FIESTA google map.</span>
+              <div class="container-fluid">
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="gmap-show" checked="" ng-model="fiestagmap">
+                  <label class="onoffswitch-label" for="gmap-show">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </label>
+                </div>
+              </div>
+              <span class="italic text-muted small"><br>Note: If all are disabled, the schedule tab will be removed on the page.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="lead"> Featured Technologies </span>
+              <span class="pull-right long-pull-right text-muted small">Customize FIESTA Featured Technologies options</span>
+            </div>
+            <div class="panel-body">
+              <button ladda="ftoptionsLoading" class="pull-right btn btn-success"type="submit" ng-click="UpdateFeattech()">
+                <span class="glyphicon glyphicon-floppy-disk"></span> Save
+              </button>
+
+              <span class="lead bold">React</span>
+              <span class="italic text-muted small">Enable/Disable users to react to FIESTA featured technologies.</span>
+              <div class="container-fluid">
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="ftreact-show" checked="" ng-model="ftreact">
+                  <label class="onoffswitch-label" for="ftreact-show">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </label>
+                </div>
+              </div>
+              <span class="lead bold">Comment</span>
+              <span class="italic text-muted small">Enable/Disable users to comment to FIESTA featured technologies.</span>
+              <div class="container-fluid">
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="ftcomment-show" checked="" ng-model="ftcomment">
+                  <label class="onoffswitch-label" for="ftcomment-show">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="lead"> Media </span>
+              <span class="pull-right long-pull-right text-muted small">Customize FIESTA Media options</span>
+            </div>
+            <div class="panel-body">
+              <button ladda="mediaoptionsLoading" class="pull-right btn btn-success"type="submit" ng-click="UpdateMedia()">
+                <span class="glyphicon glyphicon-floppy-disk"></span> Save
+              </button>
+
+              <span for="sel2" class="lead bold">Photos per page</span>
+              <div class="container-fluid">
+                <select class="form-control" id="sel2" ng-model="mediaphoto">
+                  <option value="12">12</option>
+                  <option ng-if="24 <= photos.length" value="24">24</option>
+                  <option ng-if="36 <= photos.length" value="36">36</option>
+                  <option ng-if="photos.length != 12" value="{{photos.length}}">All</option>
+                </select>
+              </div>
+
+              <span for="sel2" class="lead bold">Videos per page</span>
+              <div class="container-fluid">
+                <select class="form-control" id="sel2" ng-model="mediavideo">
+                  <option value="12">12</option>
+                  <option ng-if="24 <= videos.length" value="24">24</option>
+                  <option ng-if="36 <= videos.length" value="36">36</option>
+                  <option ng-if="videos.length != 12" value="{{videos.length}}">All</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="assets/admin/css/customize/customize-specific.css">

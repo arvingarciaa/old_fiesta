@@ -1,0 +1,132 @@
+.bold {
+  font-weight: bold;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.panel-group {
+  padding-top: 10px;
+}
+
+.commodity {
+  display: block;
+  width: 100%;
+  line-height: 40px;
+  padding-left: 20px;
+  cursor: pointer;
+  color: #000000;
+}
+
+.commodity:hover {
+  color: #000000;
+}
+
+.sector {
+  cursor: pointer;
+}
+
+#sector-A {
+  background-color: #00bfff;
+  color: #ffffff;
+}
+
+#sector-C {
+  background-color: #2E8B57;
+  color: #ffffff;
+}
+
+#sector-F {
+  background-color: #A0522D;
+  color: #ffffff;
+}
+
+#sector-L {
+  background-color: #E9967A;
+  color: #ffffff;
+}
+
+.selected-tech {
+  font-weight: bold;
+  background-color: #3062B7;
+  color: #ffffff;
+}
+
+.comm {
+  background-color: #f5f5f5;
+}
+
+.tech {
+  cursor: pointer;
+}
+
+.feattech-focus {
+  padding-right: 0;
+}
+
+.ft-name {
+  margin-bottom: 30px;
+}
+
+.ft-description {
+  font-size: 16px;
+}
+
+.ft-thumbnail-lg {
+  position: relative;
+  padding: 0;
+}
+
+.ft-thumbnail {
+  position: relative;
+  height: 200px;
+  width: auto;
+  margin: auto;
+}
+
+.ft-table {
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media only screen and (min-width : 0px) {
+  .ft-table {
+    width: 95%;
+    margin: 2%;
+  }
+}
+
+@media only screen and (min-width : 768px) {
+  .ft-table {
+    width: 48%;
+    margin: 2% 1%;
+  }
+
+  .ft-credits {
+    position: absolute;
+    padding: 5px;
+    right: 0;
+    background-color: rgba(0,0,0,.5);
+    color: white;
+  }
+}
+
+.collapse-arrow {
+  float: right;
+  padding-top: 12px;
+  padding-right: 5px;
+}
+
+.panel-body { padding: 0px; }
+.panel-body table tr td { padding-left: 15px }
+.panel-body .table {margin-bottom: 0px; }
+
+@media only screen and (min-width : 992px) {
+  .no-feattech {
+    margin-top: 90px;
+  }
+}

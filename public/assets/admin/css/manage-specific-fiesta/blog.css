@@ -1,0 +1,41 @@
+.blog {
+  padding: 0;
+}
+
+.blog-img-header {
+  min-height: 154px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.blog-info {
+  padding-bottom: 10px;
+}
+
+.blog-holder {
+  margin-bottom: 10px;
+}
+
+.media-body.blog-thumbnail-preview {
+  vertical-align: bottom !important;
+}
+
+.text-right {
+  text-align: -webkit-right;
+}
+
+.blog-img-header-credits {
+  color: white;
+  padding: 1px 4px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  font-size: .9rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  opacity: 0.9;
+}

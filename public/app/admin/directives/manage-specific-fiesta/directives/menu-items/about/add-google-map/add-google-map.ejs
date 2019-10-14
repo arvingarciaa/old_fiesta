@@ -1,0 +1,23 @@
+
+
+  <button type="submit" class="btn btn-sm btn-primary" ng-init="addCoordinates=false" ng-click="addCoordinates=true" ng-show="!addCoordinates">
+    Add Google Map Mark
+  </button>
+
+<div class="" ng-if="addCoordinates">
+  <div class="google-map" map-lazy-load="https://maps.google.com/maps/api/js?libraries=places" map-lazy-load-params="https://maps.googleapis.com/maps/api/js?key={{googleMapApi}}&libraries=places">
+    <input id="pac-input" class="form-control" places-auto-complete size=80 ng-model="address" on-place-changed="addLocation()" component-restrictions="{country:'ph'}"/>
+    <p class="help-block small text-muted">
+      To change location, you can either (1) enter the address above, or (3) drag the map marker.
+    </p>
+    <ng-map id="addCoordinates" zoom="15" center="{{coordinates.lat}}, {{coordinates.lng}}">
+      <marker draggable="true" position="{{coordinates.lat}}, {{coordinates.lng}}" title="Drag me!" label="Drag me!" animation="BOUNCE"></marker>
+    </ng-map>
+  </div>
+  <p class="help-block small text-muted">To specify the location, drag the marker in Google map abover.</p>
+  <p>
+    <button type="button" class="btn btn-sm btn-primary" ng-click="EditCoordinates('addCoordinates')" ng-show="addCoordinates" ladda="coordinatesLoading" data-style="expand-right" data-spinner-size="10">
+      Save Location
+    </button>
+  </p>
+</div>

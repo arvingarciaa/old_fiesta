@@ -1,0 +1,217 @@
+#technology-carousel-container {
+    margin-bottom: 20px;
+    width: 88%
+}
+
+.technology-carousel {
+    background-color: #fff
+}
+
+.left.carousel-control,
+.right.carousel-control {
+    background-image: none!important
+}
+
+.technology-img {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat
+}
+
+.carousel-caption {
+    display: block;
+    background-color: rgba(1, 1, 1, .5);
+    padding: .5em;
+    bottom: 4em
+}
+
+.carousel-caption>.ftitle-container>.lead>a {
+    color: #fff!important
+}
+
+@media only screen and (max-width:374px) {
+    .carousel-caption {
+        left: 0;
+        font-size: 6px;
+        width: 100%;
+        bottom: 0
+    }
+    .carousel-caption>.ftitle-container>.lead>a {
+        font-size: 8px
+    }
+    .carousel-inner>div,
+    .technology-carousel,
+    .technology-img {
+        height: 21vh
+    }
+    .carousel-indicators {
+        visibility: hidden
+    }
+}
+
+@media only screen and (min-width:375px) {
+    .carousel-caption {
+        left: 0;
+        font-size: 6px;
+        width: 100%
+    }
+    .carousel-caption>.ftitle-container>.lead>a {
+        font-size: 9px
+    }
+    .carousel-inner>div,
+    .technology-carousel,
+    .technology-img {
+        height: 25vh
+    }
+    .carousel-indicators {
+        visibility: hidden
+    }
+}
+
+@media only screen and (min-width:425px) {
+    .carousel-caption {
+        font-size: 8px
+    }
+    .carousel-caption>.ftitle-container>.lead>a {
+        font-size: 11px
+    }
+    .carousel-inner>div,
+    .technology-carousel,
+    .technology-img {
+        height: 30vh
+    }
+}
+
+@media only screen and (min-width:485px) {
+    .carousel-caption {
+        font-size: 8px
+    }
+    .carousel-caption>.ftitle-container>.lead>a {
+        font-size: 12px
+    }
+    .carousel-inner>div,
+    .technology-carousel,
+    .technology-img {
+        height: 35vh
+    }
+    .carousel-indicators {
+        visibility: visible
+    }
+}
+
+@media only screen and (min-width:540px) {
+    .carousel-caption {
+        font-size: 10px
+    }
+    .carousel-caption>.ftitle-container>.lead>a {
+        font-size: 14px
+    }
+    .carousel-inner>div,
+    .technology-carousel,
+    .technology-img {
+        height: 40vh
+    }
+    .carousel-indicators {
+        visibility: visible
+    }
+}
+
+@media only screen and (min-width:768px) {
+    .carousel-caption {
+        font-size: 13px
+    }
+    .carousel-caption>.ftitle-container>.lead>a {
+        font-size: 18px
+    }
+    .carousel-inner>div,
+    .technology-carousel,
+    .technology-img {
+        height: 55vh
+    }
+}
+
+@media only screen and (min-width:941px) {
+    .carousel-caption {
+        font-size: 13px
+    }
+    .carousel-caption>.ftitle-container>.lead>a {
+        font-size: 18px
+    }
+    .carousel-inner>div,
+    .technology-carousel,
+    .technology-img {
+        height: 64vh
+    }
+}
+
+@media only screen and (min-width:1024px) {
+    .carousel-caption {
+        left: 20%;
+        font-size: 12px;
+        width: auto
+    }
+    .carousel-caption>.ftitle-container>.lead>a {
+        font-size: 18px
+    }
+    .carousel-inner>div,
+    .technology-carousel,
+    .technology-img {
+        height: 58vh
+    }
+}
+
+@media only screen and (min-width:1200px) {
+    .carousel-caption {
+        left: 20%;
+        font-size: 14px;
+        width: auto
+    }
+    .carousel-caption>.ftitle-container>.lead>a {
+        font-size: 19px
+    }
+    .carousel-inner>div,
+    .technology-carousel,
+    .technology-img {
+        height: 64vh
+    }
+}
+
+@media only screen and (min-width:1440px) {
+    .carousel-caption {
+        left: 20%;
+        font-size: 17px;
+        width: auto
+    }
+    .carousel-caption>.ftitle-container>.lead>a {
+        font-size: 25px
+    }
+    .carousel-inner>div,
+    .technology-carousel,
+    .technology-img {
+        height: 73vh
+    }
+}
+
+@media only screen and (min-width:2560px) {
+    .carousel-caption {
+        left: 20%;
+        font-size: 28px;
+        width: auto
+    }
+    .carousel-caption>.ftitle-container>.lead>a {
+        font-size: 35px
+    }
+    .carousel-inner>div,
+    .technology-carousel,
+    .technology-img {
+        height: 66vh
+    }
+}
+
+@media only screen and (orientation:landscape) {
+    .carousel-inner>div,
+    .technology-carousel,
+    .technology-img {
+        height: 70vh
+    }
+}

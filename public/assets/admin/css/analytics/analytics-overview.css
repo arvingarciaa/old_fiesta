@@ -1,0 +1,161 @@
+.header-container {
+  margin: 5px 25px;
+}
+
+.charts {
+  width: 99%;
+  height: 100%;
+}
+
+.chart-title {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.page-title {
+  font-weight: bold;
+}
+
+.panel-heading {
+  background-color: #1d88c6 !important;
+  color: white !important;
+}
+
+#active-users-container {
+  background-color: white;
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+  float: left;
+}
+
+.ActiveUsers {
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 20px 0;
+}
+
+#date-range-selector-container {
+  float:right;
+  margin-bottom: 25px;
+  display: inline-block;
+}
+
+.DateRangeSelector-item{
+  display: inline-block;
+}
+
+.DateRangeSelector-item label{
+  display: inline-block;
+  font-size: 1.1em;
+}
+
+.DateRangeSelector-item input{
+  float: right;
+  color: black !important;
+}
+
+.no-data-div {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+table, th , tbody, td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+#scrollable-reaction,
+#scrollable-comment,
+#scrollable-feattech-comment{
+  height: 18em;
+  overflow-y: auto;
+}
+
+#scrollable-geo{
+  height: 25em;
+  overflow-y: auto;
+}
+
+#scrollable-feattech-reaction{
+  height: 35em;
+  overflow-y: auto;
+}
+
+th {
+  text-align: center;
+}
+
+.table-header {
+  text-align: center;
+  font-weight: bold;
+  background-color: #db273c !important;
+}
+
+.mini-button {
+  font-size: .7em;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+select {
+  margin: 20px 10px 0 0;
+  background: transparent;
+  padding: 5px;
+  border-radius: 25px;
+  font-weight: bold;
+  float: right;
+}
+
+select option {
+  font-size: 1em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover, .feattech-row {
+  cursor: pointer;
+}
+
+.feat-tech-container {
+  display: inline-block;
+}
+
+.comment-label {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.media-thumbnail {
+  width: 100%;
+  display: inline-block;
+  background-size: cover; /* or contain */
+  background-position: center center;
+  background-repeat: no-repeat;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.photo-container{
+  padding: 5px;
+}
+
+.top-chart-container {
+  margin-bottom: 25px;
+}
+
+@media only screen and (min-width : 320px) {
+  .media-thumbnail {
+    height: 100px;
+  }
+}
+
+@media only screen and (min-width : 425px) {
+  .media-thumbnail {
+    height: 200px;
+  }
+}

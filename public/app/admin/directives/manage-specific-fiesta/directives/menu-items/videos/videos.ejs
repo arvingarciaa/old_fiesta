@@ -1,0 +1,77 @@
+<div class="panel panel-default">
+  <!-- Panel Title -->
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-1">
+
+        <h3 class="panel-title"></span> Videos</h3>
+      </div>
+      <div class="col-md-2 col-md-offset-9">
+        <button class="btn btn-xs btn-primary pull-right" type="button" name="button" data-toggle="modal" data-target="#VideoModal" ng-click="VideoModal()">
+          Add Video
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel Body -->
+  <div class="panel-body">
+
+    <div class="list-display text-center">
+      <div class="list-holder row">
+        <div class="col-sm-6 col-md-4 text-left" ng-repeat="video in videos track by $index">
+          <div class="thumbnail">
+            <div data-toggle="modal" data-target="#focusVideoModal" ng-click="FocusVideo($index)">
+              <img class="youtube-logo" src="assets/admin/images/manage-specific-fiesta/YouTube-logo-full_color.png" alt="" />
+              <img class="youtube-thumbnail" ng-src="https://img.youtube.com/vi/{{video.youtubeId}}/hqdefault.jpg" alt="" onerror="this.style = 'visibility: hidden'"/>
+            </div>
+
+            <div class="caption">
+              <h5 class="youtube-title">
+                <a href data-toggle="modal" data-target="#focusVideoModal" ng-click="FocusVideo($index)">
+                  {{ video.title.substr(0, 50)}}
+                  <span ng-if="video.title.length > 50">...</span>
+                </a>
+
+              </h5>
+              <p class="youtube-description small">
+                {{ video.description.substr(0, 155)}}
+                <span ng-if="video.description.length > 155">...</span>
+              </p>
+              <p>
+                <div class="row">
+                  <div class="col-md-9">
+                    <a href class="small" data-toggle="modal" data-target="#VideoModal" ng-click="VideoModal($index)">Edit</a>
+                    &nbsp;
+                    <a href class="small" ng-click="DeleteVideo(video._id)">Delete</a>
+                  </div>
+                  <div class="col-md-3 text-right">
+                    <a target="_blank" href="https://www.youtube.com/watch?v={{video.youtubeId}}">
+                      <span class="glyphicon glyphicon-export" tooltip-placement="left" uib-tooltip="Check on YouTube.com">
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="" ng-if="videos.length == 0">
+      <li class="list-group-item">
+        <div class="no-data-large">
+          <span class="glyphicon glyphicon-film"></span> <br/><br/>
+          <span class="lead">Add Videos in the Fiesta</span>
+          <span class="text-muted">
+            <p>No videos displayed in fiesta. <a href data-toggle="modal" data-target="#VideoModal" ng-click="VideoModal()">Add one</a>?</p>
+          </span><br/>
+          <br/>
+        </div>
+      </li>
+    </div>
+  </div>
+</div>
+<video-modal></video-modal>

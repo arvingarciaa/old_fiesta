@@ -1,0 +1,55 @@
+
+<div class="modal centered-modal" id="editCommodity" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!commodityLoading">&times;</button>
+        <h4 class="modal-title" id="">Edit commodities</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Commodities of {{fiesta.title}}</h3>
+          </div>
+          <div class="panel-body">
+            <tags-input replace-spaces-with-dashes="false"  id="commodityTag" class="tags-input" placeholder="Type a commodity"  ng-model="commodity" add-from-autocomplete-only="true">
+              <auto-complete load-on-empty="true" load-on-focus="true"  min-length="1"  source="FilterCommodities($query)" max-results-to-show="20"></auto-complete>
+            </tags-input>
+          </div>
+
+          <div class="panel-footer">
+            <script type="text/ng-template" id="addCommodity.html">
+              <div class="form-group">
+                <select class="form-control" ng-model="newCommodity.sector">
+                  <option value="" selected disabled="">Belongs to what sector?</option>
+                  <option value="Forest and Environment">Forest and Environment</option>
+                  <option value="Livestock">Livestock</option>
+                  <option value="Aquatic">Aquatic</option>
+                  <option value="Crops">Crops</option>
+                </select>
+              </div>
+                <div class="form-group">
+                  <label>Commodity:</label>
+                  <input type="text" ng-model="newCommodity.commodity" class="form-control">
+                </div>
+                <button type="button" class="btn btn-default btn-xs btn-block" ng-click="AddCommodity(newCommodity)" ladda="extraCommodityLoading" data-style="expand-right" data-spinner-size="10">
+                  Add
+                </button>
+            </script>
+            <span class="text-muted small">
+              Commodity not in suggestions? Add one
+              <a href uib-popover-template="'addCommodity.html'" popover-trigger="'outsideClick'"  popover-placement="right" popover-title="Add a commodity">
+                here
+              </a>.
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!commodityLoading">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="EditCommodity(commodity)" ladda="commodityLoading" data-style="expand-right" data-spinner-size="10">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

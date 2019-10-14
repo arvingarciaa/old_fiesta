@@ -1,0 +1,67 @@
+<div class="panel panel-default">
+  <!-- Panel Title -->
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-1">
+
+        <h3 class="panel-title"> More</h3>
+      </div>
+      <div class="col-md-2 col-md-offset-9">
+        <button class="btn btn-xs btn-primary pull-right" type="button" name="button" ng-click="add()" data-toggle="modal" data-target="#editMore">
+          Add More
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel Body -->
+  <div class="panel-body">
+
+    <div class="" ng-if="mores.length == 0">
+      <li class="list-group-item">
+        <div class="no-data-large">
+          <span class="glyphicon glyphicon-bookmark"></span> <br/><br/>
+          <span class="lead">Add More Details in the Fiesta</span>
+          <span class="text-muted">
+            <p>No additional details added in fiesta. <a href ng-click="add()" data-toggle="modal" data-target="#editMore">Add one</a>?</p>
+          </span><br/>
+          <br/>
+        </div>
+      </li>
+    </div>
+
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="more in mores">
+        <table style="width:100%; height:100%">
+          <tr>
+            <td class="col-md-10 text-left">
+              <h3>
+                <a href style="color:black;" ng-click="select(more)" data-toggle="modal" data-target="#viewMore">{{more.title}}</a>
+              </h3>
+              <span class="small text-muted" ng-if="more.authors.length > 0">
+                By &nbsp;
+              </span>
+              <span ng-repeat="auth in more.authors track by $index">
+                {{auth.name}} <em class="small">({{auth.position}})</em><span ng-hide="$last">, </span>
+              </span>
+            </td>
+            <td class="col-md-1">
+              <table style="height:100%">
+                <tr>
+                  <td><a href ng-click="select(more)" data-toggle="modal" data-target="#editMore">Edit</a></td>
+                </tr>
+                <tr>
+                  <td><a href ng-click="DeleteMore(more._id)">Delete</a></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<edit-more></edit-more>
+<view-more></view-profile>

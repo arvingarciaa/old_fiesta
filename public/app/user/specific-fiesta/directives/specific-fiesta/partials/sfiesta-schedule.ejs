@@ -1,0 +1,149 @@
+<div ng-controller="SFiestaScheduleCtrl">
+  <div ng-if="dates.length && sfiesta_cms.schedule.sched">
+    <h2>Program of Activities</h2>
+    <div ng-repeat="date in dates">
+      <p class="lead" ng-cloak>{{date.name}}<p>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+           <th class="col-lg-1">TIME</th>
+           <th class="col-lg-6">ACTIVITY</th>
+           <th class="col-lg-5">LOCATION AND GUESTS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-cloak ng-repeat="sched in date.schedule | orderBy: 'timestamp'" ng-if="!sched.sector">
+            <td>{{ sched.timestamp | date: 'h:mma' }} </td>
+            <td>{{ sched.title }}
+                <ul class="table-subs-ul">
+                  <li class="table-subs-li" ng-repeat="sub in sched.subtitle">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <span>{{sub}}</span>
+                  </li>
+                </ul>
+            </td>
+            <td>{{sched.location}}
+              <ul class="table-subs-ul">
+                <li class="table-subs-li" ng-repeat="people in sched.people">
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                  <span>{{people}}</span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <!-- Aquatic -->
+          <tr ng-cloak ng-if="(date.schedule | filter: {sector:'Aquatic'}).length">
+            <td class="bold italic" colspan="3">Aquatic Sector</td>
+          </tr>
+          <tr ng-cloak ng-repeat="sched in date.schedule | orderBy: 'timestamp'" ng-if="sched.sector=='Aquatic'">
+            <td>{{ sched.timestamp | date: 'h:mma' }} </td>
+            <td>{{ sched.title }}
+                <ul class="table-subs-ul">
+                  <li class="table-subs-li" ng-repeat="sub in sched.subtitle">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <span>{{sub}}</span>
+                  </li>
+                </ul>
+            </td>
+            <td>{{sched.location}}
+              <ul class="table-subs-ul">
+                <li class="table-subs-li" ng-repeat="people in sched.people">
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                  <span>{{people}}</span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <!-- Livestock -->
+          <tr ng-cloak ng-if="(date.schedule | filter: {sector:'Livestock'}).length">
+            <td class="bold italic" colspan="3">Livestock Sector</td>
+          </tr>
+          <tr ng-cloak ng-repeat="sched in date.schedule | orderBy: 'timestamp'" ng-if="sched.sector=='Livestock'">
+            <td>{{ sched.timestamp | date: 'h:mma' }} </td>
+            <td>{{ sched.title }}
+                <ul class="table-subs-ul">
+                  <li class="table-subs-li" ng-repeat="sub in sched.subtitle">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <span>{{sub}}</span>
+                  </li>
+                </ul>
+            </td>
+            <td>{{sched.location}}
+              <ul class="table-subs-ul">
+                <li class="table-subs-li" ng-repeat="people in sched.people">
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                  <span>{{people}}</span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <!-- Forest and Environment -->
+          <tr ng-cloak ng-if="(date.schedule | filter: {sector:'Forest and Environment'}).length">
+            <td class="bold italic" colspan="3">Forest and Environment Sector</td>
+          </tr>
+          <tr ng-cloak ng-repeat="sched in date.schedule | orderBy: 'timestamp'" ng-if="sched.sector=='Forest and Environment'">
+            <td>{{ sched.timestamp | date: 'h:mma' }} </td>
+            <td>{{ sched.title }}
+                <ul class="table-subs-ul">
+                  <li class="table-subs-li" ng-repeat="sub in sched.subtitle">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <span>{{sub}}</span>
+                  </li>
+                </ul>
+            </td>
+            <td>{{sched.location}}
+              <ul class="table-subs-ul">
+                <li class="table-subs-li" ng-repeat="people in sched.people">
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                  <span>{{people}}</span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <!-- Crops -->
+          <tr ng-cloak ng-if="(date.schedule | filter: {sector:'Crops'}).length">
+            <td class="bold italic" colspan="3">Crops Sector</td>
+          </tr>
+          <tr ng-cloak ng-repeat="sched in date.schedule | orderBy: 'timestamp'" ng-if="sched.sector=='Crops'">
+            <td>{{ sched.timestamp | date: 'h:mma' }} </td>
+            <td>{{ sched.title }}
+                <ul class="table-subs-ul">
+                  <li class="table-subs-li" ng-repeat="sub in sched.subtitle">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <span>{{sub}}</span>
+                  </li>
+                </ul>
+            </td>
+            <td>{{sched.location}}
+              <ul class="table-subs-ul">
+                <li class="table-subs-li" ng-repeat="people in sched.people">
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                  <span>{{people}}</span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="panel panel-default" ng-if="fiesta.vicinityMap.path && sfiesta_cms.schedule.map">
+    <div class="panel-heading">
+      <span class="bold lead"><i class="fa fa-map" aria-hidden="true"></i> Venue Map </span>
+    </div>
+    <img class="vicinity-map" ng-cloak ng-src="{{fiesta.vicinityMap.path}}">
+  </div>
+  <div class="panel panel-default" ng-cloak ng-show="sfiesta_cms.schedule.googlemap">
+    <div class="panel-heading">
+      <span class="bold lead"><i class="fa fa-street-view" aria-hidden="true"></i> Find us </span>
+    </div>
+    <div class="google-map" map-lazy-load="https://maps.google.com/maps/api/js"
+         map-lazy-load-params="https://maps.googleapis.com/maps/api/js?key={{googleMapApi}}">
+      <ng-map zoom="15" center="{{coordinates.lat}}, {{coordinates.lng}}">
+        <marker  position="{{fiesta.coordinates.lat}}, {{fiesta.coordinates.lng}}"
+                 title="{{fiesta.venue}}" centered="true"></marker>
+      </ng-map>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="/assets/user/css/specific-fiesta/sfiesta-schedule.css">

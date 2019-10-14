@@ -1,0 +1,45 @@
+<div ng-controller="AdminCtrl">
+  <div id="navigation" class="navbar-fixed-top" style="border-bottom: 1px solid grey;">
+    <ol class="breadcrumb navigation-breadcrumb">
+      <li><a ng-href="http://dpitc.net">HOME</a></li>
+      <li><a ng-href="/fiesta">FIESTA</a></li>
+      <li><a ng-href="/admin">ADMIN</a></li>
+    </ol>
+    <ul class="nav navbar-nav navbar-right navigation-login">
+      <li ng-if="!loggedIn"><a ng-href="/login">Login</a></li>
+      <li class="dropdown" ng-if="loggedIn">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          {{name}} <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#" ng-click="goTo('/admin')">Manage FIESTA</a></li>
+          <li><a href="#" ng-click="goTo('/admin/customize')">Customize Pages</a></li>
+          <li><a href="#" ng-click="goTo('/admin/analytics')">Analytics</a></li>
+          <li><a href="#" ng-click="goTo('/admin/comments')">Manage Comments</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#" ng-click="goTo('/admin/accounts')" ng-if="isAdmin">Manage Accounts</a></li>
+          <li><a href="/admin/settings">Account Settings</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <uib-tabset class="hidden-xs" active="activeJustified" active="true" justified="true">
+    <uib-tab index="0" heading="MANAGE FIESTA" ng-click="setTabContent('')"></uib-tab>
+    <uib-tab index="1" heading="CUSTOMIZE" ng-click="setTabContent('customize')"></uib-tab>
+    <uib-tab index="2" heading="ANALYTICS" ng-click="setTabContent('analytics')"></uib-tab>
+    <uib-tab index="3" heading="MANAGE COMMENTS" ng-click="setTabContent('comments')"></uib-tab>
+    <uib-tab index="4" heading="MANAGE ACCOUNTS" ng-click="setTabContent('accounts')" ng-if="isAdmin"></uib-tab>
+  </uib-tabset>
+  <uib-tabset class="visible-xs" active="activeJustified" active="true" justified="false">
+    <uib-tab index="0" heading="MANAGE FIESTA" ng-click="setTabContent('')"></uib-tab>
+    <uib-tab index="1" heading="CUSTOMIZE" ng-click="setTabContent('customize')"></uib-tab>
+    <uib-tab index="2" heading="ANALYTICS" ng-click="setTabContent('analytics')"></uib-tab>
+    <uib-tab index="3" heading="MANAGE COMMENTS" ng-click="setTabContent('comments')"></uib-tab>
+    <uib-tab index="4" heading="MANAGE ACCOUNTS" ng-click="setTabContent('accounts')" ng-if="isAdmin"></uib-tab>
+  </uib-tabset>
+  <div class="tab-container">
+    <div class="container-fluid" ng-include="tabTemplateUrl"></div>
+  </div>
+</div>
+<link rel="stylesheet" href="assets/admin/css/admin.css">

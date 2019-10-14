@@ -1,0 +1,81 @@
+.bold {
+  font-weight: bold;
+}
+
+.main-header {
+  background-color: #3062b7;
+  height: 45px;
+  width: 100%;
+  margin-top: 5%;
+}
+
+.section-header .title {
+  height: 45px;
+  background-color: #000000;
+  color: #FFFFFF;
+  float: left;
+  font-weight: bold;
+  font-size: 1.5em;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+.section-header .triangle {
+  width: 0;
+  height: 0;
+  border-top: 45px solid #000000;
+  border-right: 45px solid transparent;
+  float: left;
+}
+
+.nav-pills>li>a {
+  color: #000;
+  border-radius: 0;
+}
+
+.nav-pills>li>a:focus,
+.nav-pills>li>a:hover {
+  color: #aaa;
+  border: 0 !important;
+  border-bottom: 2px solid #000000 !important;
+  background-color: #ffffff !important;
+}
+
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover {
+  color: #000000;
+  border: 0;
+  border-bottom: 2px solid #000000;
+  background-color: #ffffff;
+}
+
+.pages-tabs {
+  border: 1px solid #dddddd;
+}
+
+.pages {
+  display: flex;
+  margin-bottom: 5px;
+  border: 1px solid #dddddd;
+  border-left: 5px solid #000000;
+}
+
+.pages>div>.lead {
+  font-size: 25px;
+  padding: 6%;
+  margin-bottom: 0;
+}
+
+.customize-options>div {
+  padding: 0;
+  margin-top: 15%;
+}
+
+.page-thumbs {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-right: 1px #eee solid;
+}

@@ -1,0 +1,13 @@
+#fiesta-label {
+    width: 18%;
+    min-width: 175px;
+    max-width: 210px;
+
+    margin-bottom: 5px;
+
+    float: left;
+}
+
+#create-fiesta-button {
+  border-radius: 20px;
+}

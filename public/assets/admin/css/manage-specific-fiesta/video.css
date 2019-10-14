@@ -1,0 +1,44 @@
+
+img.youtube-thumbnail {
+  width: 100%;
+  cursor: pointer;
+}
+
+img.youtube-thumbnail:hover, img.youtube-logo:hover + img.youtube-thumbnail {
+  opacity: .8;
+}
+
+.youtube-title {
+  height: 27px;
+}
+
+
+.youtube-logo {
+  position: absolute;
+  width: 33%;
+  top: 17%;
+  left: 34%;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 25px;
+  cursor: pointer;
+  z-index: 100;
+  opacity: .8;
+}
+
+
+.youtube-description {
+  display: inline-block;
+   margin: 5px;
+   width: 100%;
+   overflow: hidden;
+   height: 77px;
+
+}
+
+.video-thumbnail {
+  margin-top: 4px;
+}
+
+.youtube-preview {
+  padding: 5px 50px;
+}

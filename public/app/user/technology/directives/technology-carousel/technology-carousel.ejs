@@ -1,0 +1,8 @@
+<div class="container-fluid" id="technology-carousel-container">
+  <div uib-carousel class="technology-carousel" active="active" interval="5000" no-wrap="false">
+    <div uib-slide ng-repeat="img in tech_cms.slider track by $index" index="$index">
+     <div class="technology-img" ng-cloak ng-style="{'background-image':'url(' + img + ')'}"></div>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="assets/user/css/technology/technology-carousel.css">

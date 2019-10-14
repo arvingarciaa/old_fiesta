@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="container">
+    <div class="well text-center" ng-if="::fiestaMag" ng-show="fiestaMag">
+      <div><img class="pcaarrd-logo" src="assets/sample/more/pcaarrd-logo.png" alt="PCAARRD logo"/></div>
+      <a ng-href="#" class="download-pdf">{{fiesta.title | uppercase}} Magazine</a>
+      <p class="lead">
+        <img class="fiesta-logo" src="assets/user/images/fiesta/fiesta-logo.png" alt="FIESTA logo">
+         Magazine is published by PCAARRD-DOST as an off-shoot of the regional FIESTA.
+      </p>
+      <p>
+        <span ng-repeat="author in fiestaMagAuthors">
+          {{author.name}}, <span class="small text-muted italic">{{author.position}}</span><br>
+        </span>
+      </p>
+    </div>
+    <div class="well" ng-repeat="input in moreInput">
+      <p class="lead bold text-center" ng-bind="input.title"> </p>
+      <p ng-bind-html="input.body"></p>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="/assets/user/css/specific-fiesta/sfiesta-more.css">

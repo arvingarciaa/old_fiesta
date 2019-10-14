@@ -1,0 +1,14 @@
+<div ng-controller="TechnologyCtrl">
+  <div id="navigation" class="navbar-fixed-top">
+    <ol class="breadcrumb navigation-breadcrumb">
+      <li><a ng-href="http://dpitc.net">HOME</a></li>
+      <li><a ng-href="/technology">TECHNOLOGY</a></li>
+    </ol>
+  </div>
+  <div>
+    <div class="text-center"><span class="bold tech-header"><br>{{tech_cms.header}}</span></div>
+    <technology-carousel></technology-carousel>
+    <technology-list></technology-list>
+  </div>
+</div>
+<link rel="stylesheet" href="assets/user/css/technology/technology.css">

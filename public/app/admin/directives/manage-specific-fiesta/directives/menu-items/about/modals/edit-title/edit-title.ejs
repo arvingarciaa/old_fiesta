@@ -1,0 +1,27 @@
+<div class="modal centered-modal" id="editTitle" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="!titleLoading">&times;</button>
+          <h4 class="modal-title" id="">Edit Title</h4>
+        </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- Title -->
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">Title</span>
+                <input ng-model="title" id="fiestaTitle" type="text" class="form-control" aria-describedby="sizing-addon1"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-if="!titleLoading">Close</button>
+        <button type="button" class="btn btn-primary" ladda="titleLoading" data-style="expand-right" data-spinner-size="10" ng-click="EditTitle(title)">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

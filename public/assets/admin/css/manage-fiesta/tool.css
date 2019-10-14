@@ -1,0 +1,25 @@
+.tool {
+  padding: 6px 11px;
+}
+
+.tool, .tool:hover, .tool:active, .tool:visited, .tool:focus {
+    text-decoration:none;
+    color: #777;
+}
+
+.tool:hover, .tool.selected{
+  padding: 5px 10px;
+  border: solid 1px rgba(0, 0, 0, 0.20);
+  border-radius: 2px;
+  box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.2);
+  box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.2);
+}
+
+.tool-glyphicon {
+  font-size: x-small;
+  margin-left: 1px;
+}
+
+.tool-toggle {
+  width: 10%;
+}

@@ -1,0 +1,107 @@
+<div class="modal centered-modal" id="focusVideoModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal modal-lg">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="FocusClose()">&times;</button>
+
+      <div class="modal-body" ng-if="focusedVideo.youtubeId">
+        <div class="row equal">
+          <div class="col-md-1 navigation" ng-click="PrevVideo(focusedVideo.index)">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </div>
+          <div class="col-md-10" ng-if="focusedVideo.youtubeId && focusedVideo.youtubeId.trim() != ''">
+            <ng-youtube-embed
+                video="focusedVideo.youtubeId"
+                autoplay="false"
+                color="white"
+                disablekb="true">
+            </ng-youtube-embed>
+          </div>
+          <div class="col-md-1 navigation" ng-click="NextVideo(focusedVideo.index)">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </div>
+        </div>
+        <hr>
+          <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+              <blockquote cite="https://www.youtube.com/watch?v={{focusedVideo.youtubeId}}">
+                <span class="lead">{{focusedVideo.title}}</span>
+                  <em class="small text-muted">
+                    <a target="_blank" href="https://www.youtube.com/watch?v={{focusedVideo.youtubeId}}">
+                      https://www.youtube.com/watch?v={{focusedVideo.youtubeId}}
+                    </a>
+                  </em>
+                  <p class="tags text-muted">
+                    <span class="glyphicon glyphicon-tags"></span> &nbsp;&nbsp;
+                    <span ng-repeat="tag in focusedVideo.tags track by $index">
+                      {{ tag }}
+                      <span ng-hide="$last"> &middot; </span>
+                    </span>
+                  </p>
+              </blockquote>
+              <div class="youtube-description">
+                Description:
+                <p class="text-muted">{{focusedVideo.description}}</p>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal centered-modal" id="VideoModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog centered-modal modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="AddClose()" ng-if="!videoLoading">&times;</button>
+        <h4 class="modal-title" id="">{{video.mode}} a video</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+            <div class="form-group video-url form-group-lg">
+              <label class="sr-only" for="youtubeLinkInput">Youtube Link</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <img src="assets/admin/images/manage-specific-fiesta/YouTube-logo-full_color_full.png" alt="" height="25"/>
+                </div>
+                <input ng-model="video.url" type="text" class="form-control" id="youtubeLinkInput" placeholder="Enter youtube video link or video id"/>
+              </div>
+            </div>
+            <div class="form-group video-credits">
+              <label for="creditsInput">Credits</label>
+              <input ng-model="video.credits" type="text" class="form-control" id="creditsInput" />
+            </div>
+            <h5 ng-init="toggletags=false" ng-hide="toggletags || video.tags.length > 0">
+              <a href ng-click="toggletags=true">
+                + Add tags for this video
+              </a>
+            </h5>
+            <div class="form-group" ng-if="toggletags || video.tags.length > 0">
+              <label for="tagsInput">Tags</label>
+              <tags-input replace-spaces-with-dashes="false" id="tagsInput" class="tags-input" placeholder="Add tag" ng-model="video.tags"></tags-input>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 youtube-preview text-center" ng-if="video.url && CheckUrl(video.url)">
+            <div class="well well-sm">
+              <span class="lead">Preview</span>
+              <ng-youtube-embed
+                  video="video.url"
+                  autoplay="false"
+                  color="white"
+                  disablekb="true">
+              </ng-youtube-embed>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="AddClose()" ng-if="!videoLoading">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="SubmitVideo()" ladda="videoLoading" data-style="expand-right" data-spinner-size="10">{{video.mode}}</button>
+      </div>
+    </div>
+  </div>
+</div>
